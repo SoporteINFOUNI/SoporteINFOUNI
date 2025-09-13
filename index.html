@@ -1,0 +1,2630 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <title>Soporte INFOUNI</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+
+    <style>
+        /* ===================================================
+           TÍTULO: VARIABLES GLOBALES Y CONFIGURACIÓN INICIAL
+           FUNCIÓN: Define los colores, tamaños y fuentes base para todo el sitio web.
+           =================================================== */
+        :root {
+            --alto-barra: 80px;
+            --metal-1: #e6f0ff;
+            --metal-2: #0a3d91;
+            --metal-3: #66ccff;
+            --sep-width: 85%;
+            --sep-max-width: 900px;
+            --sep-height: 4px;
+            --sep-margin: 40px 0;
+            --color-primary: #003366;
+            --color-secondary: #0055a5;
+            --color-accent: #007bff;
+            --color-light: #f4f7f9;
+            --color-dark: #222;
+            --color-red: #ff0000;
+            --color-red-dark: #cc0000;
+            --color-yellow: #F4D03F;
+            --color-cyan: #00FFFF;
+            /* AÑADIDO: Color para el borde animado */
+
+            /* Variable para el desplazamiento, se actualiza dinámicamente con JavaScript */
+            --header-height: 122px;
+        }
+
+        /* Normalizamos caja y aplicamos fuente base */
+        * {
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            margin: 0;
+            font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+            background-color: var(--color-light);
+            color: var(--color-dark);
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            /* Espacio superior para que el contenido no quede debajo del encabezado fijo */
+            padding-top: var(--header-height);
+        }
+
+        /* ===================================================
+           TÍTULO: AJUSTE DE ANCLAJE PARA SECCIONES
+           FUNCIÓN: Añade un margen superior a las secciones para que al navegar,
+                    se alineen correctamente debajo del encabezado fijo.
+           =================================================== */
+        #bienvenida,
+        #software,
+        #reglamento,
+        #ubicacion {
+            scroll-margin-top: var(--header-height);
+        }
+
+        /* ESTILO PARA CENTRAR VERTICALMENTE LA SECCIÓN DE REGLAMENTO */
+        #reglamento {
+            min-height: calc(100vh - var(--header-height));
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            margin-top: 40px;
+            /* MODIFICADO: Esto aumenta el espacio superior */
+        }
+
+        /* ===================================================
+           TÍTULO: CLASE PARA CENTRADO DE SECCIONES
+           FUNCIÓN: Estilos para centrar el contenido de las secciones principales.
+           =================================================== */
+        .section-centered {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* ===================================================
+           TÍTULO: SECCIÓN DE BIENVENIDA (ESPACIADO ADICIONAL)
+           FUNCIÓN: Añade un margen superior para separar esta sección del banner.
+           =================================================== */
+        #bienvenida {
+            margin-top: 50px;
+        }
+
+        /* ===================================================
+           TÍTULO: CLASE PARA CENTRAR EL CARRUSEL
+           FUNCIÓN: Centra horizontalmente el carrusel de reglamentos.
+           =================================================== */
+        .centered-carousel {
+            display: flex;
+            justify-content: center;
+            width: 100%;
+            margin-bottom: 40px;
+        }
+
+        /* ===================================================
+           TÍTULO: ESTILOS PARA EL ENCABEZADO
+           FUNCIÓN: Controla la apariencia del encabezado fijo, incluyendo la barra superior y la principal.
+           =================================================== */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, .2);
+            transition: height 0.3s ease;
+            /* Transición suave para cambios de altura */
+        }
+
+        /* Barra azul superior con información de contacto */
+        .header-top {
+            background-color: var(--color-primary);
+            color: #fff;
+            font-size: 14px;
+            padding: 10px 10%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .header-top-left,
+        .header-top-right {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        /* Botones de información (dirección y correo) */
+        .header-top-left .info-button {
+            display: flex;
+            align-items: center;
+            background-color: #000;
+            color: #fff;
+            padding: 5px 10px;
+            border-radius: 5px;
+            gap: 5px;
+            margin-right: 10px;
+            text-decoration: none;
+            transition: background-color 0.3s ease;
+            cursor: pointer;
+        }
+
+        /* Nuevo estilo para los botones de teléfono */
+        .header-top-right .info-button-phone {
+            display: flex;
+            align-items: center;
+            background-color: #000;
+            color: #fff;
+            padding: 5px 10px;
+            border-radius: 5px;
+            gap: 5px;
+            text-decoration: none;
+            transition: background-color 0.3s ease;
+            cursor: pointer;
+            border: 1px solid #fff;
+        }
+
+        .header-top-left .info-button:hover,
+        .header-top-right .info-button-phone:hover {
+            background-color: #333;
+        }
+
+        .header-top-left .info-button img,
+        .header-top-right .info-button-phone img {
+            width: 16px;
+            height: 16px;
+            vertical-align: middle;
+        }
+
+        .header-top-left .info-button span,
+        .header-top-right .info-button-phone span {
+            margin: 0;
+            font-size: 14px;
+            font-weight: bold;
+        }
+
+        /* Textos "Escríbenos" y "Síguenos" */
+        .escribenos,
+        .siguenos {
+            display: flex;
+            align-items: center;
+            font-size: 16px;
+            font-weight: bold;
+            color: #fff;
+            margin-right: 10px;
+        }
+
+        /* Iconos de redes sociales */
+        .social-icons {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+
+        .social-icons a img {
+            width: 18px;
+            height: 18px;
+            vertical-align: middle;
+        }
+
+        .escribenos img {
+            width: 20px;
+            height: 20px;
+            margin-right: 5px;
+            vertical-align: middle;
+        }
+
+        /* Cajas para los números de teléfono */
+        .phone-box {
+            background-color: #fff;
+            color: #000;
+            padding: 5px 10px;
+            border-radius: 5px;
+            border: 1px solid #000;
+            margin-right: 5px;
+        }
+
+        .phone-box p {
+            margin: 0;
+            font-size: 14px;
+            font-weight: bold;
+        }
+
+        /* Barra principal blanca con logo y navegación */
+        .header-main {
+            background-color: #fff;
+            padding: 10px 10%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: var(--alto-barra);
+        }
+
+        .header-main .logo-container img {
+            height: 60px;
+            width: auto;
+            display: block;
+            margin-right: auto;
+        }
+
+        /* Botones de navegación */
+        .nav-buttons {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+
+        .nav-button {
+            text-decoration: none;
+            color: var(--color-primary);
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            padding: 10px 15px;
+            border-radius: 5px;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        .nav-button:hover {
+            background-color: var(--color-primary);
+            color: #fff;
+        }
+
+        /* Botón especial de Intranet */
+        .intranet-btn {
+            background-color: var(--color-primary);
+            color: #fff;
+            padding: 10px 20px;
+            border-radius: 8px;
+            font-weight: bold;
+            transition: background-color 0.3s;
+        }
+
+        .intranet-btn:hover {
+            background-color: var(--color-secondary);
+        }
+
+        /* ===================================================
+           TÍTULO: BANNER PRINCIPAL
+           FUNCIÓN: Define la imagen de fondo y el texto animado del banner.
+           =================================================== */
+        .banner {
+            width: 100%;
+            height: 650px;
+            margin-top: 0;
+            margin-bottom: 0;
+            background-image: url('https://i.ibb.co/tpZJ9QDq/centroinfpuni2.png');
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-bottom: 4px solid var(--color-primary);
+        }
+
+        /* Título animado del banner (letra por letra) */
+        .banner-texto {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            animation: flotar 3s ease-in-out infinite;
+            user-select: none;
+        }
+
+        .linea {
+            display: flex;
+            justify-content: center;
+            gap: 2px;
+            font-family: sans-serif;
+            font-weight: 900;
+            font-size: 100px;
+        }
+
+        .linea2 {
+            font-size: 140px;
+        }
+
+        .letra {
+            /* === CÓDIGO MODIFICADO PARA EL BORDE MÁS GRUESO === */
+            text-shadow:
+                -4px -4px 0 #000, 4px -4px 0 #000,
+                -4px 4px 0 #000, 4px 4px 0 #000,
+                -4px 0px 0 #000, 4px 0px 0 #000,
+                0px -4px 0 #000, 0px 4px 0 #000;
+            /* ================================================== */
+            color: #ffffff;
+            animation: cambioColor 2s infinite alternate;
+            animation-delay: calc(var(--i) * 0.08s);
+            transition: transform .18s ease, color .18s ease;
+        }
+
+        .linea2 .letra {
+            animation-delay: calc(var(--i) * 0.08s + 0.45s);
+        }
+
+        /* Animación de flotar para textos */
+        @keyframes flotar {
+            0% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-10px);
+            }
+
+            100% {
+                transform: translateY(0);
+            }
+        }
+
+        /* Animación de cambio de color para letras */
+        @keyframes cambioColor {
+            0% {
+                color: #ffffff;
+            }
+
+            60% {
+                color: #78bfe0;
+            }
+
+            90% {
+                color: #2285e2;
+            }
+
+            100% {
+                color: #1e465a;
+            }
+        }
+
+        /* ===================================================
+           TÍTULO: SEPARADORES METÁLICOS
+           FUNCIÓN: Crea una línea decorativa con efecto animado para separar secciones.
+           =================================================== */
+        .separator-wrapper {
+            display: flex;
+            justify-content: center;
+            margin: var(--sep-margin);
+        }
+
+        .thin-separator {
+            width: var(--sep-width);
+            max-width: var(--sep-max-width);
+            height: var(--sep-height);
+            border-radius: 999px;
+            background: linear-gradient(135deg, var(--metal-1), var(--metal-2), var(--metal-3), var(--metal-1));
+            background-size: 240% 240%;
+            box-shadow: 0 2px 8px rgba(10, 61, 145, .08);
+            animation: sepShift 4s linear infinite;
+        }
+
+        @keyframes sepShift {
+            0% {
+                background-position: 0% 50%;
+            }
+
+            50% {
+                background-position: 100% 50%;
+            }
+
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+
+        .thin-separator.thin-mobile {
+            height: 3px;
+        }
+
+        /* ===================================================
+           TÍTULO: SECCIÓN DE INTRODUCCIÓN (LOGO + TEXTO)
+           FUNCIÓN: Estilos para la caja principal de bienvenida.
+           =================================================== */
+        .intro {
+            max-width: 1100px;
+            padding: 20px;
+            display: grid;
+            grid-template-columns: 300px 1fr;
+            gap: 28px;
+            align-items: center;
+            border: 3px solid black;
+            border-radius: 10px;
+            background: #fff;
+            margin: 0;
+        }
+
+        .intro .logo img {
+            width: 320px;
+            height: auto;
+            display: block;
+            margin: 0 auto;
+        }
+
+        .intro .texto h2 {
+            color: #0aa0ff;
+            margin: 0 0 10px;
+            font-size: 28px;
+        }
+
+        .intro .texto p {
+            margin: 0;
+            font-size: 18px;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        .intro-extra {
+            background-color: var(--color-yellow);
+            color: black;
+            padding: 20px;
+            margin-top: 20px;
+            border-radius: 10px;
+            text-align: center;
+            font-weight: bold;
+            border: 2px solid black;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .intranet-texto {
+            font-size: 12px;
+            color: var(--color-red);
+            text-decoration: underline var(--color-red);
+            margin-top: 6px;
+            text-align: center;
+            font-weight: bold;
+        }
+
+        /* Título animado para las secciones */
+        .titulo-animado {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            animation: flotar 3s ease-in-out infinite;
+            user-select: none;
+            margin: 0 0 20px 0;
+        }
+
+        .titulo-animado .linea {
+            font-size: 50px;
+            /* === CÓDIGO MODIFICADO PARA SEPARAR PALABRAS === */
+            gap: 12px;
+            /* =============================================== */
+        }
+
+        .titulo-animado .linea2 {
+            font-size: 50px;
+            /* === CÓDIGO MODIFICADO PARA SEPARAR PALABRAS === */
+            gap: 12px;
+            /* =============================================== */
+        }
+
+        .titulo-animado .letra {
+            /* === CÓDIGO MODIFICADO PARA EL BORDE MÁS GRUESO === */
+            text-shadow:
+                -4px -4px 0 #000, 4px -4px 0 #000,
+                -4px 4px 0 #000, 4px 4px 0 #000,
+                -4px 0px 0 #000, 4px 0px 0 #000,
+                0px -4px 0 #000, 0px 4px 0 #000;
+            /* ================================================== */
+            color: #ffffff;
+            animation: cambioColor 2s infinite alternate;
+            animation-delay: calc(var(--i) * 0.08s);
+            transition: transform .18s ease, color .18s ease;
+        }
+
+        /* Asegura que los espacios se visualicen correctamente */
+        .titulo-animado .letra:empty {
+            width: 10px;
+        }
+
+        /* ===================================================
+           TÍTULO: CONTENEDOR DE TRES IMÁGENES
+           FUNCIÓN: Muestra tres imágenes del mismo tamaño una al lado de la otra.
+           =================================================== */
+        #three-images-container {
+            display: flex;
+            /* Habilita el modelo de caja flexible */
+            justify-content: center;
+            /* Centra las imágenes horizontalmente */
+            align-items: center;
+            /* Centra las imágenes verticalmente */
+            flex-wrap: wrap;
+            /* Permite que las imágenes se envuelvan en pantallas pequeñas */
+            gap: 15px;
+            /* Espacio entre las imágenes */
+            margin: 20px auto;
+            /* Centra el contenedor completo y añade espacio vertical */
+            max-width: 1000px;
+            /* Ancho máximo del contenedor */
+        }
+
+        #three-images-container img {
+            width: 30%;
+            /* Cada imagen ocupa aproximadamente un tercio del ancho */
+            height: auto;
+            /* Mantiene la proporción de la imagen */
+            max-width: 300px;
+            /* Evita que las imágenes crezcan demasiado en pantallas grandes */
+            object-fit: cover;
+            /* Recorta la imagen para que cubra el espacio sin distorsionarse */
+            border: 2px solid black;
+            border-radius: 8px;
+        }
+
+        /* Estilo para la nueva imagen añadida */
+        #new-image-container {
+            display: flex;
+            justify-content: center;
+            width: 100%;
+            margin: 20px auto;
+        }
+
+        #new-image-container img {
+            width: 70%;
+            max-width: 700px;
+            height: auto;
+            object-fit: cover;
+            border: 2px solid black;
+            border-radius: 8px;
+        }
+
+        /* ===================================================
+           TÍTULO: SECCIÓN BUSCADOR DE SOFTWARE Y BECAS
+           FUNCIÓN: Estilos para el contenedor del buscador y la información de becas.
+           =================================================== */
+        .buscador-becas {
+            max-width: 1000px;
+            padding: 0 16px;
+            display: flex;
+            gap: 20px;
+            align-items: stretch;
+            margin: 0;
+        }
+
+        .contenedor-principal {
+            flex: 1;
+            padding: 20px;
+            border: 3px solid #000;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, .1);
+            background: #fff;
+            display: flex;
+            flex-direction: column;
+            height: 600px;
+        }
+
+        .titulo-seccion {
+            margin-bottom: 20px;
+            font-size: 24px;
+            font-weight: bold;
+            color: #333;
+        }
+
+        .buscador {
+            margin-bottom: 20px;
+        }
+
+        .buscador input {
+            width: 100%;
+            padding: 12px;
+            font-size: 16px;
+            /* AÑADIDO: Borde negro sólido para el campo de búsqueda */
+            border: 2px solid black;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+
+        /* === CÓDIGO AÑADIDO: ESTILOS PARA EL CAMPO DE BÚSQUEDA ANIMADO === */
+        .buscador input {
+            --border-size: 4px;
+            /* Ajustado para que el borde se vea bien en el input */
+            --color-blue-current: var(--color-primary);
+            --color-footer-blue: var(--metal-2);
+            --color-celeste: var(--metal-3);
+            --color-cyan: #00FFFF;
+
+            position: relative;
+            background: #fff;
+            border: var(--border-size) solid black;
+            border-radius: 8px;
+            font-size: 16px;
+            transition: border-color 0.3s ease;
+            box-sizing: border-box;
+            outline: none;
+            z-index: 1;
+            overflow: hidden;
+        }
+
+        .buscador input:focus {
+            outline: none;
+            border: var(--border-size) solid black;
+        }
+
+        .buscador input::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            background: linear-gradient(45deg,
+                    var(--color-blue-current),
+                    var(--color-footer-blue),
+                    var(--color-celeste),
+                    var(--color-cyan),
+                    var(--color-blue-current));
+            background-size: 400% 400%;
+            z-index: -1;
+            animation: border-animation 15s ease infinite;
+        }
+
+        @keyframes border-animation {
+            0% {
+                background-position: 0% 50%;
+            }
+
+            50% {
+                background-position: 100% 50%;
+            }
+
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+
+        /* ===================================================
+           FIN DEL CÓDIGO AÑADIDO
+           =================================================== */
+
+        .botones-container {
+            flex: 1;
+            overflow-y: auto;
+            padding-right: 10px;
+        }
+
+        .boton-enlace {
+            display: block;
+            text-align: center;
+            background: var(--color-accent);
+            color: #fff;
+            /* === INICIO DE LA CORRECCIÓN === */
+            /* Se ha reducido el valor de 4px a 2px para un borde más nítido y legible */
+            text-shadow:
+                -2px -2px 0 #000, 2px -2px 0 #000,
+                -2px 2px 0 #000, 2px 2px 0 #000,
+                -2px 0 0 #000, 2px 0 0 #000,
+                0 -2px 0 #000, 0 2px 0 #000;
+            /* === FIN DE LA CORRECCIÓN === */
+            padding: 12px;
+            margin: 8px 0;
+            text-decoration: none;
+            font-weight: bold;
+            border-radius: 8px;
+            border: 2px solid #000;
+            transition: background-color .2s;
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        /* === CÓDIGO AÑADIDO: ESTILOS PARA LOS BOTONES DE ENLACE ANIMADOS === */
+        .boton-enlace {
+            --border-size: 4px;
+            /* Ajustado para que el borde se vea bien */
+            --color-blue-current: var(--color-primary);
+            --color-footer-blue: var(--metal-2);
+            --color-celeste: var(--metal-3);
+            --color-cyan: #00FFFF;
+
+            position: relative;
+            background: var(--color-accent);
+            background-clip: padding-box;
+            border: var(--border-size) solid black;
+            font-weight: bold;
+            z-index: 1;
+            overflow: hidden;
+            color: #fff;
+            /* ACTUALIZADO: El color del texto debe ser blanco */
+            transition: background-color .2s;
+        }
+
+        .boton-enlace::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            background: linear-gradient(45deg,
+                    var(--color-blue-current),
+                    var(--color-footer-blue),
+                    var(--color-celeste),
+                    var(--color-cyan),
+                    var(--color-blue-current));
+            background-size: 400% 400%;
+            z-index: -1;
+            animation: border-animation 15s ease infinite;
+        }
+
+        .boton-enlace:hover {
+            background: var(--color-secondary);
+        }
+
+        .boton-enlace:active {
+            background: #004085;
+        }
+
+        /* ===================================================
+           FIN DEL CÓDIGO AÑADIDO
+           =================================================== */
+
+        /* Caja de información de becas */
+        .becas-box {
+            flex: 1;
+            border: 3px solid #000;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, .1);
+            background: #fff;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            height: 600px;
+        }
+
+        .becas-img {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            margin-bottom: 10px;
+        }
+
+        .becas-img img {
+            width: 90%;
+            max-width: 500px;
+            height: auto;
+            border-radius: 10px;
+            display: block;
+            margin: 0 auto;
+        }
+
+        .becas-nota {
+            font-size: 12px;
+            color: var(--color-red);
+            text-decoration: underline var(--color-red);
+            text-align: center;
+            font-weight: bold;
+            margin: 6px 0 12px;
+        }
+
+        .becas-texto {
+            font-size: 14px;
+            color: #444;
+            text-align: justify;
+            line-height: 1.7;
+            letter-spacing: 0.1px;
+        }
+
+        /* ===================================================
+           TÍTULO: CARRUSEL DE IMÁGENES
+           FUNCIÓN: Estilos para el carrusel de la sección de reglamentos.
+           =================================================== */
+        .carousel-container {
+            width: 85%;
+            max-width: 1100px;
+            border: 4px solid black;
+            border-radius: 15px;
+            padding: 20px;
+            position: relative;
+            background-color: white;
+            box-sizing: border-box;
+            margin: 0;
+        }
+
+        .image-slider {
+            width: 100%;
+            position: relative;
+            overflow: hidden;
+            border-radius: 10px;
+        }
+
+        .slider-images {
+            display: flex;
+            transition: transform 1s ease;
+        }
+
+        .slider-images .image-container {
+            flex: 0 0 100%;
+            height: 450px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            background-color: #ffffff;
+        }
+
+        .slider-images img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        /* Botones de navegación del carrusel */
+        .slider-buttons {
+            position: absolute;
+            top: 50%;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            transform: translateY(-50%);
+            z-index: 2;
+        }
+
+        .prev-btn,
+        .next-btn {
+            background-color: rgba(0, 0, 0, 0.5);
+            color: #ffffff;
+            border: none;
+            padding: 15px;
+            font-size: 30px;
+            cursor: pointer;
+            border-radius: 50%;
+            transition: background-color 0.3s;
+        }
+
+        .prev-btn:hover,
+        .next-btn:hover {
+            background-color: rgba(0, 0, 0, 0.8);
+        }
+
+        /* Indicadores de posición del carrusel */
+        .indicators {
+            position: absolute;
+            bottom: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 10px;
+            z-index: 2;
+        }
+
+        .indicator {
+            width: 15px;
+            height: 15px;
+            border-radius: 50%;
+            background-color: #ffffff;
+            border: 2px solid black;
+            /* AÑADIDO: Borde negro para diferenciar los círculos */
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .indicator.active-indicator {
+            background-color: var(--color-accent);
+        }
+
+        /* Título animado del carrusel */
+        .slider-title {
+            text-align: center;
+            font-weight: 900;
+            text-transform: uppercase;
+            margin-bottom: 15px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            user-select: none;
+            animation: flotar 3s ease-in-out infinite;
+            min-height: 120px;
+        }
+
+        .slider-title .linea,
+        .slider-title .linea2 {
+            display: flex;
+            justify-content: center;
+            gap: 2px;
+        }
+
+        .slider-title .linea {
+            font-size: 36px;
+        }
+
+        .slider-title .linea2 {
+            font-size: 48px;
+        }
+
+        .slider-title .letra {
+            /* === CÓDIGO MODIFICADO PARA EL BORDE MÁS GRUESO === */
+            text-shadow:
+                -3px -3px 0 #000, 3px -3px 0 #000,
+                -3px 3px 0 #000, 3px 3px 0 #000,
+                -3px 0px 0 #000, 3px 0px 0 #000,
+                0px -3px 0 #000, 0px 3px 0 #000;
+            /* ================================================== */
+            color: #ffffff;
+            animation: cambioColor 2s infinite alternate;
+            animation-delay: calc(var(--i) * 0.08s);
+            transition: transform .18s ease, color .18s ease;
+        }
+
+        .slider-title .linea2 .letra {
+            animation-delay: calc(var(--i) * 0.08s + 0.45s);
+        }
+
+        .click-text {
+            text-align: center;
+            font-size: 14px;
+            color: var(--color-red);
+            text-decoration: underline;
+            margin-top: 20px;
+        }
+
+        /* Nuevo estilo para el contenedor del mapa */
+        #ubicacion .map-container {
+            width: 85%;
+            max-width: 1100px;
+            margin: 40px auto;
+            border: 4px solid black;
+            border-radius: 15px;
+            overflow: hidden;
+        }
+
+        .map-container iframe {
+            display: block;
+        }
+
+        /* ===================================================
+           TÍTULO: PIE DE PÁGINA (FOOTER)
+           FUNCIÓN: Estilos para la sección final del sitio con información de contacto y enlaces.
+           =================================================== */
+        .footer {
+            background-color: var(--color-primary);
+            color: #ffffff;
+            padding: 40px 20px;
+            font-family: Arial, sans-serif;
+            font-size: 14px;
+            border-top: 4px solid #000;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            gap: 30px;
+        }
+
+        .footer-section {
+            flex: 1;
+            min-width: 200px;
+            margin-bottom: 20px;
+        }
+
+        .footer-section h4 {
+            font-size: 18px;
+            margin-bottom: 15px;
+            color: var(--metal-3);
+            border-bottom: 2px solid var(--metal-3);
+            padding-bottom: 5px;
+        }
+
+        .footer-section p,
+        .footer-section ul {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+            line-height: 1.8;
+        }
+
+        .footer-contact-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 5px;
+        }
+
+        .footer-contact-item img {
+            width: 16px;
+            height: 16px;
+        }
+
+        .footer-section a {
+            color: #fff;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-section .copyable-text {
+            cursor: pointer;
+            text-decoration: underline;
+            text-decoration-color: rgba(255, 255, 255, 0.5);
+            transition: text-decoration-color 0.3s;
+        }
+
+        .footer-section .copyable-text:hover {
+            text-decoration-color: #66ccff;
+        }
+
+        .footer-section .link-text {
+            cursor: pointer;
+            text-decoration: underline;
+            text-decoration-color: rgba(255, 255, 255, 0.5);
+            transition: text-decoration-color 0.3s;
+        }
+
+        .footer-section .link-text:hover {
+            text-decoration-color: #66ccff;
+        }
+
+
+        .footer-section a:hover {
+            color: var(--metal-3);
+        }
+
+        .footer-bottom {
+            width: 100%;
+            text-align: center;
+            border-top: 1px solid #444;
+            padding-top: 20px;
+            margin-top: 20px;
+            font-size: 12px;
+        }
+
+        .social-icons {
+            display: flex;
+            gap: 15px;
+            justify-content: flex-start;
+        }
+
+        .social-icons a img {
+            width: 24px;
+            height: auto;
+            transition: transform 0.3s;
+        }
+
+        .social-icons a:hover img {
+            transform: scale(1.1);
+        }
+
+        /* ===================================================
+           TÍTULO: DISEÑO RESPONSIVO (MEDIA QUERIES)
+           FUNCIÓN: Ajusta los estilos para adaptarse a diferentes tamaños de pantalla (tablets y móviles).
+           =================================================== */
+        @media (max-width: 1024px) {
+            .nav-buttons {
+                gap: 5px;
+            }
+
+            .nav-button {
+                padding: 8px 10px;
+            }
+
+            .intranet-btn {
+                padding: 8px 15px;
+            }
+
+            .titulo-animado .linea {
+                font-size: 40px;
+                /* MODIFICADO */
+                gap: 8px;
+            }
+
+            .titulo-animado .linea2 {
+                font-size: 40px;
+                /* MODIFICADO */
+                gap: 8px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .header-top {
+                display: none;
+                /* Oculta la barra azul en pantallas pequeñas */
+            }
+
+            .header-main {
+                flex-direction: column;
+                text-align: center;
+                padding: 10px;
+                height: auto;
+                /* La altura se ajusta al contenido */
+            }
+
+            .nav-buttons {
+                flex-wrap: wrap;
+                justify-content: center;
+                margin-top: 10px;
+            }
+
+            .banner {
+                height: 480px;
+                margin-bottom: 0;
+            }
+
+            .linea {
+                font-size: 48px
+            }
+
+            .linea2 {
+                font-size: 72px
+            }
+
+            .intro {
+                grid-template-columns: 1fr;
+                gap: 16px;
+                text-align: center;
+            }
+
+            .intro .logo img {
+                width: 220px
+            }
+
+            .buscador-becas {
+                flex-direction: column;
+            }
+
+            .contenedor-principal,
+            .becas-box {
+                height: auto
+            }
+
+            .thin-separator {
+                width: 92%;
+            }
+
+            .slider-images .image-container {
+                height: 350px;
+            }
+
+            .slider-title .linea {
+                font-size: 28px;
+            }
+
+            .slider-title .linea2 {
+                font-size: 38px;
+            }
+
+            .footer-content {
+                flex-direction: column;
+                text-align: center;
+                gap: 20px;
+            }
+
+            .social-icons {
+                justify-content: center;
+            }
+
+            .footer-section {
+                align-items: center;
+                display: flex;
+                flex-direction: column;
+            }
+
+            .footer-contact-item {
+                flex-direction: column;
+                gap: 2px;
+            }
+
+            .footer-contact-item p {
+                text-align: center;
+            }
+
+            .titulo-animado .linea {
+                font-size: 30px;
+                /* MODIFICADO */
+                gap: 6px;
+            }
+
+            .titulo-animado .linea2 {
+                font-size: 30px;
+                /* MODIFICADO */
+                gap: 6px;
+            }
+
+            #three-images-container {
+                flex-direction: column;
+                /* Apila las imágenes verticalmente en pantallas pequeñas */
+            }
+
+            #three-images-container img {
+                width: 80%;
+                /* Las imágenes ocupan más espacio para ser más visibles */
+                max-width: none;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .banner {
+                height: 360px;
+                margin-bottom: 0;
+            }
+
+            .linea {
+                font-size: 36px
+            }
+
+            .linea2 {
+                font-size: 56px
+            }
+
+            .intro .logo img {
+                width: 180px;
+                margin-bottom: 20px;
+            }
+
+            .thin-separator {
+                width: 94%;
+            }
+
+            .slider-images .image-container {
+                height: 250px;
+            }
+
+            .slider-title .linea {
+                font-size: 20px;
+            }
+
+            .slider-title .linea2 {
+                font-size: 30px;
+            }
+
+            .nav-button {
+                padding: 6px 8px;
+                font-size: 12px;
+            }
+
+            .intranet-btn {
+                padding: 6px 10px;
+                font-size: 12px;
+            }
+
+            .titulo-animado .linea {
+                font-size: 20px;
+                /* MODIFICADO */
+                gap: 4px;
+            }
+
+            .titulo-animado .linea2 {
+                font-size: 20px;
+                /* MODIFICADO */
+                gap: 4px;
+            }
+        }
+
+        /* ===================================================
+           TÍTULO: ESTILO DE MENSAJE DE COPIADO
+           FUNCIÓN: Notificación temporal para informar al usuario que el correo se copió.
+           =================================================== */
+        #copy-message {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            background-color: rgba(0, 0, 0, 0.8);
+            color: #fff;
+            padding: 10px 15px;
+            border-radius: 5px;
+            font-size: 14px;
+            opacity: 0;
+            transition: opacity 0.5s ease-in-out;
+            z-index: 1001;
+        }
+
+        #copy-message.show {
+            opacity: 1;
+        }
+
+        /* ===================================================
+           INICIO DE ESTILOS DEL CHATBOT 
+           =================================================== */
+
+        /* --- Estilos de la Burbuja de Chat Flotante --- */
+        #chat-bubble {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 80px;
+            height: 80px;
+            cursor: pointer;
+            z-index: 10000;
+            transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            filter: drop-shadow(0 10px 15px rgba(0, 0, 0, 0.3));
+        }
+
+        #chat-bubble:hover {
+            transform: scale(1.15) rotate(10deg);
+        }
+
+        #chat-bubble img {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 4px solid black;
+        }
+
+        /* --- Estilos de la Ventana del Chat --- */
+        #chat-window {
+            position: fixed;
+            bottom: 130px;
+            right: 30px;
+            width: 500px;
+            height: 600px;
+            min-width: 320px;
+            min-height: 400px;
+            max-width: 90vw;
+            max-height: 80vh;
+            background-color: #ffffff;
+            border: 4px solid #0a1128;
+            border-radius: 25px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            display: none;
+            flex-direction: column;
+            overflow: hidden;
+            z-index: 9999;
+            transition: opacity 0.3s ease, transform 0.3s ease;
+        }
+
+        /* Animación para abrir/cerrar la ventana */
+        #chat-window.open {
+            display: flex;
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        #chat-window.closed {
+            opacity: 0;
+            transform: translateY(20px);
+            pointer-events: none;
+        }
+
+        /* Cabecera del Chat con Degradado Azul */
+        .chat-header {
+            background: linear-gradient(45deg, #007bff 0%, #00c6ff 100%);
+            color: white;
+            padding: 20px;
+            border-bottom: 4px solid #0a1128;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-shrink: 0;
+            cursor: move;
+            user-select: none;
+        }
+
+        .chat-header h3 {
+            margin: 0;
+            font-size: 1.4em;
+            font-weight: 600;
+        }
+
+        .chat-header-buttons {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .chat-header .header-btn {
+            cursor: pointer;
+            font-size: 1.8em;
+            font-weight: bold;
+            color: white;
+            background: none;
+            border: none;
+            transition: transform 0.2s, text-shadow 0.2s;
+            line-height: 1;
+        }
+
+        .chat-header .header-btn:hover {
+            transform: scale(1.2);
+            text-shadow: 0 0 5px rgba(255, 255, 255, 0.5);
+        }
+
+        /* Área de Mensajes */
+        .chat-messages {
+            flex-grow: 1;
+            padding: 20px;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            background-color: #eaf8ff;
+        }
+
+        /* Estilo general para cada mensaje */
+        .message {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            max-width: 85%;
+            animation: fadeIn 0.4s ease-out;
+            font-size: 0.95em;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(15px) scale(0.95);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        .message .avatar {
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            border: 3px solid #000000;
+            background-size: cover;
+            background-position: center;
+            flex-shrink: 0;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .message .text-bubble {
+            padding: 12px 18px;
+            border-radius: 20px;
+            border: 3px solid #000000;
+            word-wrap: break-word;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Mensajes del Usuario (derecha) */
+        .user-message {
+            align-self: flex-end;
+            flex-direction: row-reverse;
+        }
+
+        .user-message .text-bubble {
+            background-color: #87ceeb;
+            color: #000000;
+            border-top-right-radius: 5px;
+        }
+
+        /* Mensajes del Bot (izquierda) */
+        .bot-message {
+            align-self: flex-start;
+        }
+
+        .bot-message .text-bubble {
+            background-color: #e0f2f7;
+            color: #000000;
+            border-top-left-radius: 5px;
+        }
+
+        /* Botones de acción dentro del chat */
+        .action-button {
+            display: inline-block;
+            margin-top: 10px;
+            padding: 10px 15px;
+            background-color: var(--color-accent);
+            color: white;
+            border: 2px solid black;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: bold;
+            text-align: center;
+            transition: background-color 0.2s ease, transform 0.2s ease;
+        }
+
+        .action-button:hover {
+            background-color: var(--color-secondary);
+            transform: translateY(-2px);
+        }
+
+        /* Mensaje de "Escribiendo..." */
+        .typing-indicator .text-bubble {
+            font-style: italic;
+            color: #555;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .typing-indicator .dot {
+            width: 8px;
+            height: 8px;
+            background-color: #888;
+            border-radius: 50%;
+            animation: bounce 1.2s infinite ease-in-out;
+        }
+
+        .typing-indicator .dot:nth-child(2) {
+            animation-delay: -0.3s;
+        }
+
+        .typing-indicator .dot:nth-child(3) {
+            animation-delay: -0.6s;
+        }
+
+        @keyframes bounce {
+
+            0%,
+            80%,
+            100% {
+                transform: scale(0);
+            }
+
+            40% {
+                transform: scale(1.0);
+            }
+        }
+
+        /* Área de Entrada de Texto */
+        .chat-input {
+            display: flex;
+            padding: 15px;
+            border-top: 4px solid #0a1128;
+            background-color: #eaf8ff;
+            flex-shrink: 0;
+        }
+
+        .chat-input input {
+            flex-grow: 1;
+            padding: 12px 20px;
+            border: 3px solid #000000;
+            border-radius: 30px;
+            background-color: #ffffff;
+            color: #333;
+            outline: none;
+            font-size: 0.95em;
+            transition: border-color 0.2s, box-shadow 0.2s;
+        }
+
+        .chat-input input:focus {
+            border-color: #007bff;
+            box-shadow: 0 0 8px rgba(0, 123, 255, 0.5);
+        }
+
+        .chat-input button {
+            background: linear-gradient(45deg, #007bff 0%, #00c6ff 100%);
+            color: white;
+            border: 3px solid #000000;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            margin-left: 12px;
+            cursor: pointer;
+            font-size: 1.8em;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .chat-input button:hover {
+            transform: scale(1.1);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        /* ===================================================
+           FIN DE ESTILOS DEL CHATBOT
+           =================================================== */
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <div class="header-top">
+            <div class="header-top-left">
+                <a href="https://www.google.com/maps/place/Centro+de+Computo+INFOUNI+-+UNI/@-12.024268,-77.0501132,17z/data=!3m1!4b1!4m6!3m5!1s0x9105cf2379633fdb:0xa8dcc17109dcdbbd!8m2!3d-12.0242733!4d-77.0475329!16s%2Fg%2F1hf392m1h?entry=ttu&g_ep=EgoyMDI1MDgyNC4wIKXMDSoASAFQAw%3D%3D"
+                    class="info-button" target="_blank" rel="noopener noreferrer">
+                    <img src="https://i.ibb.co/JWb5zp10/maps.png" alt="Ubicación">
+                    <span>Av. Túpac Amaru 210, Rímac, Lima</span>
+                </a>
+                <a href="#" class="info-button" onclick="copyEmail(event)">
+                    <img src="https://i.ibb.co/hx4sQxF7/gmail.png" alt="Correo">
+                    <span id="email-text">infouni@uni.edu.pe</span>
+                </a>
+            </div>
+            <div class="header-top-right">
+                <p class="escribenos">
+                    <img src="https://i.ibb.co/8D2MCZTk/Imagen3.png" alt="WhatsApp">
+                    Escríbenos:
+                </p>
+                <a href="#" class="info-button-phone" onclick="copyNumber(event, '922378322')">
+                    <img src="https://i.ibb.co/3ypcrfmY/telefono.png" alt="Teléfono">
+                    <span>922378322</span>
+                </a>
+                <a href="#" class="info-button-phone" onclick="copyNumber(event, '924538711')">
+                    <img src="https://i.ibb.co/3ypcrfmY/telefono.png" alt="Teléfono">
+                    <span>924538711</span>
+                </a>
+                <a href="#" class="info-button-phone" onclick="copyNumber(event, '946955476')">
+                    <img src="https://i.ibb.co/3ypcrfmY/telefono.png" alt="Teléfono">
+                    <span>946955476</span>
+                </a>
+                <p class="siguenos">Síguenos:</p>
+                <div class="social-icons">
+                    <a href="https://www.facebook.com/infouniperu" target="_blank" rel="noopener noreferrer"><img
+                            src="https://i.ibb.co/932pVmkJ/logogogogo.png" alt="Facebook"></a>
+                    <a href="https://www.tiktok.com/@infouni.peru" target="_blank" rel="noopener noreferrer"><img
+                            src="https://i.ibb.co/9HB3Kck4/logo-de-tiki-toki.png" alt="Tiktok"></a>
+                    <a href="https://www.whatsapp.com/channel/0029VaOySBW3LdQcfyQ2fZ1x" target="_blank"
+                        rel="noopener noreferrer"><img src="https://i.ibb.co/8D2MCZTk/Imagen3.png" alt="Whatssap"></a>
+                    <a href="https://www.instagram.com/infouni.peru" target="_blank" rel="noopener noreferrer"><img
+                            src="https://i.ibb.co/b5NfsHnY/inns.png" alt="Instagram"></a>
+                    <a href="https://www.youtube.com/@infouniperu" target="_blank" rel="noopener noreferrer"><img
+                            src="https://i.ibb.co/Hf8sRmfm/youtubelogo.png" alt="YouTube"></a>
+                </div>
+            </div>
+        </div>
+
+        <div class="header-main">
+            <a href="https://www.infouni.uni.edu.pe" class="logo-container">
+                <img src="https://i.ibb.co/0VDZ9bWt/logo-infouni-blue.png" alt="Logo INFOUNI">
+            </a>
+            <div class="nav-buttons">
+                <a href="#bienvenida" class="nav-button"><span>Bienvenidos</span></a>
+                <a href="#software" class="nav-button"><span>Aprendizaje</span></a>
+                <a href="#reglamento" class="nav-button"><span>Reglamentos</span></a>
+                <a href="https://www.infouni.uni.edu.pe/auth/login" class="nav-button intranet-btn"
+                    target="_blank">Intranet</a>
+                <a href="https://drive.google.com/drive/folders/1sLl2LIE1cPzYfhmgiVVW67UbaHKj-vYg"
+                    class="nav-button intranet-btn" target="_blank">Horarios</a>
+            </div>
+        </div>
+    </header>
+
+    <div class="banner">
+        <div class="banner-texto" aria-label="Soporte INFOUNI">
+            <div class="linea" aria-hidden="true">
+                <span class="letra" style="--i:0">S</span><span class="letra" style="--i:1">o</span><span class="letra"
+                    style="--i:2">p</span><span class="letra" style="--i:3">o</span><span class="letra"
+                    style="--i:4">r</span><span class="letra" style="--i:5">t</span><span class="letra"
+                    style="--i:6">e</span>
+            </div>
+            <div class="linea linea2" aria-hidden="true">
+                <span class="letra" style="--i:0">I</span><span class="letra" style="--i:1">N</span><span class="letra"
+                    style="--i:2">F</span><span class="letra" style="--i:3">O</span><span class="letra"
+                    style="--i:4">U</span><span class="letra" style="--i:5">N</span><span class="letra"
+                    style="--i:6">I</span>
+            </div>
+        </div>
+    </div>
+
+    <section id="bienvenida" class="section-centered">
+        <div class="titulo-animado" aria-label="Bienvenidos">
+            <div class="linea" aria-hidden="true">
+                <span class="letra" style="--i:0">B</span><span class="letra" style="--i:1">i</span><span class="letra"
+                    style="--i:2">e</span><span class="letra" style="--i:3">n</span><span class="letra"
+                    style="--i:4">v</span><span class="letra" style="--i:5">e</span><span class="letra"
+                    style="--i:6">n</span><span class="letra" style="--i:7">i</span><span class="letra"
+                    style="--i:8">d</span><span class="letra" style="--i:9">o</span><span class="letra"
+                    style="--i:10">s</span>
+            </div>
+        </div>
+        <div class="intro">
+            <div class="logo">
+                <a href="https://www.infouni.uni.edu.pe"><img src="https://i.ibb.co/0VDZ9bWt/logo-infouni-blue.png"
+                        alt="Centro de Cómputo INFOUNI"></a>
+                <div class="intranet-texto">Haga click en la imagen para ingresar a la pagina de Carreras de INFOUNI
+                </div>
+            </div>
+            <div class="texto">
+                <h2>Centro de Cómputo INFOUNI</h2>
+                <p>Expande tus conocimientos sobre la forma de instalar los programas de INFOUNI, las soluciones de
+                    errores y todas las dudas que tengas por resolver, están aquí. Gracias por elegir INFOUNI para
+                    comenzar tu camino hacia el éxito.</p>
+            </div>
+        </div>
+
+        <div id="three-images-container">
+            <img src="https://i.ibb.co/4hSKMph/secretaria.png" alt="Secretaría de INFOUNI">
+            <img src="https://i.ibb.co/JjXSQ1d4/Pantallaaazul.png" alt="Imagen descriptiva">
+            <img src="https://i.ibb.co/nNpfrzsj/clases.jpg" alt="Clases en INFOUNI">
+        </div>
+
+        <div id="new-image-container">
+            <img src="https://i.ibb.co/LdGXSSjg/stugio-ghibibibi.png" alt="Imagen decorativa de un animal">
+        </div>
+
+        <div class="intro-extra">
+            <p>Aquí ofrecemos todo lo que se necesita para sus comienzos como soporte en INFOUNI:<br>Normas a seguir,
+                Código de Vestimenta, Guías de variedad en formato Video, PDF y texto,<br>además de soluciones de
+                errores que se vayan registrando.</p>
+        </div>
+
+    </section>
+
+    <div class="separator-wrapper">
+        <div class="thin-separator" aria-hidden="true"></div>
+    </div>
+
+    <section id="software" class="section-centered">
+        <div class="titulo-animado" aria-label="Aprendizaje de su Problema">
+            <div class="linea" aria-hidden="true">
+                <span class="letra" style="--i:0">A</span><span class="letra" style="--i:1">p</span><span class="letra"
+                    style="--i:2">r</span><span class="letra" style="--i:3">e</span><span class="letra"
+                    style="--i:4">n</span><span class="letra" style="--i:5">d</span><span class="letra"
+                    style="--i:6">i</span><span class="letra" style="--i:7">z</span><span class="letra"
+                    style="--i:8">a</span><span class="letra" style="--i:9">j</span><span class="letra"
+                    style="--i:10">e</span>
+            </div>
+            <div class="linea linea2" aria-hidden="true">
+                <span class="letra" style="--i:0">d</span><span class="letra" style="--i:1">e</span><span class="letra"
+                    style="--i:2"> </span><span class="letra" style="--i:3">s</span><span class="letra"
+                    style="--i:4">u</span><span class="letra" style="--i:5"> </span><span class="letra"
+                    style="--i:6">P</span><span class="letra" style="--i:7">r</span><span class="letra"
+                    style="--i:8">o</span><span class="letra" style="--i:9">b</span><span class="letra"
+                    style="--i:10">l</span><span class="letra" style="--i:11">e</span><span class="letra"
+                    style="--i:12">m</span><span class="letra" style="--i:13">a</span>
+            </div>
+        </div>
+
+        <div class="buscador-becas">
+            <div class="contenedor-principal">
+                <h1 class="titulo-seccion">Busque su Software</h1>
+                <div class="buscador">
+                    <input type="search" id="buscador-input" placeholder="Buscar software..."
+                        aria-label="Buscar software">
+                </div>
+                <div id="botones-container" class="botones-container" aria-live="polite"></div>
+            </div>
+
+            <div class="becas-box">
+                <div class="becas-img">
+                    <a href="https://docs.google.com/document/d/1Qq5sykVCgjnfcxvGrdEYL9t8sxZj3RRB/export?format=docx">
+                        <img src="https://i.ibb.co/YFWmc11M/tigre-infouni.png" alt="Becas INFOUNI">
+                    </a>
+                </div>
+                <div class="becas-nota">Haga click para obtener el formato de Becas</div>
+                <div class="becas-texto">
+                    Aprovecha tus becas mensuales. No desperdicies la oportunidad de estudiar en INFOUNI de forma
+                    gratuita después de un mes de esfuerzo como soporte. Recuerda que las becas no se acumulan, así que
+                    no pierdas tu oportunidad. Como sugerencia, pide ayuda a un soporte que ya haya solicitado becas
+                    para revisar tu formato, ya que la beca no será aprobada si contiene errores en algún punto.
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="separator-wrapper">
+        <div class="thin-separator" aria-hidden="true"></div>
+    </div>
+
+    <section id="reglamento" class="section-centered">
+        <div class="centered-carousel">
+            <div class="carousel-container">
+                <div class="slider-title" id="slider-title"></div>
+                <div class="image-slider">
+                    <div class="slider-images">
+                        <div class="image-container"><a
+                                href="https://drive.google.com/uc?export=download&id=1Pe1Wx3sKU2IiKpx13vMjDjhtfS1EKeRf"><img
+                                    src="https://i.ibb.co/Tq8gcjg1/capibara-blanco.png" alt="Código de Vestimenta"></a>
+                        </div>
+                        <div class="image-container"><a
+                                href="https://docs.google.com/document/d/17H1LFjiHsRkcMQ1Ye2PXeUjirYi789B_/export?format=docx"><img
+                                    src="https://i.ibb.co/HLn5f2JZ/carnet-34.png " alt="Carnet INFOUNI"></a></div>
+                        <div class="image-container"><a
+                                href="https://drive.google.com/uc?export=download&id=1Siz6kO76_XV6wo5hDoKJ_vlE92vIleau"><img
+                                    src="https://i.ibb.co/sJJyrVhd/Reglamento.png" alt="Reglamento INFOUNI"></a></div>
+                    </div>
+                    <div class="slider-buttons">
+                        <button class="prev-btn">←</button>
+                        <button class="next-btn">→</button>
+                    </div>
+                    <div class="indicators">
+                        <div class="indicator active-indicator"></div>
+                        <div class="indicator"></div>
+                        <div class="indicator"></div>
+                    </div>
+                </div>
+                <div class="click-text">Haga click en las imágenes para descargar los formatos</div>
+            </div>
+        </div>
+    </section>
+
+    <div class="separator-wrapper">
+        <div class="thin-separator" aria-hidden="true"></div>
+    </div>
+
+    <section id="ubicacion">
+        <div class="titulo-animado" aria-label="Encuéntranos en:">
+            <div class="linea" aria-hidden="true">
+                <span class="letra" style="--i:0">E</span><span class="letra" style="--i:1">n</span><span class="letra"
+                    style="--i:2">c</span><span class="letra" style="--i:3">u</span><span class="letra"
+                    style="--i:4">é</span><span class="letra" style="--i:5">n</span><span class="letra"
+                    style="--i:6">t</span><span class="letra" style="--i:7">r</span><span class="letra"
+                    style="--i:8">a</span><span class="letra" style="--i:9">n</span><span class="letra"
+                    style="--i:10">o</span><span class="letra" style="--i:11">s</span>
+            </div>
+            <div class="linea linea2" aria-hidden="true">
+                <span class="letra" style="--i:0">e</span><span class="letra" style="--i:1">n</span><span class="letra"
+                    style="--i:2">:</span>
+            </div>
+        </div>
+        <div class="map-container">
+            <iframe
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2759.3278229179296!2d-77.04722312728791!3d-12.024315175860353!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x9105cf2379633fdb%3A0xa8dcc17109dcdbbd!2sCentro+de+Computo+INFOUNI!5e0!3m2!1ses-419!2spe!4v1438545820763"
+                width="100%" height="450" style="border:0;" allowfullscreen="" loading="lazy"
+                referrerpolicy="no-referrer-when-downgrade"></iframe>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h4>Contacto</h4>
+                <div class="footer-contact-item">
+                    <img src="https://i.ibb.co/JWb5zp10/maps.png" alt="Ubicación">
+                    <a href="https://www.google.com/maps/place/Centro+de+Computo+INFOUNI+-+UNI/@-12.024268,-77.0501132,17z/data=!3m1!4b1!4m6!3m5!1s0x9105cf2379633fdb:0xa8dcc17109dcdbbd!8m2!3d-12.0242733!4d-77.0475329!16s%2Fg%2F1hf392m1h?entry=ttu&g_ep=EgoyMDI1MDgyNC4wIKXMDSoASAFQAw%3D%3D"
+                        class="link-text" target="_blank" rel="noopener noreferrer">Av. Túpac Amaru 210, Rímac, Lima</a>
+                </div>
+                <div class="footer-contact-item">
+                    <img src="https://i.ibb.co/hx4sQxF7/gmail.png" alt="Correo">
+                    <p class="copyable-text" onclick="copyEmail(event)">infouni@uni.edu.pe</p>
+                </div>
+                <div class="footer-contact-item">
+                    <img src="https://i.ibb.co/tp9b7gGY/telefono-2.png" alt="Teléfono">
+                    <p class="copyable-text" onclick="copyNumber(event, '922378322')">922378322</p>
+                </div>
+                <div class="footer-contact-item">
+                    <img src="https://i.ibb.co/tp9b7gGY/telefono-2.png" alt="Teléfono">
+                    <p class="copyable-text" onclick="copyNumber(event, '924538711')">924538711</p>
+                </div>
+                <div class="footer-contact-item">
+                    <img src="https://i.ibb.co/tp9b7gGY/telefono-2.png" alt="Teléfono">
+                    <p class="copyable-text" onclick="copyNumber(event, '946955476')">946955476</p>
+                </div>
+            </div>
+            <div class="footer-section">
+                <h4>Nuestra Misión</h4>
+                <p>Proporcionar soporte técnico de excelencia y recursos educativos para empoderar a nuestros
+                    estudiantes en su camino hacia el éxito profesional. Nos comprometemos a ser la principal fuente de
+                    conocimiento y asistencia.</p>
+            </div>
+            <div class="footer-section">
+                <h4>Buscadores de Programas</h4>
+                <ul>
+                    <li><a href="https://es.taiwebs.com/?lang=PE" target="_blank" rel="noopener noreferrer">Taiwebs</a>
+                    </li>
+                    <li><a href="https://filecr.com/en-us/" target="_blank" rel="noopener noreferrer">FileCr</a></li>
+                    <li><a href="https://aportesingecivil.com/" target="_blank" rel="noopener noreferrer">Aportes
+                            IngeCivil</a></li>
+                    <li><a href="https://modyolo.com/" target="_blank" rel="noopener noreferrer">Modyolo</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>Síguenos</h4>
+                <div class="social-icons">
+                    <a href="https://www.facebook.com/infouniperu" target="_blank" rel="noopener noreferrer"><img
+                            src="https://i.ibb.co/932pVmkJ/logogogogo.png" alt="Facebook"></a>
+                    <a href="https://www.tiktok.com/@infouni.peru" target="_blank" rel="noopener noreferrer"><img
+                            src="https://i.ibb.co/9HB3Kck4/logo-de-tiki-toki.png" alt="Tiktok"></a>
+                    <a href="https://www.whatsapp.com/channel/0029VaOySBW3LdQcfyQ2fZ1x" target="_blank"
+                        rel="noopener noreferrer"><img src="https://i.ibb.co/8D2MCZTk/Imagen3.png" alt="Whatssap"></a>
+                    <a href="https://www.instagram.com/infouni.peru" target="_blank" rel="noopener noreferrer"><img
+                            src="https://i.ibb.co/b5NfsHnY/inns.png" alt="Instagram"></a>
+                    <a href="https://www.youtube.com/@infouniperu" target="_blank" rel="noopener noreferrer"><img
+                            src="https://i.ibb.co/Hf8sRmfm/youtubelogo.png" alt="YouTube"></a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">© 2025 INFOUNI. Todos los derechos reservados.</div>
+        <div class="footer-bottom">Creador: Fabrizio Gamboa Jimenez, Soporte 2024-2025</div>
+    </footer>
+
+    <div id="copy-message"></div>
+
+    <div id="chat-bubble">
+        <img id="bubble-icon" src="https://i.ibb.co/MDrCSpjG/tigre-leyendo.png" alt="Abrir Chat">
+    </div>
+
+    <div id="chat-window" class="closed">
+        <div class="chat-header">
+            <h3>Leo, El Chat Bot de INFOUNI</h3>
+            <div class="chat-header-buttons">
+                <button class="header-btn" id="reset-chat-size" title="Reiniciar tamaño">⟲</button>
+                <button class="header-btn" id="close-chat" title="Cerrar chat">×</button>
+            </div>
+        </div>
+        <div class="chat-messages" id="chat-messages">
+        </div>
+        <form class="chat-input" id="chat-form">
+            <input type="text" id="user-input" placeholder="Escribe tu mensaje..." autocomplete="off">
+            <button type="submit" title="Enviar mensaje">➤</button>
+        </form>
+    </div>
+
+    <script>
+        // TÍTULO: SCRIPT PARA AJUSTE DINÁMICICO DEL DESPLAZAMIENTO
+        // FUNCIÓN: Calcula la altura real del encabezado y la aplica como padding y scroll-margin
+        // para asegurar un centrado perfecto en todas las resoluciones.
+        function adjustLayoutForHeader() {
+            const header = document.querySelector('header');
+            if (header) {
+                const headerHeight = header.offsetHeight;
+                document.documentElement.style.setProperty('--header-height', `${headerHeight}px`);
+            }
+        }
+
+        // Ajustar al cargar la página y si la ventana cambia de tamaño.
+        window.addEventListener('load', adjustLayoutForHeader);
+        window.addEventListener('resize', adjustLayoutForHeader);
+
+
+        // TÍTULO: SCRIPT PARA BLOQUEAR ZOOM
+        // FUNCIÓN: Evita que los usuarios hagan zoom en la página con la rueda del ratón o gestos táctiles.
+        document.addEventListener('wheel', function (e) {
+            if (e.ctrlKey || e.metaKey) { e.preventDefault(); }
+        }, { passive: false });
+        document.addEventListener('touchmove', function (e) {
+            if (e.touches.length > 1) { e.preventDefault(); }
+        }, { passive: false });
+
+        // TÍTULO: SCRIPT DEL BUSCADOR DE SOFTWARE
+        // FUNCIÓN: Filtra y muestra los enlaces de software según lo que el usuario escribe en el campo de búsqueda.
+
+        // Instalacion de Programas
+        const enlaces = [
+            { nombre: "SolidWorks Manual en Video", url: "https://drive.google.com/uc?export=download&id=1VCnmi93qmPVwbcD5BwAdhizyhvUjEu7p" },
+            { nombre: "SolidWorks Manual en PDF", url: "https://drive.google.com/uc?export=download&id=1F6hE73Dg6Wq7YuwJGEVRxxegRsJ2660D" },
+            { nombre: "MathCad Prime Manual en Video", url: "https://drive.google.com/uc?export=download&id=1HkuczoNPdp3VJdxtPa9lLCJ-arVgiQkc" },
+            { nombre: "MathCad Prime Manual en Text", url: "https://drive.google.com/uc?export=download&id=11eMNEVJz72m-frr5EO6XyFUDqbpL-yyW" },
+            { nombre: "Visual Code Instalador", url: "https://drive.google.com/uc?export=download&id=1DJdBGBsZC2W41L4SuJjCM_Y0D8ZCnr4g" },
+            { nombre: "Manual de Instalacion Pip Numpy PDF", url: "https://drive.google.com/uc?export=download&id=1MQGlmwq1jT0Azz7ug6Q7d6MuVNooDTgN" },
+            { nombre: "Carpeta Compartida", url: "https://drive.google.com/uc?export=download&id=1xzPdFUiAZEQyFsFv-czAsUIYUzcxRen2" },
+            { nombre: "CorelDRAW Manual en PDF", url: "https://drive.google.com/uc?export=download&id=1pmodGplAqXmvueGuW79bPkMMIPAgNBYM" },
+            { nombre: "CorelDRAW Manual en Video", url: "https://drive.google.com/uc?export=download&id=1ylrG-m_5wEjmA4Gqhk2ahyyuQu34trTB" },
+            { nombre: "MATLAB Manual en Video", url: "https://drive.google.com/uc?export=download&id=1HaCvkG2ctQe1N971q_55hZoNnUBFvLdz" },
+            { nombre: "MATLAB Manual en PDF", url: "https://drive.google.com/uc?export=download&id=1UHbMiRzzKZq0uH3xuZwb4F6ItdV-dUzH" },
+            { nombre: "Fondos UNI", url: "https://drive.google.com/uc?export=download&id=1Puy4cYyqK7Q12GTYWx6ccJQHW_AkpucC" },
+            { nombre: "Trucos de Instalacion Windows 10 y 11", url: "https://drive.google.com/uc?export=download&id=16k6ORcL-MhdQumURhiFCtRB8AvRdRUTw" },
+            { nombre: "Comandos de CMD", url: "https://drive.google.com/uc?export=download&id=1ZU4a4iGjEwR3N8cIzwWZFpfqJ31KE3Nz" },
+            { nombre: "Borrar Temporales", url: "https://drive.google.com/uc?export=download&id=1St45CTMfxHdlPVwybLMrvXEn9NBZKsth" },
+            { nombre: "USB Booteable", url: "https://drive.google.com/uc?export=download&id=1dU0lqges960FSe12X-lWq_HaU7HCxBj2" },
+            { nombre: "VMware Manual de Instalacion PDF", url: "https://drive.google.com/uc?export=download&id=1rp5QdB6Yakb-zV0gAGxiK7QLI0kdU1_h" },
+            { nombre: "IBM Manual en Video", url: "https://drive.google.com/uc?export=download&id=1xoM9M9KyfefmiPTht5RWhKEVqxOcxdR4" },
+            { nombre: "IBM Manual en Text", url: "https://drive.google.com/uc?export=download&id=1ims1VxlkI52rSmwaagVN-Cbzf3QbnH7V" },
+            { nombre: "Autodesk Inventor Manual en PDF", url: "https://drive.google.com/uc?export=download&id=1vdloTzdboUYHYYFMUI4zKLlg4Esj5vUG" },
+            { nombre: "Autodesk Autocad Manual en PDF", url: "https://drive.google.com/uc?export=download&id=1DE1VXscREo-RjZVY5N8GzwCpaPHRd4g6" },
+            { nombre: "Recuva Instalacion y Uso en Video", url: "https://drive.google.com/uc?export=download&id=1XM4lvMQ6Nj8qbRLgOtxeSgEWK4U_Oh9j" },
+            { nombre: "Mastercam 2025 Manual en Video", url: "https://drive.google.com/uc?export=download&id=1gUP2zBJ4jCPpfN4ONAYQ02Lg-YOaXNHv" },
+            { nombre: "Atlas TI 24 Manual en PDF", url: "https://drive.google.com/uc?export=download&id=1Nyiu33K1uQP_EmQsKA8Cyy-TG6tDMbMy" },
+            { nombre: "Manual de Instalacion Sap 2000 26", url: "https://drive.google.com/uc?export=download&id=1OJjrC_UyyFvV-rsflTHiWWJ9jPs9MQbm" },
+            { nombre: "Symbol Factory 3 Manual en PDF", url: "https://drive.google.com/uc?export=download&id=11JrwYxwgGGm2mJwKZiQnrnoShDzpab_E" },
+            { nombre: "RStudio y R.4.4.3 Manual en PDF", url: "https://drive.google.com/uc?export=download&id=1Vsm0lN-4-xFqSEXv2WN4XnhyXUXvDiIe" },
+            { nombre: "NVivo 12 Manual en PDF", url: "https://drive.google.com/uc?export=download&id=1Vsm0lN-4-xFqSEXv2WN4XnhyXUXvDiIe" },
+            { nombre: "MaxSurf Manual en PDF", url: "https://drive.google.com/uc?export=download&id=1gxS2Wd0BO6fcis8WwaYPFl3BxkAZGnYo" },
+            { nombre: "Rhinoceros Manual en PDF", url: "https://drive.google.com/uc?export=download&id=1GmrWKiX-uk1HaazcHlndVYZzUp-K3SDk" },
+            { nombre: "Adobe Acrobat Manual en PDF", url: "https://drive.google.com/uc?export=download&id=13dsvNWgZZxlNVrIXHd6uHB8fnUgaaFTC" },
+
+            //Correccion de Errores
+            { nombre: "SolidWorks Error -8,544,0", url: "https://drive.google.com/uc?export=download&id=1hWn6JUl_C0iag-DZ94R7SiLiCDCrzFq5" },
+            { nombre: "SolidWorks Electrical No conecta con SQL Server", url: "https://drive.google.com/uc?export=download&id=1xx1LIo0FqeRYpHmerJNCYeZxGKfDVHU9" },
+            { nombre: "SolidWorks Pacht no se Elimina", url: "https://drive.google.com/uc?export=download&id=1_1Elp3lr4VPqYvEChlFIdLrz7RZ6v1xv" },
+            { nombre: "SolidWorks Toolbox no Funciona", url: "https://drive.google.com/uc?export=download&id=1GCdk0kPrau7gVruCSJW1W1RVnDAoPSiL" },
+            { nombre: "SolidWorks Faltan Componentes", url: "https://drive.google.com/uc?export=download&id=1QEdmrkwNLvHJ_mgkP9XKfr-VDcKMkzoX" },
+            { nombre: "Autodesk Error Reinicio Constante", url: "https://drive.google.com/uc?export=download&id=1LjZpEmMCDz8h-tifQEyUhe9jAKBs18jB" },
+            { nombre: "Autodesk Error -1603", url: "https://drive.google.com/uc?export=download&id=1qBdbAV-ciC9_CNO1cTNEukEl2amRmaw_" },
+            { nombre: "MathCad Prime error de Licencia -9", url: "https://drive.google.com/uc?export=download&id=1_Ee4F_WxsUbairFCbBGUmu-ScHKg0FZl" },
+            { nombre: "Activacion de Windows bat", url: "https://drive.google.com/uc?export=download&id=1zPyniDqvgrCdfLrdgYHkjL7qiFG9qw8j" },
+            { nombre: "Desactivar Antivirus bat", url: "https://drive.google.com/uc?export=download&id=19HV3fBlfba8OjAT6KldV0NZ9PgKqoWST" },
+            { nombre: "Limpieza de Temporales bat", url: "https://drive.google.com/uc?export=download&id=1n9P46FdUFTrdSE8wHdqqlWhDJDknAlEb" },
+            { nombre: "Reportes de Salon bat", url: "https://drive.google.com/uc?export=download&id=1Qdg7xehReaQ8m1kLcPOn-4ADubCOdtVS" },
+            { nombre: "Limpieza de Temporales 2 bat", url: "https://drive.google.com/uc?export=download&id=1jymwVPEDeJNGn8vFGjfBz46pjnbyTiYq" },
+            { nombre: "Entrar a la BIOS bat", url: "https://drive.google.com/uc?export=download&id=1kn14OccsnFXJGQ-fAKOL0W3c_VrJQUxb" },
+            { nombre: "Clonacion con Acronix en PDF", url: "#https://drive.google.com/uc?export=download&id=1M1kgKfFndIwHP23km9m_Fs4FTAr21Nd7" },
+            { nombre: "Creacion de copias y restauracion con Acronix en PDF", url: "https://drive.google.com/uc?export=download&id=13TnrxxGllu_qsUtQmfTMMwfpoHkRy05p" },
+            { nombre: "Particionamiento con Partition Wizard en PDF", url: "https://drive.google.com/uc?export=download&id=1Rwm8GMD50cfqMEbUDWe46Uy-lvQurgXw" },
+            { nombre: "Problema con la Resolucion de Pantalla", url: "https://drive.google.com/uc?export=download&id=1VIGFCS5KuPBBqxTauNHVS8UizO023OTh" },
+        ];
+
+        const cont = document.getElementById('botones-container');
+        const input = document.getElementById('buscador-input');
+
+        function renderizar(lista) {
+            cont.innerHTML = '';
+            lista.forEach(en => {
+                const a = document.createElement('a');
+                a.textContent = en.nombre;
+                a.href = (en.url && en.url !== '#') ? en.url : "#software";
+                a.className = 'boton-enlace';
+                a.target = '_blank'; // Añade este atributo para abrir en una nueva pestaña
+                a.rel = 'noopener noreferrer'; // Añade este atributo por seguridad
+                cont.appendChild(a);
+            });
+        }
+
+        input.addEventListener('input', e => {
+            const query = e.target.value.trim().toLowerCase();
+            const filt = enlaces
+                .filter(en => en.nombre.toLowerCase().includes(query))
+                .sort((a, b) => a.nombre.localeCompare(b.nombre));
+            renderizar(filt);
+        });
+
+        renderizar(enlaces.sort((a, b) => a.nombre.localeCompare(b.nombre)));
+
+        // TÍTULO: SCRIPT DEL CARRUSEL
+        // FUNCIÓN: Controla la lógica del carrusel de imágenes, incluyendo la navegación manual y automática.
+        let currentIndex = 0;
+        const images = document.querySelectorAll('.slider-images .image-container');
+        const indicators = document.querySelectorAll('.indicator');
+        const slider = document.querySelector('.slider-images');
+        const prevBtn = document.querySelector('.prev-btn');
+        const nextBtn = document.querySelector('.next-btn');
+        const titleContainer = document.getElementById('slider-title');
+        let autoSlideInterval;
+
+        const titleTexts = [
+            ['Código de', 'Vestimenta'], ['Carnet', 'INFOUNI'], ['Reglamento', 'INFOUNI']
+        ];
+
+        function generateTitle(index) {
+            const [line1, line2] = titleTexts[index];
+            titleContainer.innerHTML = '';
+            if (line1) {
+                const div1 = document.createElement('div');
+                div1.className = 'linea';
+                for (let i = 0; i < line1.length; i++) {
+                    const span = document.createElement('span');
+                    span.className = 'letra';
+                    span.style.setProperty('--i', i);
+                    span.textContent = line1[i] === ' ' ? '\u00a0' : line1[i];
+                    div1.appendChild(span);
+                }
+                titleContainer.appendChild(div1);
+            }
+            if (line2) {
+                const div2 = document.createElement('div');
+                div2.className = 'linea2';
+                for (let i = 0; i < line2.length; i++) {
+                    const span = document.createElement('span');
+                    span.className = 'letra';
+                    span.style.setProperty('--i', i);
+                    span.textContent = line2[i];
+                    div2.appendChild(span);
+                }
+                titleContainer.appendChild(div2);
+            }
+        }
+
+        function updateSlider(index) {
+            slider.style.transform = `translateX(-${index * 100}%)`;
+            indicators.forEach((indicator, i) => {
+                indicator.classList.toggle('active-indicator', i === index);
+            });
+            generateTitle(index);
+        }
+        prevBtn.addEventListener('click', () => {
+            currentIndex = (currentIndex - 1 + images.length) % images.length;
+            updateSlider(currentIndex);
+            restartAutoSlide();
+        });
+        nextBtn.addEventListener('click', () => {
+            currentIndex = (currentIndex + 1) % images.length;
+            updateSlider(currentIndex);
+            restartAutoSlide();
+        });
+        function restartAutoSlide() {
+            clearInterval(autoSlideInterval);
+            autoSlideInterval = setInterval(() => {
+                currentIndex = (currentIndex + 1) % images.length;
+                updateSlider(currentIndex);
+            }, 7000);
+        }
+        restartAutoSlide();
+        updateSlider(currentIndex);
+
+        // TÍTULO: FUNCIÓN PARA COPIAR CORREO Y NÚMEROS
+        // FUNCIÓN: Copia la dirección de correo o el número de teléfono al portapapeles.
+        function showMessage(text, isError = false) {
+            const messageDiv = document.getElementById('copy-message');
+            messageDiv.textContent = text;
+            if (isError) {
+                messageDiv.style.backgroundColor = '#cc0000';
+            } else {
+                messageDiv.style.backgroundColor = 'rgba(0, 0, 0, 0.8)';
+            }
+            messageDiv.classList.add('show');
+            setTimeout(() => {
+                messageDiv.classList.remove('show');
+            }, 3000);
+        }
+
+        function copyEmail(event) {
+            event.preventDefault(); // Evita que la página se desplace hacia arriba.
+            const emailText = "infouni@uni.edu.pe";
+            navigator.clipboard.writeText(emailText)
+                .then(() => {
+                    showMessage("Correo Copiado: " + emailText);
+                })
+                .catch(err => {
+                    showMessage("Error al copiar el correo", true);
+                });
+        }
+
+        function copyNumber(event, number) {
+            event.preventDefault();
+            navigator.clipboard.writeText(number)
+                .then(() => {
+                    showMessage("Número copiado: " + number);
+                })
+                .catch(err => {
+                    showMessage("Error al copiar el número", true);
+                });
+        }
+    </script>
+
+    <script>
+        // --- Elementos del DOM ---
+        const chatBubble = document.getElementById('chat-bubble');
+        const bubbleIcon = document.getElementById('bubble-icon');
+        const chatWindow = document.getElementById('chat-window');
+        const closeChatBtn = document.getElementById('close-chat');
+        const resetChatBtn = document.getElementById('reset-chat-size');
+        const chatForm = document.getElementById('chat-form');
+        const userInput = document.getElementById('user-input');
+        const chatMessages = document.getElementById('chat-messages');
+        const chatHeader = document.querySelector('.chat-header');
+
+
+        // --- URLs de Imágenes ---
+        const IMG_CERRADO = "https://i.ibb.co/MDrCSpjG/tigre-leyendo.png";
+        const IMG_ABIERTO = "https://i.ibb.co/1GNDDYzL/tigre-leyendo-2.png";
+        const FOTO_USUARIO = "https://i.ibb.co/4Zr38K6d/capibarara-burbuja.png";
+        const FOTO_BOT = "https://i.ibb.co/G4KnMLjs/Infotigre.png";
+
+        // --- Pega tu API Key de Google Gemini aquí ---
+        const API_KEY = "AIzaSyDVzjhJzcDenVKow5xvgdhJpvZPtlNwsuU"; // Ejemplo: "AIzaSy..."
+        const API_URL = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash-latest:generateContent?key=${API_KEY}`;
+
+        // --- Historial de conversación para mantener el contexto ---
+        let conversationHistory = [];
+
+        // --- Definición de comandos y sinónimos locales ---
+        const localCommands = [
+            {
+                keywords: ['manual', 'manuales', 'software', 'guia', 'guias', 'aprendizaje', 'instalar'],
+                response: "Claro, aquí tienes la sección de aprendizaje y software. Haz clic en el botón para ir.",
+                buttonText: "Ir a Aprendizaje",
+                target: "#software"
+            },
+            {
+                keywords: ['beca', 'becas', 'formato de beca', 'ayuda economica'],
+                response: "Entendido. Te llevo a la sección de becas para que puedas descargar el formato y ver la información.",
+                buttonText: "Ver Becas",
+                target: "#software"
+            },
+            {
+                keywords: ['reglamento', 'reglamentos', 'normas', 'vestimenta', 'codigo', 'carnet'],
+                response: "¡Por supuesto! En esta sección encontrarás el reglamento, el código de vestimenta y la información del carnet.",
+                buttonText: "Ver Reglamentos",
+                target: "#reglamento"
+            },
+            {
+                keywords: ['horario', 'horarios', 'clases'],
+                response: "Puedes consultar los horarios actualizados haciendo clic en el botón del menú de navegación. Te he preparado un botón para que sea más fácil.",
+                buttonText: "Ver Horarios",
+                target: "https://drive.google.com/drive/folders/1sLl2LIE1cPzYfhmgiVVW67UbaHKj-vYg"
+            },
+            {
+                keywords: ['intranet', 'plataforma', 'aula virtual'],
+                response: "Para acceder a la Intranet, usa el botón del menú principal o haz clic en el botón que te he preparado.",
+                buttonText: "Ir a Intranet",
+                target: "https://www.infouni.uni.edu.pe/auth/login"
+            },
+            {
+                keywords: ['ubicacion', 'direccion', 'donde estan', 'mapa', 'encuentranos', 'local', 'lugar'],
+                response: "¡Claro! Nuestra dirección es Av. Túpac Amaru 210, Rímac. Te muestro el mapa.",
+                buttonText: "Ver Ubicación",
+                target: "#ubicacion"
+            },
+            {
+                keywords: ['contacto', 'telefono', 'numero', 'correo', 'llamar', 'escribir', 'copiar'],
+                response: "Toda nuestra información de contacto, incluyendo los números de teléfono y el correo electrónico, está en el pie de página. Te llevo allí para que puedas verlos y copiarlos.",
+                buttonText: "Ir a Contacto",
+                target: ".footer"
+            },
+            {
+                keywords: ['curso', 'cursos', 'carrera', 'carreras', 'enseñan', 'matricularme', 'inscripcion', 'inscribirme'],
+                response: "Puedes ver todos nuestros cursos, carreras y matricularte a través de nuestra Intranet. ¡Haz clic en el botón para ir!",
+                buttonText: "Ver Cursos en Intranet",
+                target: "https://www.infouni.uni.edu.pe/auth/login"
+            },
+            {
+                keywords: ['instaladores', 'programa', 'programas', 'descargar', 'links', 'buscadores', 'webs', 'paginas'],
+                response: "¡Claro! Aquí tienes los buscadores de programas que recomendamos. Puedes hacer clic en cualquiera de ellos para buscar lo que necesites:",
+                buttons: [
+                    { text: "Taiwebs", target: "https://es.taiwebs.com/?lang=PE" },
+                    { text: "FileCr", target: "https://filecr.com/en-us/" },
+                    { text: "Aportes IngeCivil", target: "https://aportesingecivil.com/" },
+                    { text: "Modyolo", target: "https://modyolo.com/" }
+                ]
+            }
+        ];
+
+        // --- Lógica para Abrir y Cerrar el Chat ---
+        function toggleChat() {
+            const isChatOpen = !chatWindow.classList.contains('closed');
+            if (isChatOpen) {
+                chatWindow.classList.add('closed');
+                setTimeout(() => chatWindow.style.display = 'none', 300); // Espera a que termine la animación
+                bubbleIcon.src = IMG_CERRADO;
+            } else {
+                chatWindow.style.display = 'flex';
+                // Pequeño delay para que el navegador aplique el display:flex antes de la animación
+                setTimeout(() => chatWindow.classList.remove('closed'), 10);
+                bubbleIcon.src = IMG_ABIERTO;
+                if (chatMessages.children.length === 0) {
+                    showInitialMessage();
+                }
+            }
+        }
+
+        // --- Lógica para reiniciar el tamaño y posición del chat ---
+        function resetChatWindow() {
+            chatWindow.style.transition = 'all 0.3s ease'; // Añade transición suave
+            chatWindow.style.width = '500px';
+            chatWindow.style.height = '600px';
+            chatWindow.style.top = 'auto';
+            chatWindow.style.left = 'auto';
+            chatWindow.style.bottom = '130px';
+            chatWindow.style.right = '30px';
+            // Quita la transición después de que ocurra para no afectar el drag/resize
+            setTimeout(() => chatWindow.style.transition = '', 300);
+        }
+
+        chatBubble.addEventListener('click', toggleChat);
+        closeChatBtn.addEventListener('click', toggleChat);
+        resetChatBtn.addEventListener('click', resetChatWindow);
+
+        // Muestra el mensaje de bienvenida inicial
+        function showInitialMessage() {
+            const welcomeText = "¡Hola! Soy Leo, el asistente virtual de INFOUNI. 🐯\nPuedo ayudarte a navegar por la página. Pregúntame sobre todo lo que necesites saber dentro de INFOUNI o cualquier informacion que necesites a tiempo real.";
+            const typingIndicator = showTypingIndicator();
+            setTimeout(() => {
+                hideTypingIndicator(typingIndicator);
+                addMessage(welcomeText, 'bot');
+            }, 1500);
+        }
+
+        // --- Lógica para la Interacción del Chat ---
+        chatForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const messageText = userInput.value.trim();
+            if (messageText === '') return;
+
+            addMessage(messageText, 'user');
+            userInput.value = '';
+
+            // --- Verificación de Comandos Locales ---
+            const command = findLocalCommand(messageText);
+            if (command) {
+                handleLocalCommand(command);
+                return; // Detiene la ejecución para no llamar a la IA
+            }
+
+            // --- Si no es un comando local, llamar a la IA ---
+            const typingIndicator = showTypingIndicator();
+            try {
+                const botResponse = await getBotResponse(messageText);
+                hideTypingIndicator(typingIndicator);
+                addMessage(botResponse, 'bot');
+            } catch (error) {
+                hideTypingIndicator(typingIndicator);
+                // La función getBotResponse ya muestra un mensaje específico si la API Key es el problema.
+                // Este es un mensaje de fallback para otros errores de red o de la API.
+                if (!error.message.includes("API Key")) {
+                    addMessage('Lo siento, ocurrió un error al conectar con mis servidores. Por favor, inténtalo de nuevo más tarde.', 'bot');
+                }
+                console.error('Error al contactar la API:', error);
+            }
+        });
+
+        // --- Función para buscar un comando local en el mensaje del usuario ---
+        function findLocalCommand(message) {
+            const lowerCaseMessage = message.toLowerCase();
+            return localCommands.find(cmd =>
+                cmd.keywords.some(keyword => lowerCaseMessage.includes(keyword))
+            );
+        }
+
+        // --- Función para manejar un comando local (AHORA SOPORTA MÚLTIPLES BOTONES) ---
+        function handleLocalCommand(command) {
+            let responseHTML = command.response;
+
+            // Si tiene un solo botón
+            if (command.target) {
+                responseHTML += `<br><button class="action-button" data-target="${command.target}">${command.buttonText}</button>`;
+            }
+            // Si tiene múltiples 
+            else if (command.buttons) {
+                responseHTML += '<br>';
+                command.buttons.forEach(button => {
+                    responseHTML += `<button class="action-button" data-target="${button.target}" style="margin: 5px 5px 0 0;">${button.text}</button>`;
+                });
+            }
+            addMessage(responseHTML, 'bot');
+        }
+
+        // --- Event Listener para los botones de acción ---
+        chatMessages.addEventListener('click', (e) => {
+            if (e.target.classList.contains('action-button')) {
+                const targetSelector = e.target.dataset.target;
+
+                // Si es una URL externa
+                if (targetSelector.startsWith('http')) {
+                    window.open(targetSelector, '_blank');
+                    toggleChat(); // Cierra el chat para que el usuario vea la nueva pestaña
+                    return;
+                }
+
+                // Si es un selector de la página
+                const targetElement = document.querySelector(targetSelector);
+                if (targetElement) {
+                    targetElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    toggleChat(); // Cierra el chat para que el usuario vea la sección
+                }
+            }
+        });
+
+
+        // Función para añadir un mensaje al DOM
+        function addMessage(text, sender) {
+            const messageElement = document.createElement('div');
+            messageElement.classList.add('message', sender === 'user' ? 'user-message' : 'bot-message');
+
+            const avatar = document.createElement('div');
+            avatar.classList.add('avatar');
+            avatar.style.backgroundImage = `url('${sender === 'user' ? FOTO_USUARIO : FOTO_BOT}')`;
+
+            const textBubble = document.createElement('div');
+            textBubble.classList.add('text-bubble');
+            textBubble.innerHTML = text.replace(/\n/g, '<br>'); // Respeta saltos de línea
+
+            messageElement.appendChild(avatar);
+            messageElement.appendChild(textBubble);
+
+            chatMessages.appendChild(messageElement);
+            chatMessages.scrollTop = chatMessages.scrollHeight; // Scroll automático
+        }
+
+        // Muestra el indicador de "Escribiendo..."
+        function showTypingIndicator() {
+            const typingElement = document.createElement('div');
+            typingElement.id = 'typing-indicator';
+            typingElement.classList.add('message', 'bot-message', 'typing-indicator');
+            typingElement.innerHTML = `
+                <div class="avatar" style="background-image: url('${FOTO_BOT}');"></div>
+                <div class="text-bubble">
+                    <span class="dot"></span><span class="dot"></span><span class="dot"></span>
+                </div>`;
+            chatMessages.appendChild(typingElement);
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+            return typingElement;
+        }
+
+        // Oculta el indicador de "Escribiendo..."
+        function hideTypingIndicator(element) {
+            if (element) {
+                element.remove();
+            }
+        }
+
+        // --- FUNCIÓN FUERZA ESPAÑOL LATINO ---
+        async function getBotResponse(userMessage) {
+            // Validación de API Key antes de la llamada.
+            if (!API_KEY || API_KEY.includes("TU_API_KEY")) {
+                const apiKeyErrorMsg = "<strong>Error de configuración:</strong> La clave de la API de IA no ha sido configurada. Por favor, contacta al administrador del sitio.";
+                addMessage(apiKeyErrorMsg, 'bot');
+                throw new Error("API Key no configurada. Es el valor de ejemplo.");
+            }
+
+            conversationHistory.push({ role: "user", parts: [{ text: userMessage }] });
+
+            const payload = {
+                "contents": [
+                    {
+                        "role": "user",
+                        "parts": [{ "text": "Eres un Chat Bot basado en IA muy amigable y servicial llamado 'Leo 🐯'. Trabajas para INFOUNI. Responde siempre en español latino, sin importar el idioma en el que te escriban. Tus respuestas deben ser claras, directas y útiles." }]
+                    },
+                    {
+                        "role": "model",
+                        "parts": [{ "text": "¡Entendido! Soy Leo 🐯, listo para ayudar a la comunidad de INFOUNI en español latino." }]
+                    },
+                    ...conversationHistory
+                ]
+            };
+
+            try {
+                const response = await fetch(API_URL, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                });
+
+                if (!response.ok) {
+                    const errorData = await response.json();
+                    throw new Error(`Error de API: ${response.status} - ${errorData.error.message}`);
+                }
+
+                const data = await response.json();
+
+                if (data.candidates && data.candidates.length > 0 && data.candidates[0].content.parts) {
+                    const botResponseText = data.candidates[0].content.parts[0].text;
+                    conversationHistory.push({ role: "model", parts: [{ text: botResponseText }] });
+                    return botResponseText;
+                } else {
+                    return "No he podido generar una respuesta. Inténtalo de nuevo.";
+                }
+
+            } catch (error) {
+                console.error("No se pudo obtener la respuesta de la API de Gemini:", error);
+                throw error;
+            }
+        }
+
+        // =============================================================
+        // === INICIO: LÓGICA PARA MOVER Y REDIMENSIONAR LA VENTANA ===
+        // =============================================================
+
+        let isDragging = false;
+        let isResizing = false;
+        let dragOffset = { x: 0, y: 0 };
+        let resizeInfo = { direction: '', startX: 0, startY: 0, startRect: null };
+        const RESIZE_BORDER_SENSITIVITY = 8; // Píxeles de sensibilidad para el borde de redimensión
+
+        // --- Mover la ventana (Drag) ---
+        chatHeader.addEventListener('mousedown', (e) => {
+            // No arrastrar si se hace clic en botones o si el cursor es de redimensionar
+            if (e.target.closest('.header-btn') || window.getComputedStyle(chatWindow).cursor.includes('resize')) {
+                return;
+            }
+            e.preventDefault();
+            isDragging = true;
+            const rect = chatWindow.getBoundingClientRect();
+            dragOffset.x = e.clientX - rect.left;
+            dragOffset.y = e.clientY - rect.top;
+
+            // Cambiar a posicionamiento top/left para un arrastre consistente
+            chatWindow.style.right = 'auto';
+            chatWindow.style.bottom = 'auto';
+            chatWindow.style.left = `${rect.left}px`;
+            chatWindow.style.top = `${rect.top}px`;
+
+            document.body.style.userSelect = 'none'; // Evita seleccionar texto al arrastrar
+        });
+
+        // --- Iniciar la redimensión (Resize) ---
+        chatWindow.addEventListener('mousedown', (e) => {
+            const cursor = window.getComputedStyle(chatWindow).cursor;
+            if (cursor.includes('resize')) {
+                e.preventDefault();
+                isResizing = true;
+                resizeInfo.direction = cursor.replace('-resize', '').replace('-', '');
+                resizeInfo.startX = e.clientX;
+                resizeInfo.startY = e.clientY;
+                resizeInfo.startRect = chatWindow.getBoundingClientRect();
+
+                // Asegurar posicionamiento top/left para redimensionar
+                chatWindow.style.right = 'auto';
+                chatWindow.style.bottom = 'auto';
+                chatWindow.style.left = `${resizeInfo.startRect.left}px`;
+                chatWindow.style.top = `${resizeInfo.startRect.top}px`;
+
+                document.body.style.userSelect = 'none';
+                window.addEventListener('mousemove', doResize);
+                window.addEventListener('mouseup', stopResize);
+            }
+        });
+
+        // --- Lógica central de arrastre y redimensión en un solo listener ---
+        document.addEventListener('mousemove', (e) => {
+            // --- Lógica de Arrastre (DRAG) ---
+            if (isDragging) {
+                let newX = e.clientX - dragOffset.x;
+                let newY = e.clientY - dragOffset.y;
+                const headerHeight = chatHeader.offsetHeight;
+
+                // **MEJORA**: Limitar el movimiento dentro de la pantalla
+                newX = Math.max(0, Math.min(newX, window.innerWidth - chatWindow.offsetWidth));
+                newY = Math.max(0, Math.min(newY, window.innerHeight - headerHeight - 10)); // Dejar espacio para ver la cabecera
+
+                chatWindow.style.left = `${newX}px`;
+                chatWindow.style.top = `${newY}px`;
+            }
+
+            // --- Lógica para cambiar el cursor al pasar por los bordes ---
+            else if (!isResizing) {
+                const rect = chatWindow.getBoundingClientRect();
+                const border = RESIZE_BORDER_SENSITIVITY;
+                const onTop = e.clientY < rect.top + border;
+                const onBottom = e.clientY > rect.bottom - border;
+                const onLeft = e.clientX < rect.left + border;
+                const onRight = e.clientX > rect.right - border;
+
+                let cursorType = 'default';
+                if (onTop) cursorType = 'n-resize';
+                if (onBottom) cursorType = 's-resize';
+                if (onLeft) cursorType = 'w-resize';
+                if (onRight) cursorType = 'e-resize';
+                if (onTop && onLeft) cursorType = 'nw-resize';
+                if (onTop && onRight) cursorType = 'ne-resize';
+                if (onBottom && onLeft) cursorType = 'sw-resize';
+                if (onBottom && onRight) cursorType = 'se-resize';
+
+                chatWindow.style.cursor = cursorType;
+                if (cursorType === 'default' && e.target.closest('.chat-header')) {
+                    chatWindow.style.cursor = 'move';
+                }
+            }
+        });
+
+        // --- Función de Redimensión Mejorada ---
+        function doResize(e) {
+            if (!isResizing) return;
+
+            const dx = e.clientX - resizeInfo.startX;
+            const dy = e.clientY - resizeInfo.startY;
+
+            let newWidth = resizeInfo.startRect.width;
+            let newHeight = resizeInfo.startRect.height;
+            let newLeft = resizeInfo.startRect.left;
+            let newTop = resizeInfo.startRect.top;
+
+            const minWidth = parseInt(getComputedStyle(chatWindow).minWidth);
+            const minHeight = parseInt(getComputedStyle(chatWindow).minHeight);
+
+            // Calcular nuevas dimensiones y posiciones
+            if (resizeInfo.direction.includes('e')) newWidth = resizeInfo.startRect.width + dx;
+            if (resizeInfo.direction.includes('w')) newWidth = resizeInfo.startRect.width - dx;
+            if (resizeInfo.direction.includes('s')) newHeight = resizeInfo.startRect.height + dy;
+            if (resizeInfo.direction.includes('n')) newHeight = resizeInfo.startRect.height - dy;
+
+            if (resizeInfo.direction.includes('w')) newLeft = resizeInfo.startRect.left + dx;
+            if (resizeInfo.direction.includes('n')) newTop = resizeInfo.startRect.top + dy;
+
+            // Aplicar cambios si son válidos
+            if (newWidth >= minWidth) {
+                chatWindow.style.width = `${newWidth}px`;
+                chatWindow.style.left = `${newLeft}px`;
+            }
+            if (newHeight >= minHeight) {
+                chatWindow.style.height = `${newHeight}px`;
+                chatWindow.style.top = `${newTop}px`;
+            }
+        }
+
+        // --- Detener arrastre o redimensión ---
+        function stopActions() {
+            if (isResizing) {
+                window.removeEventListener('mousemove', doResize);
+                window.removeEventListener('mouseup', stopResize);
+            }
+            isDragging = false;
+            isResizing = false;
+            document.body.style.userSelect = 'auto';
+        }
+
+        // Renombrado para claridad
+        const stopResize = stopActions;
+        document.addEventListener('mouseup', stopActions);
+
+        // ===========================================================
+        // === FIN: LÓGICA PARA MOVER Y REDIMENSIONAR LA VENTANA ===
+        // ===========================================================
+
+    </script>
+</body>
+
+
+</html>
+
