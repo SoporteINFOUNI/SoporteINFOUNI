@@ -2161,8 +2161,8 @@
         // ----------------------------------------------------------------------
         const messageTimestamps = [];
         const SPAM_THRESHOLD = 5;       // Más de 5 mensajes...
-        const SPAM_TIMEFRAME = 4000;    // ...en menos de 4 segundos.
-        const BLOCK_DURATION = 15000;   // ...resultan en un bloqueo de 15 segundos.
+        const SPAM_TIMEFRAME = 30000;    // ...en menos de 4 segundos.
+        const BLOCK_DURATION = 150000;   // ...resultan en un bloqueo de 15 segundos.
         let isUserWarned = false;
         let blockInterval;
 
@@ -2711,3 +2711,4 @@
 </body>
 
 </html>
+
