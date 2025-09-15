@@ -11,10 +11,12 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
 
     <style>
-        /* ===================================================
-           TÍTULO: VARIABLES GLOBALES Y CONFIGURACIÓN INICIAL
-           FUNCIÓN: Define los colores, tamaños y fuentes base para todo el sitio web.
-           =================================================== */
+        /* ======================================================================
+           TÍTULO: El ADN de Nuestra Página: Variables Globales y Estilos Base
+           FUNCIÓN: Aquí definimos la paleta de colores, las dimensiones y las fuentes que darán
+                    identidad a todo el sitio. Es como la guía de estilo principal para mantener
+                    la coherencia visual en cada rincón de la página.
+           ====================================================================== */
         :root {
             --alto-barra: 80px;
             --metal-1: #e6f0ff;
@@ -33,19 +35,19 @@
             --color-red-dark: #cc0000;
             --color-yellow: #F4D03F;
             --color-cyan: #00FFFF;
-            /* AÑADIDO: Color para el borde animado */
 
-            /* Variable para el desplazamiento, se actualiza dinámicamente con JavaScript */
+            /* Variable mágica para el desplazamiento, se actualiza con JavaScript para precisión quirúrgica. */
             --header-height: 122px;
         }
 
-        /* Normalizamos caja y aplicamos fuente base */
+        /* Reseteo universal para un control total sobre el diseño. */
         * {
             box-sizing: border-box;
         }
 
         html {
             scroll-behavior: smooth;
+            /* Navegación suave como la seda. */
         }
 
         body {
@@ -55,15 +57,16 @@
             color: var(--color-dark);
             -webkit-font-smoothing: antialiased;
             -moz-osx-font-smoothing: grayscale;
-            /* Espacio superior para que el contenido no quede debajo del encabezado fijo */
+            /* Dejamos un espacio arriba para que el encabezado fijo no oculte nuestro contenido. */
             padding-top: var(--header-height);
         }
 
-        /* ===================================================
-           TÍTULO: AJUSTE DE ANCLAJE PARA SECCIONES
-           FUNCIÓN: Añade un margen superior a las secciones para que al navegar,
-                    se alineen correctamente debajo del encabezado fijo.
-           =================================================== */
+        /* ======================================================================
+           TÍTULO: Navegación Perfecta: Ajuste de Anclaje para Secciones
+           FUNCIÓN: Cuando el usuario hace clic en un enlace del menú, este truco asegura que
+                    la sección de destino no quede escondida debajo del encabezado. Añade un
+                    margen superior invisible que compensa la altura del header.
+           ====================================================================== */
         #bienvenida,
         #software,
         #reglamento,
@@ -71,7 +74,7 @@
             scroll-margin-top: var(--header-height);
         }
 
-        /* ESTILO PARA CENTRAR VERTICALMENTE LA SECCIÓN DE REGLAMENTO */
+        /* Le damos un cariño especial a la sección de reglamentos para que se vea genial. */
         #reglamento {
             min-height: calc(100vh - var(--header-height));
             display: flex;
@@ -79,32 +82,28 @@
             justify-content: center;
             align-items: center;
             margin-top: 40px;
-            /* MODIFICADO: Esto aumenta el espacio superior */
         }
 
-        /* ===================================================
-           TÍTULO: CLASE PARA CENTRADO DE SECCIONES
-           FUNCIÓN: Estilos para centrar el contenido de las secciones principales.
-           =================================================== */
+        /* ======================================================================
+           TÍTULO: El Centrador Universal de Contenido
+           FUNCIÓN: Una clase de utilidad para centrar nuestras secciones principales de forma
+                    rápida y consistente, asegurando que todo se vea ordenado.
+           ====================================================================== */
         .section-centered {
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
+            padding: 0 15px;
+            /* Un poco de aire en los costados para pantallas móviles. */
         }
 
-        /* ===================================================
-           TÍTULO: SECCIÓN DE BIENVENIDA (ESPACIADO ADICIONAL)
-           FUNCIÓN: Añade un margen superior para separar esta sección del banner.
-           =================================================== */
+        /* Un empujoncito extra para la sección de bienvenida. */
         #bienvenida {
             margin-top: 50px;
         }
 
-        /* ===================================================
-           TÍTULO: CLASE PARA CENTRAR EL CARRUSEL
-           FUNCIÓN: Centra horizontalmente el carrusel de reglamentos.
-           =================================================== */
+        /* Centrando el carrusel para que sea el protagonista. */
         .centered-carousel {
             display: flex;
             justify-content: center;
@@ -112,10 +111,12 @@
             margin-bottom: 40px;
         }
 
-        /* ===================================================
-           TÍTULO: ESTILOS PARA EL ENCABEZADO
-           FUNCIÓN: Controla la apariencia del encabezado fijo, incluyendo la barra superior y la principal.
-           =================================================== */
+        /* ======================================================================
+           TÍTULO: La Torre de Control: Estilos del Encabezado
+           FUNCIÓN: Aquí se define el comportamiento y la apariencia del encabezado principal.
+                    Lo mantenemos fijo en la parte superior para que la navegación esté
+                    siempre al alcance del usuario, sin importar dónde se encuentre en la página.
+           ====================================================================== */
         header {
             position: fixed;
             top: 0;
@@ -124,10 +125,9 @@
             z-index: 1000;
             box-shadow: 0 2px 5px rgba(0, 0, 0, .2);
             transition: height 0.3s ease;
-            /* Transición suave para cambios de altura */
         }
 
-        /* Barra azul superior con información de contacto */
+        /* La pequeña barra azul superior con información de contacto útil. */
         .header-top {
             background-color: var(--color-primary);
             color: #fff;
@@ -147,22 +147,8 @@
             flex-wrap: wrap;
         }
 
-        /* Botones de información (dirección y correo) */
-        .header-top-left .info-button {
-            display: flex;
-            align-items: center;
-            background-color: #000;
-            color: #fff;
-            padding: 5px 10px;
-            border-radius: 5px;
-            gap: 5px;
-            margin-right: 10px;
-            text-decoration: none;
-            transition: background-color 0.3s ease;
-            cursor: pointer;
-        }
-
-        /* Nuevo estilo para los botones de teléfono */
+        /* Botones de información que invitan a la acción. */
+        .header-top-left .info-button,
         .header-top-right .info-button-phone {
             display: flex;
             align-items: center;
@@ -174,6 +160,13 @@
             text-decoration: none;
             transition: background-color 0.3s ease;
             cursor: pointer;
+        }
+        
+        .header-top-left .info-button {
+            margin-right: 10px;
+        }
+
+        .header-top-right .info-button-phone {
             border: 1px solid #fff;
         }
 
@@ -196,7 +189,7 @@
             font-weight: bold;
         }
 
-        /* Textos "Escríbenos" y "Síguenos" */
+        /* Pequeños textos que guían al usuario. */
         .escribenos,
         .siguenos {
             display: flex;
@@ -207,7 +200,14 @@
             margin-right: 10px;
         }
 
-        /* Iconos de redes sociales */
+        .escribenos img {
+            width: 20px;
+            height: 20px;
+            margin-right: 5px;
+            vertical-align: middle;
+        }
+
+        /* Iconos de redes sociales para conectar con nuestra comunidad. */
         .social-icons {
             display: flex;
             gap: 15px;
@@ -220,30 +220,7 @@
             vertical-align: middle;
         }
 
-        .escribenos img {
-            width: 20px;
-            height: 20px;
-            margin-right: 5px;
-            vertical-align: middle;
-        }
-
-        /* Cajas para los números de teléfono */
-        .phone-box {
-            background-color: #fff;
-            color: #000;
-            padding: 5px 10px;
-            border-radius: 5px;
-            border: 1px solid #000;
-            margin-right: 5px;
-        }
-
-        .phone-box p {
-            margin: 0;
-            font-size: 14px;
-            font-weight: bold;
-        }
-
-        /* Barra principal blanca con logo y navegación */
+        /* La barra principal que contiene nuestro logo y la navegación principal. */
         .header-main {
             background-color: #fff;
             padding: 10px 10%;
@@ -260,7 +237,7 @@
             margin-right: auto;
         }
 
-        /* Botones de navegación */
+        /* Los botones que llevan a las diferentes secciones de la página. */
         .nav-buttons {
             display: flex;
             gap: 10px;
@@ -284,7 +261,7 @@
             color: #fff;
         }
 
-        /* Botón especial de Intranet */
+        /* Botones destacados para acciones importantes como "Intranet". */
         .intranet-btn {
             background-color: var(--color-primary);
             color: #fff;
@@ -298,10 +275,12 @@
             background-color: var(--color-secondary);
         }
 
-        /* ===================================================
-           TÍTULO: BANNER PRINCIPAL
-           FUNCIÓN: Define la imagen de fondo y el texto animado del banner.
-           =================================================== */
+        /* ======================================================================
+           TÍTULO: La Gran Bienvenida: Estilos del Banner Principal
+           FUNCIÓN: Define la imagen de fondo y el texto animado que capturan la atención
+                    del visitante apenas llega. Es nuestra primera impresión, ¡y queremos
+                    que sea impactante!
+           ====================================================================== */
         .banner {
             width: 100%;
             height: 650px;
@@ -316,7 +295,7 @@
             border-bottom: 4px solid var(--color-primary);
         }
 
-        /* Título animado del banner (letra por letra) */
+        /* El contenedor del texto animado del banner. */
         .banner-texto {
             display: flex;
             flex-direction: column;
@@ -339,13 +318,12 @@
         }
 
         .letra {
-            /* === CÓDIGO MODIFICADO PARA EL BORDE MÁS GRUESO === */
+            /* Un borde grueso y definido para que las letras resalten sobre el fondo. */
             text-shadow:
                 -4px -4px 0 #000, 4px -4px 0 #000,
                 -4px 4px 0 #000, 4px 4px 0 #000,
                 -4px 0px 0 #000, 4px 0px 0 #000,
                 0px -4px 0 #000, 0px 4px 0 #000;
-            /* ================================================== */
             color: #ffffff;
             animation: cambioColor 2s infinite alternate;
             animation-delay: calc(var(--i) * 0.08s);
@@ -356,7 +334,7 @@
             animation-delay: calc(var(--i) * 0.08s + 0.45s);
         }
 
-        /* Animación de flotar para textos */
+        /* Animación sutil para que los textos parezcan flotar. */
         @keyframes flotar {
             0% {
                 transform: translateY(0);
@@ -371,7 +349,7 @@
             }
         }
 
-        /* Animación de cambio de color para letras */
+        /* Animación que cambia el color de las letras de forma cíclica. */
         @keyframes cambioColor {
             0% {
                 color: #ffffff;
@@ -390,10 +368,11 @@
             }
         }
 
-        /* ===================================================
-           TÍTULO: SEPARADORES METÁLICOS
-           FUNCIÓN: Crea una línea decorativa con efecto animado para separar secciones.
-           =================================================== */
+        /* ======================================================================
+           TÍTULO: Separadores con Estilo Metálico
+           FUNCIÓN: Crean una línea decorativa con un efecto de gradiente animado para
+                    dividir visualmente las secciones y añadir un toque moderno al diseño.
+           ====================================================================== */
         .separator-wrapper {
             display: flex;
             justify-content: center;
@@ -429,10 +408,11 @@
             height: 3px;
         }
 
-        /* ===================================================
-           TÍTULO: SECCIÓN DE INTRODUCCIÓN (LOGO + TEXTO)
-           FUNCIÓN: Estilos para la caja principal de bienvenida.
-           =================================================== */
+        /* ======================================================================
+           TÍTULO: El Corazón de la Bienvenida: Logo y Texto Introductorio
+           FUNCIÓN: Estilos para la caja principal que combina el logo de INFOUNI con un
+                    mensaje de bienvenida, presentando la misión del sitio.
+           ====================================================================== */
         .intro {
             max-width: 1100px;
             padding: 20px;
@@ -466,6 +446,7 @@
             line-height: 1.6;
         }
 
+        /* Este es el famoso "cuadro amarillo" con información adicional. */
         .intro-extra {
             background-color: var(--color-yellow);
             color: black;
@@ -476,6 +457,8 @@
             font-weight: bold;
             border: 2px solid black;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            max-width: 700px; /* <--- Ajuste importante para que el cuadro no sea tan grande */
+            width: 100%;
         }
 
         .intranet-texto {
@@ -487,7 +470,11 @@
             font-weight: bold;
         }
 
-        /* Título animado para las secciones */
+        /* ======================================================================
+           TÍTULO: Títulos de Sección que Flotan y Dan Vida
+           FUNCIÓN: Reutilizamos la animación de letras del banner para crear títulos
+                    consistentes y atractivos para cada sección principal de la página.
+           ====================================================================== */
         .titulo-animado {
             display: flex;
             flex-direction: column;
@@ -499,72 +486,56 @@
 
         .titulo-animado .linea {
             font-size: 50px;
-            /* === CÓDIGO MODIFICADO PARA SEPARAR PALABRAS === */
+            /* Aumentamos el espacio para separar las palabras y mejorar la legibilidad. */
             gap: 12px;
-            /* =============================================== */
         }
 
         .titulo-animado .linea2 {
             font-size: 50px;
-            /* === CÓDIGO MODIFICADO PARA SEPARAR PALABRAS === */
             gap: 12px;
-            /* =============================================== */
         }
 
         .titulo-animado .letra {
-            /* === CÓDIGO MODIFICADO PARA EL BORDE MÁS GRUESO === */
             text-shadow:
                 -4px -4px 0 #000, 4px -4px 0 #000,
                 -4px 4px 0 #000, 4px 4px 0 #000,
                 -4px 0px 0 #000, 4px 0px 0 #000,
                 0px -4px 0 #000, 0px 4px 0 #000;
-            /* ================================================== */
             color: #ffffff;
             animation: cambioColor 2s infinite alternate;
             animation-delay: calc(var(--i) * 0.08s);
             transition: transform .18s ease, color .18s ease;
         }
 
-        /* Asegura que los espacios se visualicen correctamente */
+        /* Un truco para que los espacios en blanco se respeten en la animación. */
         .titulo-animado .letra:empty {
             width: 10px;
         }
 
-        /* ===================================================
-           TÍTULO: CONTENEDOR DE TRES IMÁGENES
-           FUNCIÓN: Muestra tres imágenes del mismo tamaño una al lado de la otra.
-           =================================================== */
+        /* ======================================================================
+           TÍTULO: Galería de Imágenes: Trío y Solitario
+           FUNCIÓN: Estilos para mostrar una fila de tres imágenes y otra imagen individual,
+                    ambas con un diseño limpio y adaptable a diferentes pantallas.
+           ====================================================================== */
         #three-images-container {
             display: flex;
-            /* Habilita el modelo de caja flexible */
             justify-content: center;
-            /* Centra las imágenes horizontalmente */
             align-items: center;
-            /* Centra las imágenes verticalmente */
             flex-wrap: wrap;
-            /* Permite que las imágenes se envuelvan en pantallas pequeñas */
             gap: 15px;
-            /* Espacio entre las imágenes */
             margin: 20px auto;
-            /* Centra el contenedor completo y añade espacio vertical */
             max-width: 1000px;
-            /* Ancho máximo del contenedor */
         }
 
         #three-images-container img {
             width: 30%;
-            /* Cada imagen ocupa aproximadamente un tercio del ancho */
             height: auto;
-            /* Mantiene la proporción de la imagen */
             max-width: 300px;
-            /* Evita que las imágenes crezcan demasiado en pantallas grandes */
             object-fit: cover;
-            /* Recorta la imagen para que cubra el espacio sin distorsionarse */
             border: 2px solid black;
             border-radius: 8px;
         }
 
-        /* Estilo para la nueva imagen añadida */
         #new-image-container {
             display: flex;
             justify-content: center;
@@ -581,10 +552,11 @@
             border-radius: 8px;
         }
 
-        /* ===================================================
-           TÍTULO: SECCIÓN BUSCADOR DE SOFTWARE Y BECAS
-           FUNCIÓN: Estilos para el contenedor del buscador y la información de becas.
-           =================================================== */
+        /* ======================================================================
+           TÍTULO: Centro de Herramientas: Buscador de Software y Becas
+           FUNCIÓN: Estilos para la sección interactiva donde los usuarios pueden buscar
+                    manuales de software y consultar información sobre el programa de becas.
+           ====================================================================== */
         .buscador-becas {
             max-width: 1000px;
             padding: 0 16px;
@@ -592,6 +564,7 @@
             gap: 20px;
             align-items: stretch;
             margin: 0;
+            width: 100%;
         }
 
         .contenedor-principal {
@@ -616,26 +589,17 @@
         .buscador {
             margin-bottom: 20px;
         }
-
-        .buscador input {
-            width: 100%;
-            padding: 12px;
-            font-size: 16px;
-            /* AÑADIDO: Borde negro sólido para el campo de búsqueda */
-            border: 2px solid black;
-            border-radius: 5px;
-            box-sizing: border-box;
-        }
-
-        /* === CÓDIGO AÑADIDO: ESTILOS PARA EL CAMPO DE BÚSQUEDA ANIMADO === */
+        
+        /* Estilos para el campo de búsqueda con borde animado. */
         .buscador input {
             --border-size: 4px;
-            /* Ajustado para que el borde se vea bien en el input */
             --color-blue-current: var(--color-primary);
             --color-footer-blue: var(--metal-2);
             --color-celeste: var(--metal-3);
             --color-cyan: #00FFFF;
 
+            width: 100%;
+            padding: 12px;
             position: relative;
             background: #fff;
             border: var(--border-size) solid black;
@@ -684,60 +648,44 @@
                 background-position: 0% 50%;
             }
         }
-
-        /* ===================================================
-           FIN DEL CÓDIGO AÑADIDO
-           =================================================== */
-
+        
         .botones-container {
             flex: 1;
             overflow-y: auto;
             padding-right: 10px;
         }
 
+        /* Estilos para los botones de resultados con un efecto visual potente. */
         .boton-enlace {
+            --border-size: 4px;
+            --color-blue-current: var(--color-primary);
+            --color-footer-blue: var(--metal-2);
+            --color-celeste: var(--metal-3);
+            --color-cyan: #00FFFF;
+            
             display: block;
             text-align: center;
+            text-decoration: none;
+            width: 100%;
+            padding: 12px;
+            margin: 8px 0;
+            position: relative;
             background: var(--color-accent);
+            background-clip: padding-box;
+            border: var(--border-size) solid black;
+            border-radius: 8px;
+            font-weight: bold;
+            z-index: 1;
+            overflow: hidden;
             color: #fff;
-            /* === INICIO DE LA CORRECCIÓN === */
-            /* Se ha reducido el valor de 4px a 2px para un borde más nítido y legible */
+            transition: background-color .2s;
+            box-sizing: border-box;
+            /* Borde de texto para máxima legibilidad. */
             text-shadow:
                 -2px -2px 0 #000, 2px -2px 0 #000,
                 -2px 2px 0 #000, 2px 2px 0 #000,
                 -2px 0 0 #000, 2px 0 0 #000,
                 0 -2px 0 #000, 0 2px 0 #000;
-            /* === FIN DE LA CORRECCIÓN === */
-            padding: 12px;
-            margin: 8px 0;
-            text-decoration: none;
-            font-weight: bold;
-            border-radius: 8px;
-            border: 2px solid #000;
-            transition: background-color .2s;
-            width: 100%;
-            box-sizing: border-box;
-        }
-
-        /* === CÓDIGO AÑADIDO: ESTILOS PARA LOS BOTONES DE ENLACE ANIMADOS === */
-        .boton-enlace {
-            --border-size: 4px;
-            /* Ajustado para que el borde se vea bien */
-            --color-blue-current: var(--color-primary);
-            --color-footer-blue: var(--metal-2);
-            --color-celeste: var(--metal-3);
-            --color-cyan: #00FFFF;
-
-            position: relative;
-            background: var(--color-accent);
-            background-clip: padding-box;
-            border: var(--border-size) solid black;
-            font-weight: bold;
-            z-index: 1;
-            overflow: hidden;
-            color: #fff;
-            /* ACTUALIZADO: El color del texto debe ser blanco */
-            transition: background-color .2s;
         }
 
         .boton-enlace::before {
@@ -766,11 +714,7 @@
             background: #004085;
         }
 
-        /* ===================================================
-           FIN DEL CÓDIGO AÑADIDO
-           =================================================== */
-
-        /* Caja de información de becas */
+        /* La caja dedicada a la información sobre becas. */
         .becas-box {
             flex: 1;
             border: 3px solid #000;
@@ -817,10 +761,12 @@
             letter-spacing: 0.1px;
         }
 
-        /* ===================================================
-           TÍTULO: CARRUSEL DE IMÁGENES
-           FUNCIÓN: Estilos para el carrusel de la sección de reglamentos.
-           =================================================== */
+        /* ======================================================================
+           TÍTULO: El Escaparate Visual: Carrusel de Reglamentos
+           FUNCIÓN: Un carrusel interactivo para presentar documentos importantes como
+                    el código de vestimenta y el reglamento de una forma visualmente
+                    atractiva y fácil de navegar.
+           ====================================================================== */
         .carousel-container {
             width: 85%;
             max-width: 1100px;
@@ -861,7 +807,7 @@
             object-fit: cover;
         }
 
-        /* Botones de navegación del carrusel */
+        /* Botones de flecha para navegar manualmente por el carrusel. */
         .slider-buttons {
             position: absolute;
             top: 50%;
@@ -889,7 +835,7 @@
             background-color: rgba(0, 0, 0, 0.8);
         }
 
-        /* Indicadores de posición del carrusel */
+        /* Pequeños círculos que indican en qué diapositiva nos encontramos. */
         .indicators {
             position: absolute;
             bottom: 10px;
@@ -906,7 +852,6 @@
             border-radius: 50%;
             background-color: #ffffff;
             border: 2px solid black;
-            /* AÑADIDO: Borde negro para diferenciar los círculos */
             cursor: pointer;
             transition: background-color 0.3s;
         }
@@ -915,7 +860,7 @@
             background-color: var(--color-accent);
         }
 
-        /* Título animado del carrusel */
+        /* El título animado que cambia con cada diapositiva del carrusel. */
         .slider-title {
             text-align: center;
             font-weight: 900;
@@ -945,13 +890,11 @@
         }
 
         .slider-title .letra {
-            /* === CÓDIGO MODIFICADO PARA EL BORDE MÁS GRUESO === */
             text-shadow:
                 -3px -3px 0 #000, 3px -3px 0 #000,
                 -3px 3px 0 #000, 3px 3px 0 #000,
                 -3px 0px 0 #000, 3px 0px 0 #000,
                 0px -3px 0 #000, 0px 3px 0 #000;
-            /* ================================================== */
             color: #ffffff;
             animation: cambioColor 2s infinite alternate;
             animation-delay: calc(var(--i) * 0.08s);
@@ -970,7 +913,11 @@
             margin-top: 20px;
         }
 
-        /* Nuevo estilo para el contenedor del mapa */
+        /* ======================================================================
+           TÍTULO: Nuestro Rincón en el Mundo: El Mapa de Ubicación
+           FUNCIÓN: Contenedor para el mapa interactivo de Google, permitiendo a los
+                    usuarios encontrar fácilmente nuestra ubicación física.
+           ====================================================================== */
         #ubicacion .map-container {
             width: 85%;
             max-width: 1100px;
@@ -984,10 +931,12 @@
             display: block;
         }
 
-        /* ===================================================
-           TÍTULO: PIE DE PÁGINA (FOOTER)
-           FUNCIÓN: Estilos para la sección final del sitio con información de contacto y enlaces.
-           =================================================== */
+        /* ======================================================================
+           TÍTULO: El Cierre Elegante: Estilos del Pie de Página (Footer)
+           FUNCIÓN: Diseña la sección final de la página, que contiene información de
+                    contacto, enlaces útiles, nuestra misión y los créditos. Es el
+                    último punto de interacción y debe ser claro y completo.
+           ====================================================================== */
         .footer {
             background-color: var(--color-primary);
             color: #ffffff;
@@ -1046,17 +995,7 @@
             transition: color 0.3s;
         }
 
-        .footer-section .copyable-text {
-            cursor: pointer;
-            text-decoration: underline;
-            text-decoration-color: rgba(255, 255, 255, 0.5);
-            transition: text-decoration-color 0.3s;
-        }
-
-        .footer-section .copyable-text:hover {
-            text-decoration-color: #66ccff;
-        }
-
+        .footer-section .copyable-text,
         .footer-section .link-text {
             cursor: pointer;
             text-decoration: underline;
@@ -1064,10 +1003,10 @@
             transition: text-decoration-color 0.3s;
         }
 
+        .footer-section .copyable-text:hover,
         .footer-section .link-text:hover {
             text-decoration-color: #66ccff;
         }
-
 
         .footer-section a:hover {
             color: var(--metal-3);
@@ -1081,57 +1020,51 @@
             margin-top: 20px;
             font-size: 12px;
         }
-
-        .social-icons {
+        
+        /* Renombramos la clase para evitar conflictos con la del header. */
+        .footer-social-icons {
             display: flex;
             gap: 15px;
             justify-content: flex-start;
         }
 
-        .social-icons a img {
+        .footer-social-icons a img {
             width: 24px;
             height: auto;
             transition: transform 0.3s;
         }
 
-        .social-icons a:hover img {
+        .footer-social-icons a:hover img {
             transform: scale(1.1);
         }
 
-        /* ===================================================
-           TÍTULO: DISEÑO RESPONSIVO (MEDIA QUERIES)
-           FUNCIÓN: Ajusta los estilos para adaptarse a diferentes tamaños de pantalla (tablets y móviles).
-           =================================================== */
+        /* ======================================================================
+           TÍTULO: Diseño Camaleónico: Reglas para Adaptarse a Cada Pantalla
+           FUNCIÓN: Aquí es donde ocurre la magia del diseño responsivo. Usamos Media Queries
+                    para ajustar los estilos y asegurar que la página se vea increíble en
+                    tablets, móviles y cualquier dispositivo, sin importar su tamaño.
+           ====================================================================== */
         @media (max-width: 1024px) {
             .nav-buttons {
                 gap: 5px;
             }
 
-            .nav-button {
+            .nav-button,
+            .intranet-btn {
                 padding: 8px 10px;
             }
 
-            .intranet-btn {
-                padding: 8px 15px;
-            }
-
-            .titulo-animado .linea {
-                font-size: 40px;
-                /* MODIFICADO */
-                gap: 8px;
-            }
-
+            .titulo-animado .linea,
             .titulo-animado .linea2 {
                 font-size: 40px;
-                /* MODIFICADO */
                 gap: 8px;
             }
         }
 
         @media (max-width: 768px) {
+            /* En pantallas pequeñas, ocultamos la barra superior para simplificar. */
             .header-top {
                 display: none;
-                /* Oculta la barra azul en pantallas pequeñas */
             }
 
             .header-main {
@@ -1139,7 +1072,6 @@
                 text-align: center;
                 padding: 10px;
                 height: auto;
-                /* La altura se ajusta al contenido */
             }
 
             .nav-buttons {
@@ -1150,15 +1082,14 @@
 
             .banner {
                 height: 480px;
-                margin-bottom: 0;
             }
 
             .linea {
-                font-size: 48px
+                font-size: 48px;
             }
 
             .linea2 {
-                font-size: 72px
+                font-size: 72px;
             }
 
             .intro {
@@ -1168,7 +1099,7 @@
             }
 
             .intro .logo img {
-                width: 220px
+                width: 220px;
             }
 
             .buscador-becas {
@@ -1177,11 +1108,7 @@
 
             .contenedor-principal,
             .becas-box {
-                height: auto
-            }
-
-            .thin-separator {
-                width: 92%;
+                height: auto;
             }
 
             .slider-images .image-container {
@@ -1196,16 +1123,17 @@
                 font-size: 38px;
             }
 
+            /* Apilamos las secciones del footer para una mejor visualización en vertical. */
             .footer-content {
                 flex-direction: column;
                 text-align: center;
                 gap: 20px;
             }
 
-            .social-icons {
+            .footer-social-icons {
                 justify-content: center;
             }
-
+            
             .footer-section {
                 align-items: center;
                 display: flex;
@@ -1220,27 +1148,20 @@
             .footer-contact-item p {
                 text-align: center;
             }
-
-            .titulo-animado .linea {
-                font-size: 30px;
-                /* MODIFICADO */
-                gap: 6px;
-            }
-
+            
+            .titulo-animado .linea,
             .titulo-animado .linea2 {
                 font-size: 30px;
-                /* MODIFICADO */
                 gap: 6px;
             }
 
+            /* Apilamos las tres imágenes para que se vean bien en móviles. */
             #three-images-container {
                 flex-direction: column;
-                /* Apila las imágenes verticalmente en pantallas pequeñas */
             }
 
             #three-images-container img {
                 width: 80%;
-                /* Las imágenes ocupan más espacio para ser más visibles */
                 max-width: none;
             }
         }
@@ -1248,26 +1169,21 @@
         @media (max-width: 480px) {
             .banner {
                 height: 360px;
-                margin-bottom: 0;
             }
 
             .linea {
-                font-size: 36px
+                font-size: 36px;
             }
 
             .linea2 {
-                font-size: 56px
+                font-size: 56px;
             }
 
             .intro .logo img {
                 width: 180px;
                 margin-bottom: 20px;
             }
-
-            .thin-separator {
-                width: 94%;
-            }
-
+            
             .slider-images .image-container {
                 height: 250px;
             }
@@ -1280,33 +1196,24 @@
                 font-size: 30px;
             }
 
-            .nav-button {
+            .nav-button,
+            .intranet-btn {
                 padding: 6px 8px;
                 font-size: 12px;
             }
-
-            .intranet-btn {
-                padding: 6px 10px;
-                font-size: 12px;
-            }
-
-            .titulo-animado .linea {
-                font-size: 20px;
-                /* MODIFICADO */
-                gap: 4px;
-            }
-
+            
+            .titulo-animado .linea,
             .titulo-animado .linea2 {
                 font-size: 20px;
-                /* MODIFICADO */
                 gap: 4px;
             }
         }
 
-        /* ===================================================
-           TÍTULO: ESTILO DE MENSAJE DE COPIADO
-           FUNCIÓN: Notificación temporal para informar al usuario que el correo se copió.
-           =================================================== */
+        /* ======================================================================
+           TÍTULO: Notificación de Éxito: El Mensaje de Copiado
+           FUNCIÓN: Un pequeño mensaje emergente que aparece para confirmar al usuario
+                    que ha copiado exitosamente un correo o número de teléfono.
+           ====================================================================== */
         #copy-message {
             position: fixed;
             bottom: 20px;
@@ -1319,17 +1226,21 @@
             opacity: 0;
             transition: opacity 0.5s ease-in-out;
             z-index: 1001;
+            /* Se asegura de que esté por encima de otros elementos. */
         }
 
         #copy-message.show {
             opacity: 1;
         }
+        
+        /* ======================================================================
+           TÍTULO: Nuestro Asistente Virtual: Estilos del Chatbot "Leo"
+           FUNCIÓN: Todo el diseño y la apariencia de nuestro amigable chatbot. Desde la
+                    burbuja flotante hasta la ventana de chat, cada detalle está
+                    diseñado para una interacción intuitiva y agradable.
+           ====================================================================== */
 
-        /* ===================================================
-           INICIO DE ESTILOS DEL CHATBOT 
-           =================================================== */
-
-        /* --- Estilos de la Burbuja de Chat Flotante --- */
+        /* La burbuja que invita a iniciar la conversación. */
         #chat-bubble {
             position: fixed;
             bottom: 30px;
@@ -1354,7 +1265,7 @@
             border: 4px solid black;
         }
 
-        /* --- Estilos de la Ventana del Chat --- */
+        /* La ventana principal del chat. */
         #chat-window {
             position: fixed;
             bottom: 130px;
@@ -1376,7 +1287,7 @@
             transition: opacity 0.3s ease, transform 0.3s ease;
         }
 
-        /* Animación para abrir/cerrar la ventana */
+        /* Animación suave para abrir y cerrar la ventana. */
         #chat-window.open {
             display: flex;
             opacity: 1;
@@ -1389,7 +1300,7 @@
             pointer-events: none;
         }
 
-        /* Cabecera del Chat con Degradado Azul */
+        /* La cabecera del chat, que permite mover y cerrar la ventana. */
         .chat-header {
             background: linear-gradient(45deg, #007bff 0%, #00c6ff 100%);
             color: white;
@@ -1431,7 +1342,7 @@
             text-shadow: 0 0 5px rgba(255, 255, 255, 0.5);
         }
 
-        /* Área de Mensajes */
+        /* El área donde aparecen todos los mensajes de la conversación. */
         .chat-messages {
             flex-grow: 1;
             padding: 20px;
@@ -1442,7 +1353,7 @@
             background-color: #eaf8ff;
         }
 
-        /* Estilo general para cada mensaje */
+        /* Estilo base para cada burbuja de mensaje. */
         .message {
             display: flex;
             align-items: flex-start;
@@ -1483,7 +1394,7 @@
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         }
 
-        /* Mensajes del Usuario (derecha) */
+        /* Estilos para los mensajes del usuario (a la derecha). */
         .user-message {
             align-self: flex-end;
             flex-direction: row-reverse;
@@ -1495,7 +1406,7 @@
             border-top-right-radius: 5px;
         }
 
-        /* Mensajes del Bot (izquierda) */
+        /* Estilos para los mensajes del bot (a la izquierda). */
         .bot-message {
             align-self: flex-start;
         }
@@ -1506,7 +1417,7 @@
             border-top-left-radius: 5px;
         }
 
-        /* Botones de acción dentro del chat */
+        /* Botones especiales que pueden aparecer en las respuestas del bot. */
         .action-button {
             display: inline-block;
             margin-top: 10px;
@@ -1526,7 +1437,7 @@
             transform: translateY(-2px);
         }
 
-        /* Mensaje de "Escribiendo..." */
+        /* Animación de "escribiendo..." para que el usuario sepa que el bot está pensando. */
         .typing-indicator .text-bubble {
             font-style: italic;
             color: #555;
@@ -1564,7 +1475,7 @@
             }
         }
 
-        /* Área de Entrada de Texto */
+        /* El área inferior del chat para escribir y enviar mensajes. */
         .chat-input {
             display: flex;
             padding: 15px;
@@ -1582,7 +1493,13 @@
             color: #333;
             outline: none;
             font-size: 0.95em;
-            transition: border-color 0.2s, box-shadow 0.2s;
+            transition: border-color 0.2s, box-shadow 0.2s, background-color 0.2s;
+        }
+        
+        /* Estilo para cuando el campo de texto está deshabilitado. */
+        .chat-input input:disabled {
+            background-color: #f0f0f0;
+            cursor: not-allowed;
         }
 
         .chat-input input:focus {
@@ -1603,27 +1520,31 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            transition: transform 0.2s, box-shadow 0.2s;
+            transition: transform 0.2s, box-shadow 0.2s, background 0.2s;
+        }
+        
+        /* Estilo para el botón de envío cuando está deshabilitado. */
+        .chat-input button:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+            transform: scale(1);
+            box-shadow: none;
         }
 
-        .chat-input button:hover {
+
+        .chat-input button:hover:not(:disabled) {
             transform: scale(1.1);
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
         }
-
-        /* ===================================================
-           FIN DE ESTILOS DEL CHATBOT
-           =================================================== */
     </style>
 </head>
 
 <body>
-
     <header>
         <div class="header-top">
             <div class="header-top-left">
-                <a href="https://www.google.com/maps/place/Centro+de+Computo+INFOUNI+-+UNI/@-12.024268,-77.0501132,17z/data=!3m1!4b1!4m6!3m5!1s0x9105cf2379633fdb:0xa8dcc17109dcdbbd!8m2!3d-12.0242733!4d-77.0475329!16s%2Fg%2F1hf392m1h?entry=ttu&g_ep=EgoyMDI1MDgyNC4wIKXMDSoASAFQAw%3D%3D"
-                    class="info-button" target="_blank" rel="noopener noreferrer">
+                <a href="https://www.google.com/maps/place/Centro+de+Computo+INFOUNI+-+UNI/@-12.024268,-77.0501132,17z/data=!3m1!4b1!4m6!3m5!1s0x9105cf2379633fdb:0xa8dcc17109dcdbbd!8m2!3d-12.0242733!4d-77.0475329!16s%2Fg%2F1hf392m1h?entry=ttu&g_ep=EgoyMDI1MDgyNC4wIKXMDSoASAFQAw%3D%3D" class="info-button" target="_blank"
+                    rel="noopener noreferrer">
                     <img src="https://i.ibb.co/JWb5zp10/maps.png" alt="Ubicación">
                     <span>Av. Túpac Amaru 210, Rímac, Lima</span>
                 </a>
@@ -1711,6 +1632,7 @@
                     style="--i:10">s</span>
             </div>
         </div>
+
         <div class="intro">
             <div class="logo">
                 <a href="https://www.infouni.uni.edu.pe"><img src="https://i.ibb.co/0VDZ9bWt/logo-infouni-blue.png"
@@ -1738,10 +1660,9 @@
 
         <div class="intro-extra">
             <p>Aquí ofrecemos todo lo que se necesita para sus comienzos como soporte en INFOUNI:<br>Normas a seguir,
-                Código de Vestimenta, Guías de variedad en formato Video, PDF y texto,<br>además de soluciones de
+                Código de Vestimenta, Guías de variedad en formato Video, PDF <br>y texto, además de soluciones de
                 errores que se vayan registrando.</p>
         </div>
-
     </section>
 
     <div class="separator-wrapper">
@@ -1768,7 +1689,7 @@
                     style="--i:12">m</span><span class="letra" style="--i:13">a</span>
             </div>
         </div>
-
+        
         <div class="buscador-becas">
             <div class="contenedor-principal">
                 <h1 class="titulo-seccion">Busque su Software</h1>
@@ -1858,15 +1779,15 @@
                 referrerpolicy="no-referrer-when-downgrade"></iframe>
         </div>
     </section>
-
+    
     <footer class="footer">
         <div class="footer-content">
             <div class="footer-section">
                 <h4>Contacto</h4>
                 <div class="footer-contact-item">
                     <img src="https://i.ibb.co/JWb5zp10/maps.png" alt="Ubicación">
-                    <a href="https://www.google.com/maps/place/Centro+de+Computo+INFOUNI+-+UNI/@-12.024268,-77.0501132,17z/data=!3m1!4b1!4m6!3m5!1s0x9105cf2379633fdb:0xa8dcc17109dcdbbd!8m2!3d-12.0242733!4d-77.0475329!16s%2Fg%2F1hf392m1h?entry=ttu&g_ep=EgoyMDI1MDgyNC4wIKXMDSoASAFQAw%3D%3D"
-                        class="link-text" target="_blank" rel="noopener noreferrer">Av. Túpac Amaru 210, Rímac, Lima</a>
+                    <a href="https://www.google.com/maps/place/Centro+de+Computo+INFOUNI+-+UNI/@-12.024268,-77.0501132,17z/data=!3m1!4b1!4m6!3m5!1s0x9105cf2379633fdb:0xa8dcc17109dcdbbd!8m2!3d-12.0242733!4d-77.0475329!16s%2Fg%2F1hf392m1h?entry=ttu&g_ep=EgoyMDI1MDgyNC4wIKXMDSoASAFQAw%3D%3D" class="link-text" target="_blank"
+                        rel="noopener noreferrer">Av. Túpac Amaru 210, Rímac, Lima</a>
                 </div>
                 <div class="footer-contact-item">
                     <img src="https://i.ibb.co/hx4sQxF7/gmail.png" alt="Correo">
@@ -1904,7 +1825,7 @@
             </div>
             <div class="footer-section">
                 <h4>Síguenos</h4>
-                <div class="social-icons">
+                <div class="footer-social-icons">
                     <a href="https://www.facebook.com/infouniperu" target="_blank" rel="noopener noreferrer"><img
                             src="https://i.ibb.co/932pVmkJ/logogogogo.png" alt="Facebook"></a>
                     <a href="https://www.tiktok.com/@infouni.peru" target="_blank" rel="noopener noreferrer"><img
@@ -1923,7 +1844,7 @@
     </footer>
 
     <div id="copy-message"></div>
-
+    
     <div id="chat-bubble">
         <img id="bubble-icon" src="https://i.ibb.co/MDrCSpjG/tigre-leyendo.png" alt="Abrir Chat">
     </div>
@@ -1940,14 +1861,24 @@
         </div>
         <form class="chat-input" id="chat-form">
             <input type="text" id="user-input" placeholder="Escribe tu mensaje..." autocomplete="off">
-            <button type="submit" title="Enviar mensaje">➤</button>
+            <button type="submit" id="send-button" title="Enviar mensaje">➤</button>
         </form>
     </div>
 
     <script>
-        // TÍTULO: SCRIPT PARA AJUSTE DINÁMICICO DEL DESPLAZAMIENTO
-        // FUNCIÓN: Calcula la altura real del encabezado y la aplica como padding y scroll-margin
-        // para asegurar un centrado perfecto en todas las resoluciones.
+        /* ======================================================================
+           TÍTULO: La Magia Detrás de la Web: Scripts de Funcionalidad
+           FUNCIÓN: Aquí reside el cerebro de la página. Este bloque de JavaScript
+                    controla desde el comportamiento dinámico del encabezado hasta la
+                    lógica interactiva del buscador y el carrusel.
+           ====================================================================== */
+
+        // ----------------------------------------------------------------------
+        // TÍTULO: Ajuste Dinámico del Encabezado
+        // FUNCIÓN: Calcula la altura real del encabezado (que puede cambiar en móviles)
+        // y la usa para ajustar el espaciado superior del contenido. Esto evita
+        // que el encabezado fijo oculte el inicio de las secciones.
+        // ----------------------------------------------------------------------
         function adjustLayoutForHeader() {
             const header = document.querySelector('header');
             if (header) {
@@ -1955,26 +1886,37 @@
                 document.documentElement.style.setProperty('--header-height', `${headerHeight}px`);
             }
         }
-
-        // Ajustar al cargar la página y si la ventana cambia de tamaño.
         window.addEventListener('load', adjustLayoutForHeader);
         window.addEventListener('resize', adjustLayoutForHeader);
 
 
-        // TÍTULO: SCRIPT PARA BLOQUEAR ZOOM
-        // FUNCIÓN: Evita que los usuarios hagan zoom en la página con la rueda del ratón o gestos táctiles.
+        // ----------------------------------------------------------------------
+        // TÍTULO: Guardián del Zoom
+        // FUNCIÓN: Previene que los usuarios hagan zoom accidentalmente en la página,
+        // ya sea con la rueda del ratón o con gestos táctiles, manteniendo la
+        // integridad del diseño en todo momento.
+        // ----------------------------------------------------------------------
         document.addEventListener('wheel', function (e) {
-            if (e.ctrlKey || e.metaKey) { e.preventDefault(); }
+            if (e.ctrlKey || e.metaKey) {
+                e.preventDefault();
+            }
         }, { passive: false });
+
         document.addEventListener('touchmove', function (e) {
-            if (e.touches.length > 1) { e.preventDefault(); }
+            if (e.touches.length > 1) {
+                e.preventDefault();
+            }
         }, { passive: false });
 
-        // TÍTULO: SCRIPT DEL BUSCADOR DE SOFTWARE
-        // FUNCIÓN: Filtra y muestra los enlaces de software según lo que el usuario escribe en el campo de búsqueda.
 
-        // Instalacion de Programas
+        // ----------------------------------------------------------------------
+        // TÍTULO: El Cerebro del Buscador de Software
+        // FUNCIÓN: Filtra y muestra dinámicamente los enlaces de guías y soluciones
+        // a medida que el usuario escribe en el campo de búsqueda, ofreciendo
+        // resultados instantáneos y relevantes.
+        // ----------------------------------------------------------------------
         const enlaces = [
+            // Manuales de Instalación
             { nombre: "SolidWorks Manual en Video", url: "https://drive.google.com/uc?export=download&id=1VCnmi93qmPVwbcD5BwAdhizyhvUjEu7p" },
             { nombre: "SolidWorks Manual en PDF", url: "https://drive.google.com/uc?export=download&id=1F6hE73Dg6Wq7YuwJGEVRxxegRsJ2660D" },
             { nombre: "MathCad Prime Manual en Video", url: "https://drive.google.com/uc?export=download&id=1HkuczoNPdp3VJdxtPa9lLCJ-arVgiQkc" },
@@ -2007,14 +1949,17 @@
             { nombre: "Rhinoceros Manual en PDF", url: "https://drive.google.com/uc?export=download&id=1GmrWKiX-uk1HaazcHlndVYZzUp-K3SDk" },
             { nombre: "Adobe Acrobat Manual en PDF", url: "https://drive.google.com/uc?export=download&id=13dsvNWgZZxlNVrIXHd6uHB8fnUgaaFTC" },
 
-            //Correccion de Errores
+            // Solución de Errores Comunes
             { nombre: "SolidWorks Error -8,544,0", url: "https://drive.google.com/uc?export=download&id=1hWn6JUl_C0iag-DZ94R7SiLiCDCrzFq5" },
             { nombre: "SolidWorks Electrical No conecta con SQL Server", url: "https://drive.google.com/uc?export=download&id=1xx1LIo0FqeRYpHmerJNCYeZxGKfDVHU9" },
             { nombre: "SolidWorks Pacht no se Elimina", url: "https://drive.google.com/uc?export=download&id=1_1Elp3lr4VPqYvEChlFIdLrz7RZ6v1xv" },
             { nombre: "SolidWorks Toolbox no Funciona", url: "https://drive.google.com/uc?export=download&id=1GCdk0kPrau7gVruCSJW1W1RVnDAoPSiL" },
             { nombre: "SolidWorks Faltan Componentes", url: "https://drive.google.com/uc?export=download&id=1QEdmrkwNLvHJ_mgkP9XKfr-VDcKMkzoX" },
             { nombre: "Autodesk Error Reinicio Constante", url: "https://drive.google.com/uc?export=download&id=1LjZpEmMCDz8h-tifQEyUhe9jAKBs18jB" },
+            { nombre: "Autodesk Error 103", url: "https://drive.google.com/uc?export=download&id=1zokkrUlquewbgnDZTXA-VqIDDLt_jDW9" },
+            { nombre: "Autodesk Error de Requerimiento", url: "https://drive.google.com/uc?export=download&id=1r8v4lAKyM8u1CypYMTOPT8vANOQ6KxRv" },
             { nombre: "Autodesk Error -1603", url: "https://drive.google.com/uc?export=download&id=1qBdbAV-ciC9_CNO1cTNEukEl2amRmaw_" },
+            { nombre: "Autodesk Error Genuine-Software 2 ", url: "https://drive.google.com/uc?export=download&id=1VwjQSVICALjriCAmSlGPK_Pn7FlIGV1J" },
             { nombre: "MathCad Prime error de Licencia -9", url: "https://drive.google.com/uc?export=download&id=1_Ee4F_WxsUbairFCbBGUmu-ScHKg0FZl" },
             { nombre: "Activacion de Windows bat", url: "https://drive.google.com/uc?export=download&id=1zPyniDqvgrCdfLrdgYHkjL7qiFG9qw8j" },
             { nombre: "Desactivar Antivirus bat", url: "https://drive.google.com/uc?export=download&id=19HV3fBlfba8OjAT6KldV0NZ9PgKqoWST" },
@@ -2022,7 +1967,7 @@
             { nombre: "Reportes de Salon bat", url: "https://drive.google.com/uc?export=download&id=1Qdg7xehReaQ8m1kLcPOn-4ADubCOdtVS" },
             { nombre: "Limpieza de Temporales 2 bat", url: "https://drive.google.com/uc?export=download&id=1jymwVPEDeJNGn8vFGjfBz46pjnbyTiYq" },
             { nombre: "Entrar a la BIOS bat", url: "https://drive.google.com/uc?export=download&id=1kn14OccsnFXJGQ-fAKOL0W3c_VrJQUxb" },
-            { nombre: "Clonacion con Acronix en PDF", url: "#https://drive.google.com/uc?export=download&id=1M1kgKfFndIwHP23km9m_Fs4FTAr21Nd7" },
+            { nombre: "Clonacion con Acronix en PDF", url: "https://drive.google.com/uc?export=download&id=1M1kgKfFndIwHP23km9m_Fs4FTAr21Nd7" },
             { nombre: "Creacion de copias y restauracion con Acronix en PDF", url: "https://drive.google.com/uc?export=download&id=13TnrxxGllu_qsUtQmfTMMwfpoHkRy05p" },
             { nombre: "Particionamiento con Partition Wizard en PDF", url: "https://drive.google.com/uc?export=download&id=1Rwm8GMD50cfqMEbUDWe46Uy-lvQurgXw" },
             { nombre: "Problema con la Resolucion de Pantalla", url: "https://drive.google.com/uc?export=download&id=1VIGFCS5KuPBBqxTauNHVS8UizO023OTh" },
@@ -2038,8 +1983,8 @@
                 a.textContent = en.nombre;
                 a.href = (en.url && en.url !== '#') ? en.url : "#software";
                 a.className = 'boton-enlace';
-                a.target = '_blank'; // Añade este atributo para abrir en una nueva pestaña
-                a.rel = 'noopener noreferrer'; // Añade este atributo por seguridad
+                a.target = '_blank';
+                a.rel = 'noopener noreferrer';
                 cont.appendChild(a);
             });
         }
@@ -2054,8 +1999,12 @@
 
         renderizar(enlaces.sort((a, b) => a.nombre.localeCompare(b.nombre)));
 
-        // TÍTULO: SCRIPT DEL CARRUSEL
-        // FUNCIÓN: Controla la lógica del carrusel de imágenes, incluyendo la navegación manual y automática.
+        // ----------------------------------------------------------------------
+        // TÍTULO: El Director de Escena del Carrusel
+        // FUNCIÓN: Maneja toda la lógica del carrusel de reglamentos: el cambio
+        // automático de diapositivas, la navegación con los botones de flecha y
+        // la actualización del título y los indicadores.
+        // ----------------------------------------------------------------------
         let currentIndex = 0;
         const images = document.querySelectorAll('.slider-images .image-container');
         const indicators = document.querySelectorAll('.indicator');
@@ -2066,7 +2015,9 @@
         let autoSlideInterval;
 
         const titleTexts = [
-            ['Código de', 'Vestimenta'], ['Carnet', 'INFOUNI'], ['Reglamento', 'INFOUNI']
+            ['Código de', 'Vestimenta'],
+            ['Carnet', 'INFOUNI'],
+            ['Reglamento', 'INFOUNI']
         ];
 
         function generateTitle(index) {
@@ -2115,6 +2066,7 @@
             updateSlider(currentIndex);
             restartAutoSlide();
         });
+
         function restartAutoSlide() {
             clearInterval(autoSlideInterval);
             autoSlideInterval = setInterval(() => {
@@ -2125,16 +2077,16 @@
         restartAutoSlide();
         updateSlider(currentIndex);
 
-        // TÍTULO: FUNCIÓN PARA COPIAR CORREO Y NÚMEROS
-        // FUNCIÓN: Copia la dirección de correo o el número de teléfono al portapapeles.
+        // ----------------------------------------------------------------------
+        // TÍTULO: El Copiador Mágico de Texto
+        // FUNCIÓN: Permite a los usuarios copiar el correo electrónico o los números
+        // de teléfono con un solo clic, mostrando una notificación para confirmar
+        // que la acción fue exitosa.
+        // ----------------------------------------------------------------------
         function showMessage(text, isError = false) {
             const messageDiv = document.getElementById('copy-message');
             messageDiv.textContent = text;
-            if (isError) {
-                messageDiv.style.backgroundColor = '#cc0000';
-            } else {
-                messageDiv.style.backgroundColor = 'rgba(0, 0, 0, 0.8)';
-            }
+            messageDiv.style.backgroundColor = isError ? '#cc0000' : 'rgba(0, 0, 0, 0.8)';
             messageDiv.classList.add('show');
             setTimeout(() => {
                 messageDiv.classList.remove('show');
@@ -2142,7 +2094,7 @@
         }
 
         function copyEmail(event) {
-            event.preventDefault(); // Evita que la página se desplace hacia arriba.
+            event.preventDefault();
             const emailText = "infouni@uni.edu.pe";
             navigator.clipboard.writeText(emailText)
                 .then(() => {
@@ -2166,7 +2118,16 @@
     </script>
 
     <script>
-        // --- Elementos del DOM ---
+        /* ======================================================================
+           TÍTULO: El Corazón del Asistente: Lógica del Chatbot "Leo"
+           FUNCIÓN: Este es el script principal que da vida a Leo. Gestiona todo:
+                    desde abrir y cerrar la ventana, procesar los mensajes del
+                    usuario, conectarse con la IA de Google Gemini, hasta funciones
+                    avanzadas como el sistema anti-spam y la capacidad de mover y
+                    redimensionar la ventana del chat.
+           ====================================================================== */
+
+        // --- Conectando los cables: Referencias a los elementos del DOM ---
         const chatBubble = document.getElementById('chat-bubble');
         const bubbleIcon = document.getElementById('bubble-icon');
         const chatWindow = document.getElementById('chat-window');
@@ -2174,101 +2135,186 @@
         const resetChatBtn = document.getElementById('reset-chat-size');
         const chatForm = document.getElementById('chat-form');
         const userInput = document.getElementById('user-input');
+        const sendButton = document.getElementById('send-button');
         const chatMessages = document.getElementById('chat-messages');
         const chatHeader = document.querySelector('.chat-header');
 
-
-        // --- URLs de Imágenes ---
+        // --- Identidades visuales: URLs de las imágenes del chat ---
         const IMG_CERRADO = "https://i.ibb.co/MDrCSpjG/tigre-leyendo.png";
         const IMG_ABIERTO = "https://i.ibb.co/1GNDDYzL/tigre-leyendo-2.png";
         const FOTO_USUARIO = "https://i.ibb.co/4Zr38K6d/capibarara-burbuja.png";
         const FOTO_BOT = "https://i.ibb.co/G4KnMLjs/Infotigre.png";
 
-        // --- Pega tu API Key de Google Gemini aquí ---
-        const API_KEY = "AIzaSyDVzjhJzcDenVKow5xvgdhJpvZPtlNwsuU"; // Ejemplo: "AIzaSy..."
+        // --- Configuración de la IA: Conexión con Google Gemini ---
+        // IMPORTANTE: Reemplaza la siguiente clave con tu propia API Key de Google Gemini.
+        const API_KEY = "AIzaSyDVzjhJzcDenVKow5xvgdhJpvZPtlNwsuU"; // <-- ¡Pega tu clave aquí!
         const API_URL = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash-latest:generateContent?key=${API_KEY}`;
 
-        // --- Historial de conversación para mantener el contexto ---
+        // --- Memoria a corto plazo: Historial de la conversación para mantener el contexto ---
         let conversationHistory = [];
 
-        // --- Definición de comandos y sinónimos locales ---
+        // ----------------------------------------------------------------------
+        // TÍTULO: Guardián Anti-Spam Mejorado
+        // FUNCIÓN: Protege el chat de un exceso de mensajes. Si un usuario envía
+        // mensajes demasiado rápido, lo bloquea temporalmente y le muestra una
+        // cuenta regresiva clara para saber cuándo puede volver a escribir.
+        // ----------------------------------------------------------------------
+        const messageTimestamps = [];
+        const SPAM_THRESHOLD = 5;       // Más de 5 mensajes...
+        const SPAM_TIMEFRAME = 4000;    // ...en menos de 4 segundos.
+        const BLOCK_DURATION = 15000;   // ...resultan en un bloqueo de 15 segundos.
+        let isUserWarned = false;
+        let blockInterval;
+
+        function checkSpam() {
+            const now = Date.now();
+            // Eliminamos los registros de mensajes antiguos para no acumular datos innecesarios.
+            while (messageTimestamps.length > 0 && now - messageTimestamps[0] > SPAM_TIMEFRAME) {
+                messageTimestamps.shift();
+            }
+            messageTimestamps.push(now);
+
+            if (messageTimestamps.length > SPAM_THRESHOLD) {
+                if (!isUserWarned) {
+                    addMessage("Por favor, envía mensajes más despacio para que pueda procesarlos.", 'bot');
+                    isUserWarned = true;
+                } else {
+                    blockUser(); // Si ya fue advertido y continúa, aplicamos el bloqueo.
+                }
+                return true; // Es spam.
+            }
+            return false; // No es spam.
+        }
+
+        function blockUser() {
+            const blockExpiresAt = Date.now() + BLOCK_DURATION;
+            localStorage.setItem('chatBlockExpiresAt', blockExpiresAt);
+            applyBlock(blockExpiresAt);
+            addMessage(`Has sido bloqueado temporalmente por enviar demasiados mensajes. Podrás volver a escribir en ${Math.ceil(BLOCK_DURATION / 100000)} segundos.`, 'bot');
+        }
+        
+        function applyBlock(expiresAt) {
+            clearInterval(blockInterval);
+            
+            const updateTimer = () => {
+                const now = Date.now();
+                const timeLeft = Math.ceil((expiresAt - now) / 1000);
+
+                if (timeLeft > 0) {
+                    userInput.disabled = true;
+                    sendButton.disabled = true;
+                    userInput.placeholder = `Bloqueado. Espera ${timeLeft} segundos...`;
+                } else {
+                    userInput.disabled = false;
+                    sendButton.disabled = false;
+                    userInput.placeholder = "Escribe tu mensaje...";
+                    localStorage.removeItem('chatBlockExpiresAt');
+                    isUserWarned = false; 
+                    messageTimestamps.length = 0;
+                    clearInterval(blockInterval);
+                }
+            };
+            
+            blockInterval = setInterval(updateTimer, 1000);
+            updateTimer(); // Llamada inicial para aplicar el estado inmediatamente.
+        }
+
+        // Al cargar la página, verificamos si existe un bloqueo activo.
+        window.addEventListener('load', () => {
+            const blockExpiresAt = localStorage.getItem('chatBlockExpiresAt');
+            if (blockExpiresAt && Date.now() < parseInt(blockExpiresAt)) {
+                applyBlock(parseInt(blockExpiresAt));
+            }
+        });
+        
+        // ----------------------------------------------------------------------
+        // TÍTULO: El Diccionario de Atajos de Leo
+        // FUNCIÓN: Una lista de comandos locales que Leo reconoce al instante sin
+        // necesidad de consultar a la IA. Esto proporciona respuestas rápidas y
+        // precisas para las preguntas más frecuentes sobre la página.
+        // ----------------------------------------------------------------------
         const localCommands = [
             {
-                keywords: ['manual', 'manuales', 'software', 'guia', 'guias', 'aprendizaje', 'instalar'],
-                response: "Claro, aquí tienes la sección de aprendizaje y software. Haz clic en el botón para ir.",
+                keywords: ['manual', 'manuales', 'software', 'guia', 'guias', 'aprendizaje', 'instalar', 'programa', 'solucion', 'error'],
+                response: "¡Claro! Te llevo a la sección de aprendizaje y software. Ahí puedes usar el buscador para encontrar exactamente lo que necesitas.",
                 buttonText: "Ir a Aprendizaje",
                 target: "#software"
             },
             {
                 keywords: ['beca', 'becas', 'formato de beca', 'ayuda economica'],
-                response: "Entendido. Te llevo a la sección de becas para que puedas descargar el formato y ver la información.",
-                buttonText: "Ver Becas",
+                response: "Entendido. Aquí tienes la sección de becas para que puedas descargar el formato y leer toda la información importante.",
+                buttonText: "Ver Información de Becas",
                 target: "#software"
             },
             {
                 keywords: ['reglamento', 'reglamentos', 'normas', 'vestimenta', 'codigo', 'carnet'],
-                response: "¡Por supuesto! En esta sección encontrarás el reglamento, el código de vestimenta y la información del carnet.",
-                buttonText: "Ver Reglamentos",
+                response: "¡Por supuesto! En la sección de reglamentos encontrarás el código de vestimenta, el formato para el carnet y el reglamento general.",
+                buttonText: "Consultar Reglamentos",
                 target: "#reglamento"
             },
             {
                 keywords: ['horario', 'horarios', 'clases'],
-                response: "Puedes consultar los horarios actualizados haciendo clic en el botón del menú de navegación. Te he preparado un botón para que sea más fácil.",
+                response: "Puedes ver los horarios actualizados directamente en el enlace del menú de navegación. ¡Te he preparado un botón para que llegues más rápido!",
                 buttonText: "Ver Horarios",
                 target: "https://drive.google.com/drive/folders/1sLl2LIE1cPzYfhmgiVVW67UbaHKj-vYg"
             },
             {
                 keywords: ['informe', 'informes', 'reporte', 'reportes', 'ver informes', 'laboratorios', 'informes de laboratorios'],
-                response: "Claro, aquí puedes acceder a la hoja de cálculo de Informes de los laboratorios.",
-                buttonText: "Ver Informes",
+                response: "¡Claro! Desde aquí puedes acceder a la hoja de cálculo con los informes de los laboratorios.",
+                buttonText: "Acceder a Informes",
                 target: "https://docs.google.com/spreadsheets/d/1-0qO7vLhCtk52nUOYsnnzMFtDd0o4huj/edit?gid=1762839187#gid=1762839187"
             },
             {
-                keywords: ['intranet', 'plataforma', 'aula virtual'],
-                response: "Para acceder a la Intranet, usa el botón del menú principal o haz clic en el botón que te he preparado.",
+                keywords: ['intranet', 'plataforma', 'aula virtual', 'mis cursos'],
+                response: "Para entrar a la Intranet, ver tus cursos o matricularte, puedes usar el botón del menú principal o este atajo que te he creado.",
                 buttonText: "Ir a Intranet",
                 target: "https://www.infouni.uni.edu.pe/auth/login"
             },
             {
                 keywords: ['ubicacion', 'direccion', 'donde estan', 'mapa', 'encuentranos', 'local', 'lugar'],
-                response: "¡Claro! Nuestra dirección es Av. Túpac Amaru 210, Rímac. Te muestro el mapa.",
-                buttonText: "Ver Ubicación",
+                response: "¡Con gusto! Nuestra dirección es Av. Túpac Amaru 210, Rímac. Te muestro el mapa para que no te pierdas.",
+                buttonText: "Ver Mapa de Ubicación",
                 target: "#ubicacion"
             },
             {
-                keywords: ['contacto', 'telefono', 'numero', 'correo', 'llamar', 'escribir', 'copiar'],
-                response: "Toda nuestra información de contacto, incluyendo los números de teléfono y el correo electrónico, está en el pie de página. Te llevo allí para que puedas verlos y copiarlos.",
+                keywords: ['contacto', 'telefono', 'numero', 'correo', 'llamar', 'escribir', 'copiar', 'whatsapp'],
+                response: "Toda nuestra información de contacto está al final de la página. Te llevo allí para que puedas ver los teléfonos, el correo y más.",
                 buttonText: "Ir a Contacto",
                 target: ".footer"
             },
             {
+                keywords: ['mision', 'vision', 'proposito', 'quienes somos'],
+                response: "Nuestra misión es ser tu mejor aliado en tu camino al éxito. Puedes leerla completa en el pie de página.",
+                buttonText: "Leer Nuestra Misión",
+                target: ".footer"
+            },
+            {
                 keywords: ['curso', 'cursos', 'carrera', 'carreras', 'enseñan', 'matricularme', 'inscripcion', 'inscribirme'],
-                response: "Puedes ver todos nuestros cursos, carreras y matricularte a través de nuestra Intranet. ¡Haz clic en el botón para ir!",
+                response: "Puedes explorar todos nuestros cursos, carreras y realizar tu matrícula a través de la Intranet. ¡Haz clic en el botón para empezar!",
                 buttonText: "Ver Cursos en Intranet",
                 target: "https://www.infouni.uni.edu.pe/auth/login"
             },
             {
-                keywords: ['instaladores', 'programa', 'programas', 'descargar', 'links', 'buscadores', 'webs', 'paginas'],
-                response: "¡Claro! Aquí tienes los buscadores de programas que recomendamos. Puedes hacer clic en cualquiera de ellos para buscar lo que necesites:",
-                buttons: [
-                    { text: "Taiwebs", target: "https://es.taiwebs.com/?lang=PE" },
-                    { text: "FileCr", target: "https://filecr.com/en-us/" },
-                    { text: "Aportes IngeCivil", target: "https://aportesingecivil.com/" },
-                    { text: "Modyolo", target: "https://modyolo.com/" }
-                ]
+                keywords: ['instaladores', 'descargar', 'links', 'buscadores', 'webs', 'paginas'],
+                response: "¡Excelente pregunta! En el pie de página recomendamos algunos buscadores de programas muy útiles. Te llevo para que los veas.",
+                buttonText: "Ver Buscadores Recomendados",
+                target: ".footer"
             }
         ];
-
-        // --- Lógica para Abrir y Cerrar el Chat ---
+        
+        // ----------------------------------------------------------------------
+        // TÍTULO: El Interruptor del Chat
+        // FUNCIÓN: Controla la apertura y cierre de la ventana del chat con una
+        // animación suave y cambia el ícono de la burbuja para reflejar el estado.
+        // ----------------------------------------------------------------------
         function toggleChat() {
             const isChatOpen = !chatWindow.classList.contains('closed');
             if (isChatOpen) {
                 chatWindow.classList.add('closed');
-                setTimeout(() => chatWindow.style.display = 'none', 300); // Espera a que termine la animación
+                setTimeout(() => chatWindow.style.display = 'none', 300);
                 bubbleIcon.src = IMG_CERRADO;
             } else {
                 chatWindow.style.display = 'flex';
-                // Pequeño delay para que el navegador aplique el display:flex antes de la animación
                 setTimeout(() => chatWindow.classList.remove('closed'), 10);
                 bubbleIcon.src = IMG_ABIERTO;
                 if (chatMessages.children.length === 0) {
@@ -2276,51 +2322,71 @@
                 }
             }
         }
-
-        // --- Lógica para reiniciar el tamaño y posición del chat ---
+        
+        // ----------------------------------------------------------------------
+        // TÍTULO: Botón de Reseteo
+        // FUNCIÓN: Restaura la ventana del chat a su tamaño y posición originales
+        // si el usuario la ha movido o redimensionado.
+        // ----------------------------------------------------------------------
         function resetChatWindow() {
-            chatWindow.style.transition = 'all 0.3s ease'; // Añade transición suave
+            chatWindow.style.transition = 'all 0.3s ease';
             chatWindow.style.width = '500px';
             chatWindow.style.height = '600px';
             chatWindow.style.top = 'auto';
             chatWindow.style.left = 'auto';
             chatWindow.style.bottom = '130px';
             chatWindow.style.right = '30px';
-            // Quita la transición después de que ocurra para no afectar el drag/resize
             setTimeout(() => chatWindow.style.transition = '', 300);
         }
 
         chatBubble.addEventListener('click', toggleChat);
         closeChatBtn.addEventListener('click', toggleChat);
         resetChatBtn.addEventListener('click', resetChatWindow);
-
-        // Muestra el mensaje de bienvenida inicial
+        
+        // ----------------------------------------------------------------------
+        // TÍTULO: La Bienvenida de Leo
+        // FUNCIÓN: Muestra un mensaje de saludo inicial la primera vez que se
+        // abre el chat, simulando que el bot está "escribiendo" para dar una
+        // sensación más natural.
+        // ----------------------------------------------------------------------
         function showInitialMessage() {
-            const welcomeText = "¡Hola! Soy Leo, el asistente virtual de INFOUNI. 🐯\nPuedo ayudarte a navegar por la página. Pregúntame sobre todo lo que necesites saber dentro de INFOUNI o cualquier informacion que necesites a tiempo real.";
+            const welcomeText = "¡Hola! Soy Leo, el asistente virtual de INFOUNI. 🐯\nPuedo ayudarte a navegar por la página. Pregúntame sobre manuales, becas, horarios o cualquier otra cosa que necesites.";
             const typingIndicator = showTypingIndicator();
             setTimeout(() => {
                 hideTypingIndicator(typingIndicator);
                 addMessage(welcomeText, 'bot');
             }, 1500);
         }
-
-        // --- Lógica para la Interacción del Chat ---
+        
+        // ----------------------------------------------------------------------
+        // TÍTULO: El Corazón de la Conversación
+        // FUNCIÓN: Se activa cuando el usuario envía un mensaje. Procesa el texto,
+        // verifica si es un comando local, y si no, se lo envía a la IA de Gemini
+        // para obtener una respuesta inteligente.
+        // ----------------------------------------------------------------------
         chatForm.addEventListener('submit', async (e) => {
             e.preventDefault();
+            if (userInput.disabled) return;
+
             const messageText = userInput.value.trim();
             if (messageText === '') return;
-
+            
             addMessage(messageText, 'user');
             userInput.value = '';
-
-            // --- Verificación de Comandos Locales ---
+            
+            if (checkSpam()) return;
+            
             const command = findLocalCommand(messageText);
             if (command) {
                 handleLocalCommand(command);
-                return; // Detiene la ejecución para no llamar a la IA
+                return;
             }
+            
+            // Desactivamos el input mientras esperamos la respuesta de la IA.
+            userInput.disabled = true;
+            sendButton.disabled = true;
+            userInput.placeholder = "Leo está pensando...";
 
-            // --- Si no es un comando local, llamar a la IA ---
             const typingIndicator = showTypingIndicator();
             try {
                 const botResponse = await getBotResponse(messageText);
@@ -2328,16 +2394,25 @@
                 addMessage(botResponse, 'bot');
             } catch (error) {
                 hideTypingIndicator(typingIndicator);
-                // La función getBotResponse ya muestra un mensaje específico si la API Key es el problema.
-                // Este es un mensaje de fallback para otros errores de red o de la API.
                 if (!error.message.includes("API Key")) {
-                    addMessage('Lo siento, ocurrió un error al conectar con mis servidores. Por favor, inténtalo de nuevo más tarde.', 'bot');
+                    addMessage('Lo siento, tuve un problema para conectarme con mis servidores. Por favor, inténtalo de nuevo más tarde.', 'bot');
                 }
                 console.error('Error al contactar la API:', error);
+            } finally {
+                // Reactivamos el input, independientemente del resultado.
+                if (!localStorage.getItem('chatBlockExpiresAt')) { // Solo reactivar si no está bloqueado por spam.
+                    userInput.disabled = false;
+                    sendButton.disabled = false;
+                    userInput.placeholder = "Escribe tu mensaje...";
+                }
             }
         });
-
-        // --- Función para buscar un comando local en el mensaje del usuario ---
+        
+        // ----------------------------------------------------------------------
+        // TÍTULO: El Intérprete de Comandos
+        // FUNCIÓN: Busca en el diccionario de atajos si el mensaje del usuario
+        // contiene alguna de las palabras clave definidas.
+        // ----------------------------------------------------------------------
         function findLocalCommand(message) {
             const lowerCaseMessage = message.toLowerCase();
             return localCommands.find(cmd =>
@@ -2345,16 +2420,18 @@
             );
         }
 
-        // --- Función para manejar un comando local (AHORA SOPORTA MÚLTIPLES BOTONES) ---
+        // ----------------------------------------------------------------------
+        // TÍTULO: El Ejecutor de Acciones
+        // FUNCIÓN: Cuando se encuentra un comando local, esta función se encarga
+        // de mostrar la respuesta predefinida y de generar los botones de acción
+        // correspondientes (ya sea uno solo o varios).
+        // ----------------------------------------------------------------------
         function handleLocalCommand(command) {
             let responseHTML = command.response;
 
-            // Si tiene un solo botón
             if (command.target) {
                 responseHTML += `<br><button class="action-button" data-target="${command.target}">${command.buttonText}</button>`;
-            }
-            // Si tiene múltiples 
-            else if (command.buttons) {
+            } else if (command.buttons) {
                 responseHTML += '<br>';
                 command.buttons.forEach(button => {
                     responseHTML += `<button class="action-button" data-target="${button.target}" style="margin: 5px 5px 0 0;">${button.text}</button>`;
@@ -2363,29 +2440,36 @@
             addMessage(responseHTML, 'bot');
         }
 
-        // --- Event Listener para los botones de acción ---
+        // ----------------------------------------------------------------------
+        // TÍTULO: El Escucha de Botones
+        // FUNCIÓN: Está siempre atento a los clics en los botones de acción dentro
+        // del chat. Cuando detecta uno, navega a la sección correspondiente de la
+        // página o abre un enlace externo.
+        // ----------------------------------------------------------------------
         chatMessages.addEventListener('click', (e) => {
             if (e.target.classList.contains('action-button')) {
                 const targetSelector = e.target.dataset.target;
-
-                // Si es una URL externa
+                
                 if (targetSelector.startsWith('http')) {
                     window.open(targetSelector, '_blank');
-                    toggleChat(); // Cierra el chat para que el usuario vea la nueva pestaña
+                    toggleChat();
                     return;
                 }
-
-                // Si es un selector de la página
+                
                 const targetElement = document.querySelector(targetSelector);
                 if (targetElement) {
                     targetElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                    toggleChat(); // Cierra el chat para que el usuario vea la sección
+                    toggleChat();
                 }
             }
         });
-
-
-        // Función para añadir un mensaje al DOM
+        
+        // ----------------------------------------------------------------------
+        // TÍTULO: El Constructor de Mensajes
+        // FUNCIÓN: Se encarga de crear y añadir un nuevo mensaje (ya sea del
+        // usuario o del bot) a la ventana del chat, con el formato y estilo
+        // correctos.
+        // ----------------------------------------------------------------------
         function addMessage(text, sender) {
             const messageElement = document.createElement('div');
             messageElement.classList.add('message', sender === 'user' ? 'user-message' : 'bot-message');
@@ -2396,16 +2480,16 @@
 
             const textBubble = document.createElement('div');
             textBubble.classList.add('text-bubble');
-            textBubble.innerHTML = text.replace(/\n/g, '<br>'); // Respeta saltos de línea
+            textBubble.innerHTML = text.replace(/\n/g, '<br>');
 
             messageElement.appendChild(avatar);
             messageElement.appendChild(textBubble);
 
             chatMessages.appendChild(messageElement);
-            chatMessages.scrollTop = chatMessages.scrollHeight; // Scroll automático
+            chatMessages.scrollTop = chatMessages.scrollHeight; // Scroll automático al final.
         }
 
-        // Muestra el indicador de "Escribiendo..."
+        // --- Funciones para simular que el bot está escribiendo ---
         function showTypingIndicator() {
             const typingElement = document.createElement('div');
             typingElement.id = 'typing-indicator';
@@ -2420,20 +2504,23 @@
             return typingElement;
         }
 
-        // Oculta el indicador de "Escribiendo..."
         function hideTypingIndicator(element) {
             if (element) {
                 element.remove();
             }
         }
-
-        // --- FUNCIÓN FUERZA ESPAÑOL LATINO ---
+        
+        // ----------------------------------------------------------------------
+        // TÍTULO: La Conexión con la Inteligencia Artificial
+        // FUNCIÓN: Envía el mensaje del usuario y el historial de la conversación
+        // a la API de Google Gemini. Le da instrucciones a la IA para que actúe
+        // como Leo y se asegure de responder siempre en español latino.
+        // ----------------------------------------------------------------------
         async function getBotResponse(userMessage) {
-            // Validación de API Key antes de la llamada.
-            if (!API_KEY || API_KEY.includes("TU_API_KEY")) {
-                const apiKeyErrorMsg = "<strong>Error de configuración:</strong> La clave de la API de IA no ha sido configurada. Por favor, contacta al administrador del sitio.";
+            if (!API_KEY || API_KEY === "TU_API_KEY") {
+                const apiKeyErrorMsg = "<strong>Error de configuración:</strong> La clave de la API de IA no ha sido configurada. Por favor, contacta al administrador del sitio para que pueda activarme.";
                 addMessage(apiKeyErrorMsg, 'bot');
-                throw new Error("API Key no configurada. Es el valor de ejemplo.");
+                throw new Error("API Key no configurada.");
             }
 
             conversationHistory.push({ role: "user", parts: [{ text: userMessage }] });
@@ -2442,7 +2529,7 @@
                 "contents": [
                     {
                         "role": "user",
-                        "parts": [{ "text": "Eres un Chat Bot basado en IA muy amigable y servicial llamado 'Leo 🐯'. Trabajas para INFOUNI. Responde siempre en español latino, sin importar el idioma en el que te escriban. Tus respuestas deben ser claras, directas y útiles." }]
+                        "parts": [{ "text": "Eres un Chat Bot de IA muy amigable y servicial llamado 'Leo 🐯'. Trabajas para INFOUNI. Responde siempre en español latino, sin importar el idioma en el que te escriban. Tus respuestas deben ser claras, directas y útiles." }]
                     },
                     {
                         "role": "model",
@@ -2466,12 +2553,12 @@
 
                 const data = await response.json();
 
-                if (data.candidates && data.candidates.length > 0 && data.candidates[0].content.parts) {
+                if (data.candidates && data.candidates[0].content.parts) {
                     const botResponseText = data.candidates[0].content.parts[0].text;
                     conversationHistory.push({ role: "model", parts: [{ text: botResponseText }] });
                     return botResponseText;
                 } else {
-                    return "No he podido generar una respuesta. Inténtalo de nuevo.";
+                    return "No he podido generar una respuesta en este momento. Inténtalo de nuevo.";
                 }
 
             } catch (error) {
@@ -2479,20 +2566,21 @@
                 throw error;
             }
         }
-
-        // =============================================================
-        // === INICIO: LÓGICA PARA MOVER Y REDIMENSIONAR LA VENTANA ===
-        // =============================================================
-
+        
+        // ======================================================================
+        // TÍTULO: Ventana Flotante y Personalizable
+        // FUNCIÓN: Toda la lógica que permite al usuario mover la ventana del
+        //          chat por toda la pantalla y cambiar su tamaño arrastrando los
+        //          bordes.
+        // ======================================================================
         let isDragging = false;
         let isResizing = false;
         let dragOffset = { x: 0, y: 0 };
         let resizeInfo = { direction: '', startX: 0, startY: 0, startRect: null };
-        const RESIZE_BORDER_SENSITIVITY = 8; // Píxeles de sensibilidad para el borde de redimensión
+        const RESIZE_BORDER_SENSITIVITY = 8; // Sensibilidad en píxeles.
 
-        // --- Mover la ventana (Drag) ---
+        // --- Lógica para mover la ventana (Drag) ---
         chatHeader.addEventListener('mousedown', (e) => {
-            // No arrastrar si se hace clic en botones o si el cursor es de redimensionar
             if (e.target.closest('.header-btn') || window.getComputedStyle(chatWindow).cursor.includes('resize')) {
                 return;
             }
@@ -2501,17 +2589,16 @@
             const rect = chatWindow.getBoundingClientRect();
             dragOffset.x = e.clientX - rect.left;
             dragOffset.y = e.clientY - rect.top;
-
-            // Cambiar a posicionamiento top/left para un arrastre consistente
+            
             chatWindow.style.right = 'auto';
             chatWindow.style.bottom = 'auto';
             chatWindow.style.left = `${rect.left}px`;
             chatWindow.style.top = `${rect.top}px`;
 
-            document.body.style.userSelect = 'none'; // Evita seleccionar texto al arrastrar
+            document.body.style.userSelect = 'none';
         });
 
-        // --- Iniciar la redimensión (Resize) ---
+        // --- Lógica para iniciar la redimensión (Resize) ---
         chatWindow.addEventListener('mousedown', (e) => {
             const cursor = window.getComputedStyle(chatWindow).cursor;
             if (cursor.includes('resize')) {
@@ -2521,8 +2608,7 @@
                 resizeInfo.startX = e.clientX;
                 resizeInfo.startY = e.clientY;
                 resizeInfo.startRect = chatWindow.getBoundingClientRect();
-
-                // Asegurar posicionamiento top/left para redimensionar
+                
                 chatWindow.style.right = 'auto';
                 chatWindow.style.bottom = 'auto';
                 chatWindow.style.left = `${resizeInfo.startRect.left}px`;
@@ -2534,24 +2620,24 @@
             }
         });
 
-        // --- Lógica central de arrastre y redimensión en un solo listener ---
+        // --- Lógica central de movimiento y cambio de cursor ---
         document.addEventListener('mousemove', (e) => {
-            // --- Lógica de Arrastre (DRAG) ---
             if (isDragging) {
                 let newX = e.clientX - dragOffset.x;
                 let newY = e.clientY - dragOffset.y;
-                const headerHeight = chatHeader.offsetHeight;
-
-                // **MEJORA**: Limitar el movimiento dentro de la pantalla
-                newX = Math.max(0, Math.min(newX, window.innerWidth - chatWindow.offsetWidth));
-                newY = Math.max(0, Math.min(newY, window.innerHeight - headerHeight - 10)); // Dejar espacio para ver la cabecera
+                
+                // Limitamos el movimiento para que la ventana no se salga de la pantalla.
+                const minX = 0;
+                const minY = 0;
+                const maxX = window.innerWidth - chatWindow.offsetWidth;
+                const maxY = window.innerHeight - chatHeader.offsetHeight - 5;
+                
+                newX = Math.max(minX, Math.min(newX, maxX));
+                newY = Math.max(minY, Math.min(newY, maxY));
 
                 chatWindow.style.left = `${newX}px`;
                 chatWindow.style.top = `${newY}px`;
-            }
-
-            // --- Lógica para cambiar el cursor al pasar por los bordes ---
-            else if (!isResizing) {
+            } else if (!isResizing) {
                 const rect = chatWindow.getBoundingClientRect();
                 const border = RESIZE_BORDER_SENSITIVITY;
                 const onTop = e.clientY < rect.top + border;
@@ -2560,14 +2646,14 @@
                 const onRight = e.clientX > rect.right - border;
 
                 let cursorType = 'default';
-                if (onTop) cursorType = 'n-resize';
-                if (onBottom) cursorType = 's-resize';
-                if (onLeft) cursorType = 'w-resize';
-                if (onRight) cursorType = 'e-resize';
                 if (onTop && onLeft) cursorType = 'nw-resize';
-                if (onTop && onRight) cursorType = 'ne-resize';
-                if (onBottom && onLeft) cursorType = 'sw-resize';
-                if (onBottom && onRight) cursorType = 'se-resize';
+                else if (onTop && onRight) cursorType = 'ne-resize';
+                else if (onBottom && onLeft) cursorType = 'sw-resize';
+                else if (onBottom && onRight) cursorType = 'se-resize';
+                else if (onTop) cursorType = 'n-resize';
+                else if (onBottom) cursorType = 's-resize';
+                else if (onLeft) cursorType = 'w-resize';
+                else if (onRight) cursorType = 'e-resize';
 
                 chatWindow.style.cursor = cursorType;
                 if (cursorType === 'default' && e.target.closest('.chat-header')) {
@@ -2576,7 +2662,7 @@
             }
         });
 
-        // --- Función de Redimensión Mejorada ---
+        // --- Función que calcula el nuevo tamaño durante la redimensión ---
         function doResize(e) {
             if (!isResizing) return;
 
@@ -2590,8 +2676,7 @@
 
             const minWidth = parseInt(getComputedStyle(chatWindow).minWidth);
             const minHeight = parseInt(getComputedStyle(chatWindow).minHeight);
-
-            // Calcular nuevas dimensiones y posiciones
+            
             if (resizeInfo.direction.includes('e')) newWidth = resizeInfo.startRect.width + dx;
             if (resizeInfo.direction.includes('w')) newWidth = resizeInfo.startRect.width - dx;
             if (resizeInfo.direction.includes('s')) newHeight = resizeInfo.startRect.height + dy;
@@ -2599,8 +2684,7 @@
 
             if (resizeInfo.direction.includes('w')) newLeft = resizeInfo.startRect.left + dx;
             if (resizeInfo.direction.includes('n')) newTop = resizeInfo.startRect.top + dy;
-
-            // Aplicar cambios si son válidos
+            
             if (newWidth >= minWidth) {
                 chatWindow.style.width = `${newWidth}px`;
                 chatWindow.style.left = `${newLeft}px`;
@@ -2611,7 +2695,7 @@
             }
         }
 
-        // --- Detener arrastre o redimensión ---
+        // --- Función para detener cualquier acción (arrastre o redimensión) ---
         function stopActions() {
             if (isResizing) {
                 window.removeEventListener('mousemove', doResize);
@@ -2621,18 +2705,9 @@
             isResizing = false;
             document.body.style.userSelect = 'auto';
         }
-
-        // Renombrado para claridad
         const stopResize = stopActions;
         document.addEventListener('mouseup', stopActions);
-
-        // ===========================================================
-        // === FIN: LÓGICA PARA MOVER Y REDIMENSIONAR LA VENTANA ===
-        // ===========================================================
-
     </script>
 </body>
 
-
 </html>
-
