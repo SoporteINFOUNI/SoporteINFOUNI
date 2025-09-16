@@ -2161,8 +2161,8 @@
         // ----------------------------------------------------------------------
         const messageTimestamps = [];
         const SPAM_THRESHOLD = 5;       // Más de 5 mensajes...
-        const SPAM_TIMEFRAME = 30000;    // ...en menos de 4 segundos.
-        const BLOCK_DURATION = 150000;   // ...resultan en un bloqueo de 15 segundos.
+        const SPAM_TIMEFRAME = 30000;    // ...en menos de 30 segundos.
+        const BLOCK_DURATION = 150000;   // ...resultan en un bloqueo de 150 segundos.
         let isUserWarned = false;
         let blockInterval;
 
@@ -2190,7 +2190,7 @@
             const blockExpiresAt = Date.now() + BLOCK_DURATION;
             localStorage.setItem('chatBlockExpiresAt', blockExpiresAt);
             applyBlock(blockExpiresAt);
-            addMessage(`Has sido bloqueado temporalmente por enviar demasiados mensajes. Podrás volver a escribir en ${Math.ceil(BLOCK_DURATION / 100000)} segundos.`, 'bot');
+            addMessage(`Has sido bloqueado temporalmente por enviar demasiados mensajes. Podrás volver a escribir en ${Math.ceil(BLOCK_DURATION / 150000)} segundos.`, 'bot');
         }
         
         function applyBlock(expiresAt) {
@@ -2711,4 +2711,5 @@
 </body>
 
 </html>
+
 
