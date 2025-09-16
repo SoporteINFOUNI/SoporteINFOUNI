@@ -2147,7 +2147,7 @@
 
         // --- Configuración de la IA: Conexión con Google Gemini ---
         // IMPORTANTE: Reemplaza la siguiente clave con tu propia API Key de Google Gemini.
-        const API_KEY = "AIzaSyDVzjhJzcDenVKow5xvgdhJpvZPtlNwsuU"; // <-- ¡Pega tu clave aquí!
+        const API_KEY = "AIzaSyDTAQJKwSHByCbB-2waPbRbBXnnKtPLFE4"; // <-- ¡Pega tu clave aquí!
         const API_URL = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash-latest:generateContent?key=${API_KEY}`;
 
         // --- Memoria a corto plazo: Historial de la conversación para mantener el contexto ---
@@ -2176,7 +2176,7 @@
 
             if (messageTimestamps.length > SPAM_THRESHOLD) {
                 if (!isUserWarned) {
-                    addMessage("Por favor, envía mensajes más despacio para que pueda procesarlos.", 'bot');
+                    addMessage("Hemos detectado un posible Spam, por favor espera 20 segundos para proseguir, de lo contrario al siguiente mensaje seras bloqueado por 15.", 'bot');
                     isUserWarned = true;
                 } else {
                     blockUser(); // Si ya fue advertido y continúa, aplicamos el bloqueo.
@@ -2711,3 +2711,4 @@
 </body>
 
 </html>
+
