@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="es">
 
@@ -36,7 +37,7 @@
             --color-yellow: #F4D03F;
             --color-cyan: #00FFFF;
 
-            /* Variable mágica para el desplazamiento, se actualiza con JavaScript para precisión quirúrgica. */
+            /* Variable para la altura del encabezado, se actualiza con JavaScript para un ajuste preciso. */
             --header-height: 122px;
         }
 
@@ -47,7 +48,7 @@
 
         html {
             scroll-behavior: smooth;
-            /* Navegación suave como la seda. */
+            /* Activa el desplazamiento suave entre anclas. */
         }
 
         body {
@@ -57,13 +58,21 @@
             color: var(--color-dark);
             -webkit-font-smoothing: antialiased;
             -moz-osx-font-smoothing: grayscale;
-            /* Dejamos un espacio arriba para que el encabezado fijo no oculte nuestro contenido. */
-            padding-top: var(--header-height);
         }
+
+        /* Contenedor principal para aplicar el zoom sin afectar al header/chat */
+        #zoom-container {
+            padding-top: var(--header-height);
+            transition: transform 0.2s ease-out;
+            background-color: var(--color-light);
+            position: relative; /* Clave para la correcta superposición */
+            z-index: 1;         /* Se asegura de que esté debajo del header (z-index: 1000) */
+        }
+
 
         /* ======================================================================
            TÍTULO: Navegación Perfecta: Ajuste de Anclaje para Secciones
-           FUNCIÓN: Cuando el usuario hace clic en un enlace del menú, este truco asegura que
+           FUNCIÓN: Cuando el usuario hace clic en un enlace del menú, este ajuste asegura que
                     la sección de destino no quede escondida debajo del encabezado. Añade un
                     margen superior invisible que compensa la altura del header.
            ====================================================================== */
@@ -161,7 +170,7 @@
             transition: background-color 0.3s ease;
             cursor: pointer;
         }
-        
+
         .header-top-left .info-button {
             margin-right: 10px;
         }
@@ -457,7 +466,8 @@
             font-weight: bold;
             border: 2px solid black;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            max-width: 700px; /* <--- Ajuste importante para que el cuadro no sea tan grande */
+            max-width: 700px;
+            /* <--- Ajuste importante para que el cuadro no sea tan grande */
             width: 100%;
         }
 
@@ -589,7 +599,7 @@
         .buscador {
             margin-bottom: 20px;
         }
-        
+
         /* Estilos para el campo de búsqueda con borde animado. */
         .buscador input {
             --border-size: 4px;
@@ -648,7 +658,7 @@
                 background-position: 0% 50%;
             }
         }
-        
+
         .botones-container {
             flex: 1;
             overflow-y: auto;
@@ -662,7 +672,7 @@
             --color-footer-blue: var(--metal-2);
             --color-celeste: var(--metal-3);
             --color-cyan: #00FFFF;
-            
+
             display: block;
             text-align: center;
             text-decoration: none;
@@ -807,7 +817,7 @@
             object-fit: cover;
         }
 
-        /* Botones de flecha para navegar manualmente por el carrusel. */
+        /* Botones de flecha para navegar manually por el carrusel. */
         .slider-buttons {
             position: absolute;
             top: 50%;
@@ -1020,7 +1030,7 @@
             margin-top: 20px;
             font-size: 12px;
         }
-        
+
         /* Renombramos la clase para evitar conflictos con la del header. */
         .footer-social-icons {
             display: flex;
@@ -1133,7 +1143,7 @@
             .footer-social-icons {
                 justify-content: center;
             }
-            
+
             .footer-section {
                 align-items: center;
                 display: flex;
@@ -1148,7 +1158,7 @@
             .footer-contact-item p {
                 text-align: center;
             }
-            
+
             .titulo-animado .linea,
             .titulo-animado .linea2 {
                 font-size: 30px;
@@ -1183,7 +1193,7 @@
                 width: 180px;
                 margin-bottom: 20px;
             }
-            
+
             .slider-images .image-container {
                 height: 250px;
             }
@@ -1201,7 +1211,7 @@
                 padding: 6px 8px;
                 font-size: 12px;
             }
-            
+
             .titulo-animado .linea,
             .titulo-animado .linea2 {
                 font-size: 20px;
@@ -1232,7 +1242,81 @@
         #copy-message.show {
             opacity: 1;
         }
+
+        /* ======================================================================
+           TÍTULO: Interfaz de Controles de Zoom
+           FUNCIÓN: Estilos para la barra de control de zoom que aparece
+                    temporalmente en la pantalla al hacer zoom.
+           ====================================================================== */
+        #zoom-controls {
+            position: fixed;
+            left: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            background-color: rgba(10, 17, 40, 0.9);
+            border: 2px solid #000;
+            border-radius: 25px;
+            padding: 10px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+            z-index: 10001;
+            opacity: 0;
+            transition: opacity 0.4s ease-in-out;
+            pointer-events: none;
+        }
+
+        #zoom-controls.visible {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .zoom-btn {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 24px;
+            font-weight: bold;
+            cursor: pointer;
+            width: 30px;
+            height: 30px;
+            line-height: 30px;
+            text-align: center;
+            transition: background-color 0.2s, color 0.2s;
+            border-radius: 50%;
+        }
+
+        .zoom-btn:hover {
+            background-color: rgba(255, 255, 255, 0.2);
+        }
         
+        .zoom-btn:disabled {
+            color: #666;
+            cursor: not-allowed;
+        }
+        
+        .zoom-btn:disabled:hover {
+             background-color: transparent;
+        }
+
+        #zoom-display {
+            color: white;
+            font-size: 14px;
+            font-weight: 600;
+            background-color: rgba(0, 0, 0, 0.3);
+            padding: 2px 8px;
+            border-radius: 5px;
+            min-width: 50px;
+            text-align: center;
+        }
+
+        #zoom-icon {
+            color: white;
+            font-size: 20px;
+        }
+
+
         /* ======================================================================
            TÍTULO: Nuestro Asistente Virtual: Estilos del Chatbot "Leo"
            FUNCIÓN: Todo el diseño y la apariencia de nuestro amigable chatbot. Desde la
@@ -1482,6 +1566,7 @@
             border-top: 4px solid #0a1128;
             background-color: #eaf8ff;
             flex-shrink: 0;
+            align-items: center;
         }
 
         .chat-input input {
@@ -1495,7 +1580,7 @@
             font-size: 0.95em;
             transition: border-color 0.2s, box-shadow 0.2s, background-color 0.2s;
         }
-        
+
         /* Estilo para cuando el campo de texto está deshabilitado. */
         .chat-input input:disabled {
             background-color: #f0f0f0;
@@ -1521,8 +1606,23 @@
             align-items: center;
             justify-content: center;
             transition: transform 0.2s, box-shadow 0.2s, background 0.2s;
+            flex-shrink: 0;
         }
-        
+
+        #unblock-btn {
+            background-color: #ffc107;
+            color: black;
+            border: 2px solid black;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            margin-right: 10px;
+            cursor: pointer;
+            font-size: 20px;
+            flex-shrink: 0;
+        }
+
+
         /* Estilo para el botón de envío cuando está deshabilitado. */
         .chat-input button:disabled {
             background: #ccc;
@@ -1604,247 +1704,265 @@
         </div>
     </header>
 
-    <div class="banner">
-        <div class="banner-texto" aria-label="Soporte INFOUNI">
-            <div class="linea" aria-hidden="true">
-                <span class="letra" style="--i:0">S</span><span class="letra" style="--i:1">o</span><span class="letra"
-                    style="--i:2">p</span><span class="letra" style="--i:3">o</span><span class="letra"
-                    style="--i:4">r</span><span class="letra" style="--i:5">t</span><span class="letra"
-                    style="--i:6">e</span>
-            </div>
-            <div class="linea linea2" aria-hidden="true">
-                <span class="letra" style="--i:0">I</span><span class="letra" style="--i:1">N</span><span class="letra"
-                    style="--i:2">F</span><span class="letra" style="--i:3">O</span><span class="letra"
-                    style="--i:4">U</span><span class="letra" style="--i:5">N</span><span class="letra"
-                    style="--i:6">I</span>
-            </div>
-        </div>
-    </div>
-
-    <section id="bienvenida" class="section-centered">
-        <div class="titulo-animado" aria-label="Bienvenidos">
-            <div class="linea" aria-hidden="true">
-                <span class="letra" style="--i:0">B</span><span class="letra" style="--i:1">i</span><span class="letra"
-                    style="--i:2">e</span><span class="letra" style="--i:3">n</span><span class="letra"
-                    style="--i:4">v</span><span class="letra" style="--i:5">e</span><span class="letra"
-                    style="--i:6">n</span><span class="letra" style="--i:7">i</span><span class="letra"
-                    style="--i:8">d</span><span class="letra" style="--i:9">o</span><span class="letra"
-                    style="--i:10">s</span>
-            </div>
-        </div>
-
-        <div class="intro">
-            <div class="logo">
-                <a href="https://www.infouni.uni.edu.pe"><img src="https://i.ibb.co/0VDZ9bWt/logo-infouni-blue.png"
-                        alt="Centro de Cómputo INFOUNI"></a>
-                <div class="intranet-texto">Haga click en la imagen para ingresar a la pagina de Carreras de INFOUNI
+    <main id="zoom-container">
+        <div class="banner">
+            <div class="banner-texto" aria-label="Soporte INFOUNI">
+                <div class="linea" aria-hidden="true">
+                    <span class="letra" style="--i:0">S</span><span class="letra" style="--i:1">o</span><span
+                        class="letra" style="--i:2">p</span><span class="letra" style="--i:3">o</span><span class="letra"
+                        style="--i:4">r</span><span class="letra" style="--i:5">t</span><span class="letra"
+                        style="--i:6">e</span>
                 </div>
-            </div>
-            <div class="texto">
-                <h2>Centro de Cómputo INFOUNI</h2>
-                <p>Expande tus conocimientos sobre la forma de instalar los programas de INFOUNI, las soluciones de
-                    errores y todas las dudas que tengas por resolver, están aquí. Gracias por elegir INFOUNI para
-                    comenzar tu camino hacia el éxito.</p>
-            </div>
-        </div>
-
-        <div id="three-images-container">
-            <img src="https://i.ibb.co/4hSKMph/secretaria.png" alt="Secretaría de INFOUNI">
-            <img src="https://i.ibb.co/JjXSQ1d4/Pantallaaazul.png" alt="Imagen descriptiva">
-            <img src="https://i.ibb.co/nNpfrzsj/clases.jpg" alt="Clases en INFOUNI">
-        </div>
-
-        <div id="new-image-container">
-            <img src="https://i.ibb.co/LdGXSSjg/stugio-ghibibibi.png" alt="Imagen decorativa de un animal">
-        </div>
-
-        <div class="intro-extra">
-            <p>Aquí ofrecemos todo lo que se necesita para sus comienzos como soporte en INFOUNI:<br>Normas a seguir,
-                Código de Vestimenta, Guías de variedad en formato Video, PDF <br>y texto, además de soluciones de
-                errores que se vayan registrando.</p>
-        </div>
-    </section>
-
-    <div class="separator-wrapper">
-        <div class="thin-separator" aria-hidden="true"></div>
-    </div>
-
-    <section id="software" class="section-centered">
-        <div class="titulo-animado" aria-label="Aprendizaje de su Problema">
-            <div class="linea" aria-hidden="true">
-                <span class="letra" style="--i:0">A</span><span class="letra" style="--i:1">p</span><span class="letra"
-                    style="--i:2">r</span><span class="letra" style="--i:3">e</span><span class="letra"
-                    style="--i:4">n</span><span class="letra" style="--i:5">d</span><span class="letra"
-                    style="--i:6">i</span><span class="letra" style="--i:7">z</span><span class="letra"
-                    style="--i:8">a</span><span class="letra" style="--i:9">j</span><span class="letra"
-                    style="--i:10">e</span>
-            </div>
-            <div class="linea linea2" aria-hidden="true">
-                <span class="letra" style="--i:0">d</span><span class="letra" style="--i:1">e</span><span class="letra"
-                    style="--i:2"> </span><span class="letra" style="--i:3">s</span><span class="letra"
-                    style="--i:4">u</span><span class="letra" style="--i:5"> </span><span class="letra"
-                    style="--i:6">P</span><span class="letra" style="--i:7">r</span><span class="letra"
-                    style="--i:8">o</span><span class="letra" style="--i:9">b</span><span class="letra"
-                    style="--i:10">l</span><span class="letra" style="--i:11">e</span><span class="letra"
-                    style="--i:12">m</span><span class="letra" style="--i:13">a</span>
-            </div>
-        </div>
-        
-        <div class="buscador-becas">
-            <div class="contenedor-principal">
-                <h1 class="titulo-seccion">Busque su Software</h1>
-                <div class="buscador">
-                    <input type="search" id="buscador-input" placeholder="Buscar software..."
-                        aria-label="Buscar software">
-                </div>
-                <div id="botones-container" class="botones-container" aria-live="polite"></div>
-            </div>
-
-            <div class="becas-box">
-                <div class="becas-img">
-                    <a href="https://docs.google.com/document/d/1Qq5sykVCgjnfcxvGrdEYL9t8sxZj3RRB/export?format=docx">
-                        <img src="https://i.ibb.co/YFWmc11M/tigre-infouni.png" alt="Becas INFOUNI">
-                    </a>
-                </div>
-                <div class="becas-nota">Haga click para obtener el formato de Becas</div>
-                <div class="becas-texto">
-                    Aprovecha tus becas mensuales. No desperdicies la oportunidad de estudiar en INFOUNI de forma
-                    gratuita después de un mes de esfuerzo como soporte. Recuerda que las becas no se acumulan, así que
-                    no pierdas tu oportunidad. Como sugerencia, pide ayuda a un soporte que ya haya solicitado becas
-                    para revisar tu formato, ya que la beca no será aprobada si contiene errores en algún punto.
+                <div class="linea linea2" aria-hidden="true">
+                    <span class="letra" style="--i:0">I</span><span class="letra" style="--i:1">N</span><span
+                        class="letra" style="--i:2">F</span><span class="letra" style="--i:3">O</span><span class="letra"
+                        style="--i:4">U</span><span class="letra" style="--i:5">N</span><span class="letra"
+                        style="--i:6">I</span>
                 </div>
             </div>
         </div>
-    </section>
 
-    <div class="separator-wrapper">
-        <div class="thin-separator" aria-hidden="true"></div>
-    </div>
+        <section id="bienvenida" class="section-centered">
+            <div class="titulo-animado" aria-label="Bienvenidos">
+                <div class="linea" aria-hidden="true">
+                    <span class="letra" style="--i:0">B</span><span class="letra" style="--i:1">i</span><span
+                        class="letra" style="--i:2">e</span><span class="letra" style="--i:3">n</span><span class="letra"
+                        style="--i:4">v</span><span class="letra" style="--i:5">e</span><span class="letra"
+                        style="--i:6">n</span><span class="letra" style="--i:7">i</span><span class="letra"
+                        style="--i:8">d</span><span class="letra" style="--i:9">o</span><span class="letra"
+                        style="--i:10">s</span>
+                </div>
+            </div>
 
-    <section id="reglamento" class="section-centered">
-        <div class="centered-carousel">
-            <div class="carousel-container">
-                <div class="slider-title" id="slider-title"></div>
-                <div class="image-slider">
-                    <div class="slider-images">
-                        <div class="image-container"><a
-                                href="https://drive.google.com/uc?export=download&id=1Pe1Wx3sKU2IiKpx13vMjDjhtfS1EKeRf"><img
-                                    src="https://i.ibb.co/Tq8gcjg1/capibara-blanco.png" alt="Código de Vestimenta"></a>
+            <div class="intro">
+                <div class="logo">
+                    <a href="https://www.infouni.uni.edu.pe"><img src="https://i.ibb.co/0VDZ9bWt/logo-infouni-blue.png"
+                            alt="Centro de Cómputo INFOUNI"></a>
+                    <div class="intranet-texto">Haga click en la imagen para ingresar a la pagina de Carreras de INFOUNI
+                    </div>
+                </div>
+                <div class="texto">
+                    <h2>Centro de Cómputo INFOUNI</h2>
+                    <p>Expande tus conocimientos sobre la forma de instalar los programas de INFOUNI, las soluciones de
+                        errores y todas las dudas que tengas por resolver, están aquí. Gracias por elegir INFOUNI para
+                        comenzar tu camino hacia el éxito.</p>
+                </div>
+            </div>
+
+            <div id="three-images-container">
+                <img src="https://i.ibb.co/4hSKMph/secretaria.png" alt="Secretaría de INFOUNI">
+                <img src="https://i.ibb.co/JjXSQ1d4/Pantallaaazul.png" alt="Imagen descriptiva">
+                <img src="https://i.ibb.co/nNpfrzsj/clases.jpg" alt="Clases en INFOUNI">
+            </div>
+
+            <div id="new-image-container">
+                <img src="https://i.ibb.co/LdGXSSjg/stugio-ghibibibi.png" alt="Imagen decorativa de un animal">
+            </div>
+
+            <div class="intro-extra">
+                <p>Aquí ofrecemos todo lo que se necesita para sus comienzos como soporte en INFOUNI:<br>Normas a
+                    seguir,
+                    Código de Vestimenta, Guías de variedad en formato Video, PDF <br>y texto, además de soluciones de
+                    errores que se vayan registrando.</p>
+            </div>
+        </section>
+
+        <div class="separator-wrapper">
+            <div class="thin-separator" aria-hidden="true"></div>
+        </div>
+
+        <section id="software" class="section-centered">
+            <div class="titulo-animado" aria-label="Aprendizaje de su Problema">
+                <div class="linea" aria-hidden="true">
+                    <span class="letra" style="--i:0">A</span><span class="letra" style="--i:1">p</span><span
+                        class="letra" style="--i:2">r</span><span class="letra" style="--i:3">e</span><span class="letra"
+                        style="--i:4">n</span><span class="letra" style="--i:5">d</span><span class="letra"
+                        style="--i:6">i</span><span class="letra" style="--i:7">z</span><span class="letra"
+                        style="--i:8">a</span><span class="letra" style="--i:9">j</span><span class="letra"
+                        style="--i:10">e</span>
+                </div>
+                <div class="linea linea2" aria-hidden="true">
+                    <span class="letra" style="--i:0">d</span><span class="letra" style="--i:1">e</span><span
+                        class="letra" style="--i:2"> </span><span class="letra" style="--i:3">s</span><span class="letra"
+                        style="--i:4">u</span><span class="letra" style="--i:5"> </span><span class="letra"
+                        style="--i:6">P</span><span class="letra" style="--i:7">r</span><span class="letra"
+                        style="--i:8">o</span><span class="letra" style="--i:9">b</span><span class="letra"
+                        style="--i:10">l</span><span class="letra" style="--i:11">e</span><span class="letra"
+                        style="--i:12">m</span><span class="letra" style="--i:13">a</span>
+                </div>
+            </div>
+
+            <div class="buscador-becas">
+                <div class="contenedor-principal">
+                    <h1 class="titulo-seccion">Busque su Software</h1>
+                    <div class="buscador">
+                        <input type="search" id="buscador-input" placeholder="Buscar software..."
+                            aria-label="Buscar software">
+                    </div>
+                    <div id="botones-container" class="botones-container" aria-live="polite"></div>
+                </div>
+
+                <div class="becas-box">
+                    <div class="becas-img">
+                        <a
+                            href="https://docs.google.com/document/d/1Qq5sykVCgjnfcxvGrdEYL9t8sxZj3RRB/export?format=docx">
+                            <img src="https://i.ibb.co/YFWmc11M/tigre-infouni.png" alt="Becas INFOUNI">
+                        </a>
+                    </div>
+                    <div class="becas-nota">Haga click para obtener el formato de Becas</div>
+                    <div class="becas-texto">
+                        Aprovecha tus becas mensuales. No desperdicies la oportunidad de estudiar en INFOUNI de forma
+                        gratuita después de un mes de esfuerzo como soporte. Recuerda que las becas no se acumulan, así
+                        que
+                        no pierdas tu oportunidad. Como sugerencia, pide ayuda a un soporte que ya haya solicitado becas
+                        para revisar tu formato, ya que la beca no será aprobada si contiene errores en algún punto.
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <div class="separator-wrapper">
+            <div class="thin-separator" aria-hidden="true"></div>
+        </div>
+
+        <section id="reglamento" class="section-centered">
+            <div class="centered-carousel">
+                <div class="carousel-container">
+                    <div class="slider-title" id="slider-title"></div>
+                    <div class="image-slider">
+                        <div class="slider-images">
+                            <div class="image-container"><a
+                                    href="https://drive.google.com/uc?export=download&id=1Pe1Wx3sKU2IiKpx13vMjDjhtfS1EKeRf"><img
+                                        src="https://i.ibb.co/Tq8gcjg1/capibara-blanco.png"
+                                        alt="Código de Vestimenta"></a>
+                            </div>
+                            <div class="image-container"><a
+                                    href="https://docs.google.com/document/d/17H1LFjiHsRkcMQ1Ye2PXeUjirYi789B_/export?format=docx"><img
+                                        src="https://i.ibb.co/HLn5f2JZ/carnet-34.png " alt="Carnet INFOUNI"></a></div>
+                            <div class="image-container"><a
+                                    href="https://drive.google.com/uc?export=download&id=1Siz6kO76_XV6wo5hDoKJ_vlE92vIleau"><img
+                                        src="https://i.ibb.co/sJJyrVhd/Reglamento.png" alt="Reglamento INFOUNI"></a>
+                            </div>
                         </div>
-                        <div class="image-container"><a
-                                href="https://docs.google.com/document/d/17H1LFjiHsRkcMQ1Ye2PXeUjirYi789B_/export?format=docx"><img
-                                    src="https://i.ibb.co/HLn5f2JZ/carnet-34.png " alt="Carnet INFOUNI"></a></div>
-                        <div class="image-container"><a
-                                href="https://drive.google.com/uc?export=download&id=1Siz6kO76_XV6wo5hDoKJ_vlE92vIleau"><img
-                                    src="https://i.ibb.co/sJJyrVhd/Reglamento.png" alt="Reglamento INFOUNI"></a></div>
+                        <div class="slider-buttons">
+                            <button class="prev-btn">←</button>
+                            <button class="next-btn">→</button>
+                        </div>
+                        <div class="indicators">
+                            <div class="indicator active-indicator"></div>
+                            <div class="indicator"></div>
+                            <div class="indicator"></div>
+                        </div>
                     </div>
-                    <div class="slider-buttons">
-                        <button class="prev-btn">←</button>
-                        <button class="next-btn">→</button>
-                    </div>
-                    <div class="indicators">
-                        <div class="indicator active-indicator"></div>
-                        <div class="indicator"></div>
-                        <div class="indicator"></div>
-                    </div>
+                    <div class="click-text">Haga click en las imágenes para descargar los formatos</div>
                 </div>
-                <div class="click-text">Haga click en las imágenes para descargar los formatos</div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <div class="separator-wrapper">
-        <div class="thin-separator" aria-hidden="true"></div>
-    </div>
+        <div class="separator-wrapper">
+            <div class="thin-separator" aria-hidden="true"></div>
+        </div>
 
-    <section id="ubicacion">
-        <div class="titulo-animado" aria-label="Encuéntranos en:">
-            <div class="linea" aria-hidden="true">
-                <span class="letra" style="--i:0">E</span><span class="letra" style="--i:1">n</span><span class="letra"
-                    style="--i:2">c</span><span class="letra" style="--i:3">u</span><span class="letra"
-                    style="--i:4">é</span><span class="letra" style="--i:5">n</span><span class="letra"
-                    style="--i:6">t</span><span class="letra" style="--i:7">r</span><span class="letra"
-                    style="--i:8">a</span><span class="letra" style="--i:9">n</span><span class="letra"
-                    style="--i:10">o</span><span class="letra" style="--i:11">s</span>
-            </div>
-            <div class="linea linea2" aria-hidden="true">
-                <span class="letra" style="--i:0">e</span><span class="letra" style="--i:1">n</span><span class="letra"
-                    style="--i:2">:</span>
-            </div>
-        </div>
-        <div class="map-container">
-            <iframe
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2759.3278229179296!2d-77.04722312728791!3d-12.024315175860353!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x9105cf2379633fdb%3A0xa8dcc17109dcdbbd!2sCentro+de+Computo+INFOUNI!5e0!3m2!1ses-419!2spe!4v1438545820763"
-                width="100%" height="450" style="border:0;" allowfullscreen="" loading="lazy"
-                referrerpolicy="no-referrer-when-downgrade"></iframe>
-        </div>
-    </section>
-    
-    <footer class="footer">
-        <div class="footer-content">
-            <div class="footer-section">
-                <h4>Contacto</h4>
-                <div class="footer-contact-item">
-                    <img src="https://i.ibb.co/JWb5zp10/maps.png" alt="Ubicación">
-                    <a href="https://www.google.com/maps/place/Centro+de+Computo+INFOUNI+-+UNI/@-12.024268,-77.0501132,17z/data=!3m1!4b1!4m6!3m5!1s0x9105cf2379633fdb:0xa8dcc17109dcdbbd!8m2!3d-12.0242733!4d-77.0475329!16s%2Fg%2F1hf392m1h?entry=ttu&g_ep=EgoyMDI1MDgyNC4wIKXMDSoASAFQAw%3D%3D" class="link-text" target="_blank"
-                        rel="noopener noreferrer">Av. Túpac Amaru 210, Rímac, Lima</a>
+        <section id="ubicacion">
+            <div class="titulo-animado" aria-label="Encuéntranos en:">
+                <div class="linea" aria-hidden="true">
+                    <span class="letra" style="--i:0">E</span><span class="letra" style="--i:1">n</span><span
+                        class="letra" style="--i:2">c</span><span class="letra" style="--i:3">u</span><span class="letra"
+                        style="--i:4">é</span><span class="letra" style="--i:5">n</span><span class="letra"
+                        style="--i:6">t</span><span class="letra" style="--i:7">r</span><span class="letra"
+                        style="--i:8">a</span><span class="letra" style="--i:9">n</span><span class="letra"
+                        style="--i:10">o</span><span class="letra" style="--i:11">s</span>
                 </div>
-                <div class="footer-contact-item">
-                    <img src="https://i.ibb.co/hx4sQxF7/gmail.png" alt="Correo">
-                    <p class="copyable-text" onclick="copyEmail(event)">infouni@uni.edu.pe</p>
-                </div>
-                <div class="footer-contact-item">
-                    <img src="https://i.ibb.co/tp9b7gGY/telefono-2.png" alt="Teléfono">
-                    <p class="copyable-text" onclick="copyNumber(event, '922378322')">922378322</p>
-                </div>
-                <div class="footer-contact-item">
-                    <img src="https://i.ibb.co/tp9b7gGY/telefono-2.png" alt="Teléfono">
-                    <p class="copyable-text" onclick="copyNumber(event, '924538711')">924538711</p>
-                </div>
-                <div class="footer-contact-item">
-                    <img src="https://i.ibb.co/tp9b7gGY/telefono-2.png" alt="Teléfono">
-                    <p class="copyable-text" onclick="copyNumber(event, '946955476')">946955476</p>
+                <div class="linea linea2" aria-hidden="true">
+                    <span class="letra" style="--i:0">e</span><span class="letra" style="--i:1">n</span><span
+                        class="letra" style="--i:2">:</span>
                 </div>
             </div>
-            <div class="footer-section">
-                <h4>Nuestra Misión</h4>
-                <p>Proporcionar soporte técnico de excelencia y recursos educativos para empoderar a nuestros
-                    estudiantes en su camino hacia el éxito profesional. Nos comprometemos a ser la principal fuente de
-                    conocimiento y asistencia.</p>
+            <div class="map-container">
+                <iframe
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2759.3278229179296!2d-77.04722312728791!3d-12.024315175860353!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x9105cf2379633fdb%3A0xa8dcc17109dcdbbd!2sCentro+de+Computo+INFOUNI!5e0!3m2!1ses-419!2spe!4v1438545820763"
+                    width="100%" height="450" style="border:0;" allowfullscreen="" loading="lazy"
+                    referrerpolicy="no-referrer-when-downgrade"></iframe>
             </div>
-            <div class="footer-section">
-                <h4>Buscadores de Programas</h4>
-                <ul>
-                    <li><a href="https://es.taiwebs.com/?lang=PE" target="_blank" rel="noopener noreferrer">Taiwebs</a>
-                    </li>
-                    <li><a href="https://filecr.com/en-us/" target="_blank" rel="noopener noreferrer">FileCr</a></li>
-                    <li><a href="https://aportesingecivil.com/" target="_blank" rel="noopener noreferrer">Aportes
-                            IngeCivil</a></li>
-                    <li><a href="https://modyolo.com/" target="_blank" rel="noopener noreferrer">Modyolo</a></li>
-                </ul>
-            </div>
-            <div class="footer-section">
-                <h4>Síguenos</h4>
-                <div class="footer-social-icons">
-                    <a href="https://www.facebook.com/infouniperu" target="_blank" rel="noopener noreferrer"><img
-                            src="https://i.ibb.co/932pVmkJ/logogogogo.png" alt="Facebook"></a>
-                    <a href="https://www.tiktok.com/@infouni.peru" target="_blank" rel="noopener noreferrer"><img
-                            src="https://i.ibb.co/9HB3Kck4/logo-de-tiki-toki.png" alt="Tiktok"></a>
-                    <a href="https://www.whatsapp.com/channel/0029VaOySBW3LdQcfyQ2fZ1x" target="_blank"
-                        rel="noopener noreferrer"><img src="https://i.ibb.co/8D2MCZTk/Imagen3.png" alt="Whatssap"></a>
-                    <a href="https://www.instagram.com/infouni.peru" target="_blank" rel="noopener noreferrer"><img
-                            src="https://i.ibb.co/b5NfsHnY/inns.png" alt="Instagram"></a>
-                    <a href="https://www.youtube.com/@infouniperu" target="_blank" rel="noopener noreferrer"><img
-                            src="https://i.ibb.co/Hf8sRmfm/youtubelogo.png" alt="YouTube"></a>
+        </section>
+
+        <footer class="footer">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>Contacto</h4>
+                    <div class="footer-contact-item">
+                        <img src="https://i.ibb.co/JWb5zp10/maps.png" alt="Ubicación">
+                        <a href="https://www.google.com/maps/place/Centro+de+Computo+INFOUNI+-+UNI/@-12.024268,-77.0501132,17z/data=!3m1!4b1!4m6!3m5!1s0x9105cf2379633fdb:0xa8dcc17109dcdbbd!8m2!3d-12.0242733!4d-77.0475329!16s%2Fg%2F1hf392m1h?entry=ttu&g_ep=EgoyMDI1MDgyNC4wIKXMDSoASAFQAw%3D%3D" class="link-text" target="_blank"
+                            rel="noopener noreferrer">Av. Túpac Amaru 210, Rímac, Lima</a>
+                    </div>
+                    <div class="footer-contact-item">
+                        <img src="https://i.ibb.co/hx4sQxF7/gmail.png" alt="Correo">
+                        <p class="copyable-text" onclick="copyEmail(event)">infouni@uni.edu.pe</p>
+                    </div>
+                    <div class="footer-contact-item">
+                        <img src="https://i.ibb.co/tp9b7gGY/telefono-2.png" alt="Teléfono">
+                        <p class="copyable-text" onclick="copyNumber(event, '922378322')">922378322</p>
+                    </div>
+                    <div class="footer-contact-item">
+                        <img src="https://i.ibb.co/tp9b7gGY/telefono-2.png" alt="Teléfono">
+                        <p class="copyable-text" onclick="copyNumber(event, '924538711')">924538711</p>
+                    </div>
+                    <div class="footer-contact-item">
+                        <img src="https://i.ibb.co/tp9b7gGY/telefono-2.png" alt="Teléfono">
+                        <p class="copyable-text" onclick="copyNumber(event, '946955476')">946955476</p>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h4>Nuestra Misión</h4>
+                    <p>Proporcionar soporte técnico de excelencia y recursos educativos para empoderar a nuestros
+                        estudiantes en su camino hacia el éxito profesional. Nos comprometemos a ser la principal fuente
+                        de
+                        conocimiento y asistencia.</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Buscadores de Programas</h4>
+                    <ul>
+                        <li><a href="https://es.taiwebs.com/?lang=PE" target="_blank"
+                                rel="noopener noreferrer">Taiwebs</a>
+                        </li>
+                        <li><a href="https://filecr.com/en-us/" target="_blank" rel="noopener noreferrer">FileCr</a></li>
+                        <li><a href="https://aportesingecivil.com/" target="_blank" rel="noopener noreferrer">Aportes
+                                IngeCivil</a></li>
+                        <li><a href="https://modyolo.com/" target="_blank" rel="noopener noreferrer">Modyolo</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Síguenos</h4>
+                    <div class="footer-social-icons">
+                        <a href="https://www.facebook.com/infouniperu" target="_blank" rel="noopener noreferrer"><img
+                                src="https://i.ibb.co/932pVmkJ/logogogogo.png" alt="Facebook"></a>
+                        <a href="https://www.tiktok.com/@infouni.peru" target="_blank" rel="noopener noreferrer"><img
+                                src="https://i.ibb.co/9HB3Kck4/logo-de-tiki-toki.png" alt="Tiktok"></a>
+                        <a href="https://www.whatsapp.com/channel/0029VaOySBW3LdQcfyQ2fZ1x" target="_blank"
+                            rel="noopener noreferrer"><img src="https://i.ibb.co/8D2MCZTk/Imagen3.png"
+                                alt="Whatssap"></a>
+                        <a href="https://www.instagram.com/infouni.peru" target="_blank" rel="noopener noreferrer"><img
+                                src="https://i.ibb.co/b5NfsHnY/inns.png" alt="Instagram"></a>
+                        <a href="https://www.youtube.com/@infouniperu" target="_blank" rel="noopener noreferrer"><img
+                                src="https://i.ibb.co/Hf8sRmfm/youtubelogo.png" alt="YouTube"></a>
+                    </div>
                 </div>
             </div>
-        </div>
-        <div class="footer-bottom">© 2025 INFOUNI. Todos los derechos reservados.</div>
-        <div class="footer-bottom">Creador: Fabrizio Gamboa Jimenez, Soporte 2024-2025</div>
-    </footer>
+            <div class="footer-bottom">© 2025 INFOUNI. Todos los derechos reservados.</div>
+            <div class="footer-bottom">Creador: Fabrizio Gamboa Jimenez, Soporte 2024-2025</div>
+        </footer>
+    </main>
 
     <div id="copy-message"></div>
-    
+
+    <div id="zoom-controls">
+        <button class="zoom-btn" id="zoom-reset-btn" title="Reiniciar Zoom">⟲</button>
+        <div id="zoom-icon">🔎</div>
+        <button class="zoom-btn" id="zoom-in-btn">+</button>
+        <div id="zoom-display">100%</div>
+        <button class="zoom-btn" id="zoom-out-btn">-</button>
+    </div>
+
     <div id="chat-bubble">
         <img id="bubble-icon" src="https://i.ibb.co/MDrCSpjG/tigre-leyendo.png" alt="Abrir Chat">
     </div>
@@ -1867,10 +1985,10 @@
 
     <script>
         /* ======================================================================
-           TÍTULO: La Magia Detrás de la Web: Scripts de Funcionalidad
-           FUNCIÓN: Aquí reside el cerebro de la página. Este bloque de JavaScript
-                    controla desde el comportamiento dinámico del encabezado hasta la
-                    lógica interactiva del buscador y el carrusel.
+           TÍTULO: Lógica de la Página y Scripts de Interacción
+           FUNCIÓN: Este bloque de JavaScript controla el comportamiento dinámico del 
+                    encabezado, la lógica interactiva del buscador, el carrusel, el
+                    nuevo control de zoom y otras funcionalidades de la página.
            ====================================================================== */
 
         // ----------------------------------------------------------------------
@@ -1891,26 +2009,70 @@
 
 
         // ----------------------------------------------------------------------
-        // TÍTULO: Guardián del Zoom
-        // FUNCIÓN: Previene que los usuarios hagan zoom accidentalmente en la página,
-        // ya sea con la rueda del ratón o con gestos táctiles, manteniendo la
-        // integridad del diseño en todo momento.
+        // TÍTULO: Control de Zoom Dinámico con Interfaz
+        // FUNCIÓN: Implementa una función de zoom suave y controlado que se centra
+        // en la posición del cursor. Muestra una barra de control temporal con
+        // botones para ajustar el nivel de zoom.
         // ----------------------------------------------------------------------
-        document.addEventListener('wheel', function (e) {
-            if (e.ctrlKey || e.metaKey) {
-                e.preventDefault();
+        const zoomContainer = document.getElementById('zoom-container');
+        const zoomControls = document.getElementById('zoom-controls');
+        const zoomInBtn = document.getElementById('zoom-in-btn');
+        const zoomOutBtn = document.getElementById('zoom-out-btn');
+        const zoomDisplay = document.getElementById('zoom-display');
+        const zoomResetBtn = document.getElementById('zoom-reset-btn');
+        let scale = 1;
+        let zoomTimeout;
+
+        function updateZoom(newScale, originX, originY) {
+            scale = Math.max(1.0, Math.min(newScale, 3)); // Limita el zoom entre 100% y 300%
+
+            const origin = (originX !== undefined && originY !== undefined)
+                ? `${originX}px ${originY}px`
+                : 'center center';
+
+            zoomContainer.style.transformOrigin = origin;
+            zoomContainer.style.transform = `scale(${scale})`;
+            zoomDisplay.textContent = `${Math.round(scale * 100)}%`;
+            
+            // Desactiva el botón de alejar si la escala es 100%
+            zoomOutBtn.disabled = (scale <= 1.0);
+
+            showZoomControls();
+        }
+
+        function showZoomControls() {
+            clearTimeout(zoomTimeout);
+            zoomControls.classList.add('visible');
+            zoomTimeout = setTimeout(() => {
+                zoomControls.classList.remove('visible');
+            }, 2500); // Ocultar después de 2.5 segundos
+        }
+        
+        // Llamada inicial para establecer el estado del botón
+        updateZoom(1.0);
+
+        document.body.addEventListener('wheel', function (event) {
+            if (event.ctrlKey) {
+                event.preventDefault();
+                const scaleAmount = 0.1;
+                const rect = zoomContainer.getBoundingClientRect();
+
+                // Calculamos el origen relativo al contenedor del zoom
+                const originX = event.pageX - rect.left;
+                const originY = event.pageY - rect.top;
+
+                const newScale = event.deltaY < 0 ? scale + scaleAmount : scale - scaleAmount;
+                updateZoom(newScale, originX, originY);
             }
         }, { passive: false });
 
-        document.addEventListener('touchmove', function (e) {
-            if (e.touches.length > 1) {
-                e.preventDefault();
-            }
-        }, { passive: false });
+        zoomInBtn.addEventListener('click', () => updateZoom(scale + 0.1));
+        zoomOutBtn.addEventListener('click', () => updateZoom(scale - 0.1));
+        zoomResetBtn.addEventListener('click', () => updateZoom(1.0));
 
 
         // ----------------------------------------------------------------------
-        // TÍTULO: El Cerebro del Buscador de Software
+        // TÍTULO: Funcionalidad del Buscador de Software
         // FUNCIÓN: Filtra y muestra dinámicamente los enlaces de guías y soluciones
         // a medida que el usuario escribe en el campo de búsqueda, ofreciendo
         // resultados instantáneos y relevantes.
@@ -2000,7 +2162,7 @@
         renderizar(enlaces.sort((a, b) => a.nombre.localeCompare(b.nombre)));
 
         // ----------------------------------------------------------------------
-        // TÍTULO: El Director de Escena del Carrusel
+        // TÍTULO: Lógica del Carrusel de Imágenes
         // FUNCIÓN: Maneja toda la lógica del carrusel de reglamentos: el cambio
         // automático de diapositivas, la navegación con los botones de flecha y
         // la actualización del título y los indicadores.
@@ -2078,7 +2240,7 @@
         updateSlider(currentIndex);
 
         // ----------------------------------------------------------------------
-        // TÍTULO: El Copiador Mágico de Texto
+        // TÍTULO: Funcionalidad para Copiar Texto al Portapapeles
         // FUNCIÓN: Permite a los usuarios copiar el correo electrónico o los números
         // de teléfono con un solo clic, mostrando una notificación para confirmar
         // que la acción fue exitosa.
@@ -2119,15 +2281,14 @@
 
     <script>
         /* ======================================================================
-           TÍTULO: El Corazón del Asistente: Lógica del Chatbot "Leo"
-           FUNCIÓN: Este es el script principal que da vida a Leo. Gestiona todo:
-                    desde abrir y cerrar la ventana, procesar los mensajes del
-                    usuario, conectarse con la IA de Google Gemini, hasta funciones
-                    avanzadas como el sistema anti-spam y la capacidad de mover y
-                    redimensionar la ventana del chat.
+           TÍTULO: Lógica Principal del Chatbot "Leo"
+           FUNCIÓN: Este script da vida a Leo. Gestiona la apertura y cierre del
+                    chat, el procesamiento de mensajes, la conexión con la IA de 
+                    Google Gemini, el sistema anti-spam y la capacidad de mover y
+                    redimensionar la ventana.
            ====================================================================== */
 
-        // --- Conectando los cables: Referencias a los elementos del DOM ---
+        // --- Referencias a los Elementos del DOM del Chat ---
         const chatBubble = document.getElementById('chat-bubble');
         const bubbleIcon = document.getElementById('bubble-icon');
         const chatWindow = document.getElementById('chat-window');
@@ -2137,7 +2298,8 @@
         const userInput = document.getElementById('user-input');
         const sendButton = document.getElementById('send-button');
         const chatMessages = document.getElementById('chat-messages');
-        const chatHeader = document.querySelector('.chat-header');
+        const chatInputContainer = document.querySelector('.chat-input');
+
 
         // --- Identidades visuales: URLs de las imágenes del chat ---
         const IMG_CERRADO = "https://i.ibb.co/MDrCSpjG/tigre-leyendo.png";
@@ -2146,56 +2308,94 @@
         const FOTO_BOT = "https://i.ibb.co/G4KnMLjs/Infotigre.png";
 
         // --- Configuración de la IA: Conexión con Google Gemini ---
-        // IMPORTANTE: Reemplaza la siguiente clave con tu propia API Key de Google Gemini.
-        const API_KEY = "AIzaSyDTAQJKwSHByCbB-2waPbRbBXnnKtPLFE4"; // <-- ¡Pega tu clave aquí!
+        const API_KEY = "AIzaSyDVzjhJzcDenVKow5xvgdhJpvZPtlNwsuU";
         const API_URL = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash-latest:generateContent?key=${API_KEY}`;
 
         // --- Memoria a corto plazo: Historial de la conversación para mantener el contexto ---
         let conversationHistory = [];
 
         // ----------------------------------------------------------------------
-        // TÍTULO: Guardián Anti-Spam Mejorado
-        // FUNCIÓN: Protege el chat de un exceso de mensajes. Si un usuario envía
-        // mensajes demasiado rápido, lo bloquea temporalmente y le muestra una
-        // cuenta regresiva clara para saber cuándo puede volver a escribir.
+        // TÍTULO: Sistema de Control de Frecuencia de Mensajes (Anti-Spam)
+        // FUNCIÓN: Protege el chat de un exceso de mensajes, con advertencia previa,
+        // bloqueo persistente y una opción de desbloqueo por contraseña.
         // ----------------------------------------------------------------------
         const messageTimestamps = [];
-        const SPAM_THRESHOLD = 5;       // Más de 5 mensajes...
+        const SPAM_THRESHOLD = 5;       // Número de mensajes para activar la advertencia.
         const SPAM_TIMEFRAME = 30000;    // ...en menos de 30 segundos.
-        const BLOCK_DURATION = 900000;   // ...resultan en un bloqueo de 15 Minutod.
-        let isUserWarned = false;
+        const PRE_WARN_COOLDOWN = 30000; // 30 segundos de espera tras la advertencia.
+        const BLOCK_DURATION = 900000;   // ...resultan en un bloqueo de 15 Minutos.
+        let preWarnTimestamp = 0;
         let blockInterval;
 
         function checkSpam() {
             const now = Date.now();
-            // Eliminamos los registros de mensajes antiguos para no acumular datos innecesarios.
-            while (messageTimestamps.length > 0 && now - messageTimestamps[0] > SPAM_TIMEFRAME) {
+
+            // 1. Si hay una advertencia activa, verificar si el usuario está dentro del período de enfriamiento.
+            if (preWarnTimestamp > 0) {
+                if (now - preWarnTimestamp < PRE_WARN_COOLDOWN) {
+                    blockUser(); // El usuario no esperó, se aplica el bloqueo.
+                    return true;
+                } else {
+                    preWarnTimestamp = 0; // El período de enfriamiento ha pasado, se resetea la advertencia.
+                }
+            }
+
+            // 2. Añadir la marca de tiempo del mensaje actual y limpiar las antiguas.
+            messageTimestamps.push(now);
+            while (messageTimestamps.length > 0 && (now - messageTimestamps[0] > SPAM_TIMEFRAME)) {
                 messageTimestamps.shift();
             }
-            messageTimestamps.push(now);
 
+            // 3. Si se supera el umbral de mensajes y no había una advertencia activa, se emite una.
             if (messageTimestamps.length > SPAM_THRESHOLD) {
-                if (!isUserWarned) {
-                    addMessage("Hemos detectado un posible Spam, por favor espera 20 segundos para proseguir, de lo contrario al siguiente mensaje seras bloqueado por 15.", 'bot');
-                    isUserWarned = true;
-                } else {
-                    blockUser(); // Si ya fue advertido y continúa, aplicamos el bloqueo.
-                }
-                return true; // Es spam.
+                preWarnTimestamp = now; // Activar el estado de advertencia.
+                addMessage("<b>Advertencia:</b> Ha enviado mensajes con demasiada frecuencia. Por favor, espere 30 segundos antes de enviar otro mensaje o su chat será bloqueado por 15 minutos.", 'bot');
+                return true; // Detener el procesamiento del mensaje actual para que no se envíe a la IA.
             }
-            return false; // No es spam.
+
+            return false; // No se detectó spam.
+        }
+        
+        function unblockUser() {
+            clearInterval(blockInterval);
+            userInput.disabled = false;
+            sendButton.disabled = false;
+            userInput.placeholder = "Escribe tu mensaje...";
+            localStorage.removeItem('chatBlockExpiresAt');
+            preWarnTimestamp = 0;
+            messageTimestamps.length = 0;
+            const unblockBtn = document.getElementById('unblock-btn');
+            if (unblockBtn) unblockBtn.remove();
         }
 
         function blockUser() {
             const blockExpiresAt = Date.now() + BLOCK_DURATION;
             localStorage.setItem('chatBlockExpiresAt', blockExpiresAt);
             applyBlock(blockExpiresAt);
-            addMessage(`Has sido bloqueado temporalmente por enviar demasiados mensajes. Podrás volver a escribir en 15 Minutos.`, 'bot');
+            addMessage(`Ha sido bloqueado temporalmente por enviar demasiados mensajes. Podrá volver a escribir en 15 minutos.`, 'bot');
         }
-        
+
         function applyBlock(expiresAt) {
             clearInterval(blockInterval);
             
+            // Añadir botón de desbloqueo si no existe
+            if (!document.getElementById('unblock-btn')) {
+                const unblockBtn = document.createElement('button');
+                unblockBtn.id = 'unblock-btn';
+                unblockBtn.title = 'Desbloquear Chat';
+                unblockBtn.innerHTML = '🔓';
+                unblockBtn.onclick = () => {
+                    const pass = prompt("Ingrese la contraseña de administrador para desbloquear:");
+                    if (pass === "Fabrizio1238") {
+                        unblockUser();
+                        addMessage("Chat desbloqueado por el administrador.", 'bot');
+                    } else if (pass !== null) { // Evita la alerta si el usuario presiona "Cancelar"
+                        alert("Contraseña incorrecta.");
+                    }
+                };
+                chatInputContainer.insertBefore(unblockBtn, userInput);
+            }
+
             const updateTimer = () => {
                 const now = Date.now();
                 const timeLeft = Math.ceil((expiresAt - now) / 1000);
@@ -2203,35 +2403,30 @@
                 if (timeLeft > 0) {
                     userInput.disabled = true;
                     sendButton.disabled = true;
-                    userInput.placeholder = `Bloqueado. Espera ${timeLeft} segundos...`;
+                    const minutesLeft = Math.floor(timeLeft / 60);
+                    const secondsLeft = timeLeft % 60;
+                    userInput.placeholder = `Bloqueado. Espera ${minutesLeft}m ${secondsLeft}s...`;
                 } else {
-                    userInput.disabled = false;
-                    sendButton.disabled = false;
-                    userInput.placeholder = "Escribe tu mensaje...";
-                    localStorage.removeItem('chatBlockExpiresAt');
-                    isUserWarned = false; 
-                    messageTimestamps.length = 0;
-                    clearInterval(blockInterval);
+                    unblockUser();
                 }
             };
-            
+
             blockInterval = setInterval(updateTimer, 1000);
-            updateTimer(); // Llamada inicial para aplicar el estado inmediatamente.
+            updateTimer(); 
         }
 
-        // Al cargar la página, verificamos si existe un bloqueo activo.
         window.addEventListener('load', () => {
             const blockExpiresAt = localStorage.getItem('chatBlockExpiresAt');
             if (blockExpiresAt && Date.now() < parseInt(blockExpiresAt)) {
                 applyBlock(parseInt(blockExpiresAt));
             }
         });
-        
+
         // ----------------------------------------------------------------------
-        // TÍTULO: El Diccionario de Atajos de Leo
-        // FUNCIÓN: Una lista de comandos locales que Leo reconoce al instante sin
-        // necesidad de consultar a la IA. Esto proporciona respuestas rápidas y
-        // precisas para las preguntas más frecuentes sobre la página.
+        // TÍTULO: Comandos Locales y Respuestas Rápidas
+        // FUNCIÓN: Una lista de comandos que Leo reconoce al instante sin
+        // necesidad de consultar a la IA. Proporciona respuestas rápidas para
+        // las preguntas más frecuentes sobre la página.
         // ----------------------------------------------------------------------
         const localCommands = [
             {
@@ -2301,9 +2496,9 @@
                 target: ".footer"
             }
         ];
-        
+
         // ----------------------------------------------------------------------
-        // TÍTULO: El Interruptor del Chat
+        // TÍTULO: Funcionalidad para Abrir y Cerrar el Chat
         // FUNCIÓN: Controla la apertura y cierre de la ventana del chat con una
         // animación suave y cambia el ícono de la burbuja para reflejar el estado.
         // ----------------------------------------------------------------------
@@ -2322,9 +2517,9 @@
                 }
             }
         }
-        
+
         // ----------------------------------------------------------------------
-        // TÍTULO: Botón de Reseteo
+        // TÍTULO: Funcionalidad para Restaurar la Ventana del Chat
         // FUNCIÓN: Restaura la ventana del chat a su tamaño y posición originales
         // si el usuario la ha movido o redimensionado.
         // ----------------------------------------------------------------------
@@ -2342,9 +2537,9 @@
         chatBubble.addEventListener('click', toggleChat);
         closeChatBtn.addEventListener('click', toggleChat);
         resetChatBtn.addEventListener('click', resetChatWindow);
-        
+
         // ----------------------------------------------------------------------
-        // TÍTULO: La Bienvenida de Leo
+        // TÍTULO: Mensaje de Bienvenida del Chat
         // FUNCIÓN: Muestra un mensaje de saludo inicial la primera vez que se
         // abre el chat, simulando que el bot está "escribiendo" para dar una
         // sensación más natural.
@@ -2357,12 +2552,12 @@
                 addMessage(welcomeText, 'bot');
             }, 1500);
         }
-        
+
         // ----------------------------------------------------------------------
-        // TÍTULO: El Corazón de la Conversación
+        // TÍTULO: Gestión del Envío de Mensajes
         // FUNCIÓN: Se activa cuando el usuario envía un mensaje. Procesa el texto,
-        // verifica si es un comando local, y si no, se lo envía a la IA de Gemini
-        // para obtener una respuesta inteligente.
+        // verifica si es un comando local, y si no, lo envía a la IA de Gemini
+        // para obtener una respuesta.
         // ----------------------------------------------------------------------
         chatForm.addEventListener('submit', async (e) => {
             e.preventDefault();
@@ -2370,18 +2565,18 @@
 
             const messageText = userInput.value.trim();
             if (messageText === '') return;
-            
+
             addMessage(messageText, 'user');
             userInput.value = '';
-            
+
             if (checkSpam()) return;
-            
+
             const command = findLocalCommand(messageText);
             if (command) {
                 handleLocalCommand(command);
                 return;
             }
-            
+
             // Desactivamos el input mientras esperamos la respuesta de la IA.
             userInput.disabled = true;
             sendButton.disabled = true;
@@ -2407,10 +2602,10 @@
                 }
             }
         });
-        
+
         // ----------------------------------------------------------------------
-        // TÍTULO: El Intérprete de Comandos
-        // FUNCIÓN: Busca en el diccionario de atajos si el mensaje del usuario
+        // TÍTULO: Búsqueda de Comandos Locales
+        // FUNCIÓN: Busca en la lista de comandos si el mensaje del usuario
         // contiene alguna de las palabras clave definidas.
         // ----------------------------------------------------------------------
         function findLocalCommand(message) {
@@ -2421,10 +2616,10 @@
         }
 
         // ----------------------------------------------------------------------
-        // TÍTULO: El Ejecutor de Acciones
+        // TÍTULO: Manejo de Comandos Locales
         // FUNCIÓN: Cuando se encuentra un comando local, esta función se encarga
-        // de mostrar la respuesta predefinida y de generar los botones de acción
-        // correspondientes (ya sea uno solo o varios).
+        // de mostrar la respuesta predefinida y generar los botones de acción
+        // correspondientes.
         // ----------------------------------------------------------------------
         function handleLocalCommand(command) {
             let responseHTML = command.response;
@@ -2441,21 +2636,21 @@
         }
 
         // ----------------------------------------------------------------------
-        // TÍTULO: El Escucha de Botones
-        // FUNCIÓN: Está siempre atento a los clics en los botones de acción dentro
-        // del chat. Cuando detecta uno, navega a la sección correspondiente de la
+        // TÍTULO: Manejador de Eventos para Botones de Acción
+        // FUNCIÓN: Escucha los clics en los botones de acción dentro del chat.
+        // Cuando detecta uno, navega a la sección correspondiente de la
         // página o abre un enlace externo.
         // ----------------------------------------------------------------------
         chatMessages.addEventListener('click', (e) => {
             if (e.target.classList.contains('action-button')) {
                 const targetSelector = e.target.dataset.target;
-                
+
                 if (targetSelector.startsWith('http')) {
                     window.open(targetSelector, '_blank');
                     toggleChat();
                     return;
                 }
-                
+
                 const targetElement = document.querySelector(targetSelector);
                 if (targetElement) {
                     targetElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
@@ -2463,12 +2658,11 @@
                 }
             }
         });
-        
+
         // ----------------------------------------------------------------------
-        // TÍTULO: El Constructor de Mensajes
-        // FUNCIÓN: Se encarga de crear y añadir un nuevo mensaje (ya sea del
-        // usuario o del bot) a la ventana del chat, con el formato y estilo
-        // correctos.
+        // TÍTULO: Creación y Adición de Mensajes en la Interfaz
+        // FUNCIÓN: Se encarga de crear y añadir un nuevo mensaje (del usuario o
+        // del bot) a la ventana del chat, con el formato y estilo correctos.
         // ----------------------------------------------------------------------
         function addMessage(text, sender) {
             const messageElement = document.createElement('div');
@@ -2509,12 +2703,12 @@
                 element.remove();
             }
         }
-        
+
         // ----------------------------------------------------------------------
-        // TÍTULO: La Conexión con la Inteligencia Artificial
+        // TÍTULO: Comunicación con la API de Google Gemini
         // FUNCIÓN: Envía el mensaje del usuario y el historial de la conversación
-        // a la API de Google Gemini. Le da instrucciones a la IA para que actúe
-        // como Leo y se asegure de responder siempre en español latino.
+        // a la API de Google Gemini, con instrucciones para que la IA actúe
+        // como Leo y responda en español latino.
         // ----------------------------------------------------------------------
         async function getBotResponse(userMessage) {
             if (!API_KEY || API_KEY === "TU_API_KEY") {
@@ -2566,12 +2760,11 @@
                 throw error;
             }
         }
-        
+
         // ======================================================================
-        // TÍTULO: Ventana Flotante y Personalizable
-        // FUNCIÓN: Toda la lógica que permite al usuario mover la ventana del
-        //          chat por toda la pantalla y cambiar su tamaño arrastrando los
-        //          bordes.
+        // TÍTULO: Funcionalidad para Mover y Redimensionar la Ventana del Chat
+        // FUNCIÓN: Lógica que permite al usuario mover la ventana del chat por
+        //          la pantalla y cambiar su tamaño arrastrando los bordes.
         // ======================================================================
         let isDragging = false;
         let isResizing = false;
@@ -2589,7 +2782,7 @@
             const rect = chatWindow.getBoundingClientRect();
             dragOffset.x = e.clientX - rect.left;
             dragOffset.y = e.clientY - rect.top;
-            
+
             chatWindow.style.right = 'auto';
             chatWindow.style.bottom = 'auto';
             chatWindow.style.left = `${rect.left}px`;
@@ -2608,7 +2801,7 @@
                 resizeInfo.startX = e.clientX;
                 resizeInfo.startY = e.clientY;
                 resizeInfo.startRect = chatWindow.getBoundingClientRect();
-                
+
                 chatWindow.style.right = 'auto';
                 chatWindow.style.bottom = 'auto';
                 chatWindow.style.left = `${resizeInfo.startRect.left}px`;
@@ -2625,13 +2818,13 @@
             if (isDragging) {
                 let newX = e.clientX - dragOffset.x;
                 let newY = e.clientY - dragOffset.y;
-                
+
                 // Limitamos el movimiento para que la ventana no se salga de la pantalla.
                 const minX = 0;
                 const minY = 0;
                 const maxX = window.innerWidth - chatWindow.offsetWidth;
                 const maxY = window.innerHeight - chatHeader.offsetHeight - 5;
-                
+
                 newX = Math.max(minX, Math.min(newX, maxX));
                 newY = Math.max(minY, Math.min(newY, maxY));
 
@@ -2676,7 +2869,7 @@
 
             const minWidth = parseInt(getComputedStyle(chatWindow).minWidth);
             const minHeight = parseInt(getComputedStyle(chatWindow).minHeight);
-            
+
             if (resizeInfo.direction.includes('e')) newWidth = resizeInfo.startRect.width + dx;
             if (resizeInfo.direction.includes('w')) newWidth = resizeInfo.startRect.width - dx;
             if (resizeInfo.direction.includes('s')) newHeight = resizeInfo.startRect.height + dy;
@@ -2684,7 +2877,7 @@
 
             if (resizeInfo.direction.includes('w')) newLeft = resizeInfo.startRect.left + dx;
             if (resizeInfo.direction.includes('n')) newTop = resizeInfo.startRect.top + dy;
-            
+
             if (newWidth >= minWidth) {
                 chatWindow.style.width = `${newWidth}px`;
                 chatWindow.style.left = `${newLeft}px`;
@@ -2711,4 +2904,3 @@
 </body>
 
 </html>
-
